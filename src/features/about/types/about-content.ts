@@ -28,6 +28,11 @@ export type AboutCraftsmanshipSection = {
   eyebrow: string;
   title: string;
   description: string;
+  showcaseVideo: {
+    type: "local" | "youtube";
+    src: string;
+    title: string;
+  };
   showcaseImageSrc: string;
   showcaseImageAlt: string;
   showcaseCaption: string;
@@ -37,7 +42,7 @@ export type AboutCraftsmanshipSection = {
 export type AboutCoreValue = {
   title: string;
   description: string;
-  icon: "sparkles" | "leaf" | "users" | "shield-check" | "hammer" | "compass";
+  imageSrc: string;
 };
 
 export type AboutValuesSection = {
@@ -73,7 +78,6 @@ export type AboutCtaSection = {
 
 export type AboutPageContent = {
   hero: AboutHeroContent;
-  story: AboutStorySection;
   craftsmanship: AboutCraftsmanshipSection;
   values: AboutValuesSection;
   stats: AboutStatsSection;

@@ -1,26 +1,6 @@
-import {
-  Sparkles,
-  Leaf,
-  Users,
-  ShieldCheck,
-  Hammer,
-  Compass,
-  type LucideIcon,
-} from "lucide-react";
-import type {
-  AboutValuesSection,
-  AboutCoreValue,
-} from "@/features/about/types/about-content";
+import Image from "next/image";
+import type { AboutValuesSection } from "@/features/about/types/about-content";
 import { Card } from "@/components/ui/card";
-
-const valueIcons: Record<AboutCoreValue["icon"], LucideIcon> = {
-  sparkles: Sparkles,
-  leaf: Leaf,
-  users: Users,
-  "shield-check": ShieldCheck,
-  hammer: Hammer,
-  compass: Compass,
-};
 
 type AboutValuesProps = {
   content: AboutValuesSection;
@@ -42,27 +22,31 @@ export function AboutValues({ content }: AboutValuesProps) {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 sm:mt-16">
-          {content.values.map((value) => {
-            const Icon = valueIcons[value.icon] || Sparkles;
+        <div className="mt-12 grid gap-6 sm:mt-16 sm:grid-cols-2 xl:grid-cols-4">
+          {content.values.map((value) => (
+            <Card
+              key={value.title}
+              className="group overflow-hidden border-neutral-200/80 bg-white px-5 pb-6 pt-5 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-red-200 hover:shadow-lg dark:border-neutral-800 dark:bg-neutral-950 dark:hover:border-red-900/50"
+            >
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[24px] bg-neutral-100">
+                <Image
+                  src={value.imageSrc}  
+                  alt={value.title}
+                  fill
+                  sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
 
-            return (
-              <Card
-                key={value.title}
-                className="group relative overflow-hidden border-neutral-200/80 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-red-200 hover:shadow-lg dark:border-neutral-800 dark:bg-neutral-950 dark:hover:border-red-900/50"
-              >
-                <div className="flex size-12 items-center justify-center rounded-2xl bg-neutral-100 text-neutral-950 transition-colors group-hover:bg-red-600 group-hover:text-white dark:bg-neutral-900 dark:text-white">
-                  <Icon className="size-6" />
-                </div>
-                <h3 className="type-h5 mt-6 text-neutral-950 dark:text-white">
-                  {value.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-                  {value.description}
-                </p>
-              </Card>
-            );
-          })}
+              <h3 className="type-h5 mt-6 text-neutral-950 dark:text-white">
+                {value.title}
+              </h3>
+
+              <p className="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+                {value.description}
+              </p>
+            </Card>
+          ))}
         </div>
       </div>
     </section>

@@ -2,33 +2,24 @@ import type { AboutPageContent } from "@/features/about/types/about-content";
 
 export const aboutPageContent: AboutPageContent = {
   hero: {
-    eyebrow: "Về chúng tôi • MemoryShard",
+    eyebrow: "Về chúng tôi • GamePieceLabs",
     title: "Chế tác phụ kiện & Nâng tầm trải nghiệm Board Game",
     subtitle:
       "Chúng tôi kết hợp nghệ thuật thủ công tinh xảo, công nghệ cắt laser chính xác và vật liệu gỗ tuyển chọn để biến mỗi buổi chơi game thành một kỷ niệm đáng nhớ.",
     heroImageSrc: "/images/about/about-hero.jpg",
     heroImageAlt:
-      "Bàn làm việc xưởng chế tác phụ kiện gỗ và organizer board game MemoryShard",
-  },
-  story: {
-    eyebrow: "Khởi nguồn câu chuyện",
-    title: "Từ sự bừa bộn trên bàn cờ đến đam mê kiến tạo sự ngăn nắp hoàn mỹ",
-    lead: "Mọi thứ bắt đầu từ một đêm chơi Gloomhaven với bạn bè, khi thời gian chuẩn bị và thu dọn ngốn gần một tiếng đồng hồ quý giá.",
-    paragraphs: [
-      "Chúng tôi nhận ra rằng những trò chơi tuyệt vời xứng đáng có những giải pháp lưu trữ và phụ kiện tương xứng. Không chỉ là những chiếc hộp nhựa thô sơ, mà phải là những khay gỗ tinh tế, khớp nối hoàn hảo từng góc cạnh, mang lại cảm giác mở hộp đầy phấn khích mỗi khi bắt đầu ván đấu.",
-      "Từ chiếc máy cắt laser đầu tiên trong một xưởng nhỏ, MemoryShard đã lớn mạnh thành điểm đến đáng tin cậy của hàng chục ngàn người yêu board game và sưu tầm mô hình khắp mọi nơi.",
-    ],
-    quote: {
-      text: "Chúng tôi không chỉ tạo ra phụ kiện, chúng tôi tạo nên nghi thức mở màn cho những ván cờ bất tận.",
-      author: "Đội ngũ Thiết kế MemoryShard",
-      role: "Artisan & Tabletop Enthusiasts",
-    },
+      "Bàn làm việc xưởng chế tác phụ kiện gỗ và organizer board game GamePieceLabs",
   },
   craftsmanship: {
     eyebrow: "Kỹ nghệ chế tác",
     title: "Chính xác đến từng milimet với công nghệ Laser hiện đại",
     description:
       "Mỗi chi tiết đều trải qua quy trình thiết kế 3D nghiêm ngặt, cắt khắc laser CO2 công suất cao và được xử lý bề mặt thủ công tỉ mỉ để đảm bảo độ mượt mà tuyệt đối khi sử dụng.",
+    showcaseVideo: {
+      type: "youtube",
+      src: "https://www.youtube.com/embed/HjsGUuQsQOY?si=ZcxnS0Ln7VPw4BqD",
+      title: "How many people does it take to produce a Frosthaven Organizer?",
+    },
     showcaseImageSrc: "/images/about/laser-craftsmanship.jpg",
     showcaseImageAlt:
       "Máy cắt laser đang khắc chi tiết bảng điều khiển người chơi bằng gỗ",
@@ -63,33 +54,33 @@ export const aboutPageContent: AboutPageContent = {
   },
   values: {
     eyebrow: "Giá trị cốt lõi",
-    title: "Những nguyên tắc định hình từng sản phẩm MemoryShard",
+    title: "Product DNA",
     description:
-      "Chúng tôi cam kết mang đến những giá trị thực sự cho người chơi và cộng đồng qua từng đường cắt nét khắc.",
+      "As we shared our work, we quickly got a lot of positive feedback and started looking into production possibilities. With a blend of solid craftsmanship and a serious passion for gaming, Laserox came to life in 2017. Since then, we have developed many organizers and will continue to do so.",
     values: [
       {
         title: "Nghệ thuật & Tinh tế",
         description:
           "Mỗi khay đựng và organizer không chỉ hữu dụng mà còn là một tác phẩm trang trí tôn vinh góc bàn chơi của bạn.",
-        icon: "sparkles",
+        imageSrc: "/images/about/valuesBox1.jpg",
       },
       {
         title: "Vật liệu Xanh (Play Green)",
         description:
           "Ưu tiên vật liệu gỗ có nguồn gốc bền vững, hạn chế tối đa rác thải nhựa và đóng gói thân thiện với môi trường.",
-        icon: "leaf",
+        imageSrc: "/images/about/valuesBox2.jpg",
       },
       {
         title: "Đồng hành cùng Người chơi",
         description:
           "Lắng nghe phản hồi từ cộng đồng board game thế giới để liên tục cập nhật thiết kế cho các bản mở rộng (expansions) mới nhất.",
-        icon: "users",
+        imageSrc: "/images/about/valuesBox3.jpg",
       },
       {
         title: "Độ bền Vượt thời gian",
         description:
           "Cấu trúc gia cố chịu lực bền bỉ, đồng hành cùng bạn qua hàng trăm giờ phiêu lưu và hàng ngàn ván đấu kịch tính.",
-        icon: "shield-check",
+        imageSrc: "https://laserox.net/cdn/shop/files/Rectangle_45_1.png?v=1715684448&width=414",
       },
     ],
   },
@@ -132,3 +123,5 @@ export const aboutPageContent: AboutPageContent = {
     },
   },
 };
+
+

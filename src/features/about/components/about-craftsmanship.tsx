@@ -1,8 +1,5 @@
-import { Sparkles, CheckCircle2 } from "lucide-react";
 import type { AboutCraftsmanshipSection } from "@/features/about/types/about-content";
-import { ImageFrame } from "@/components/shared/image-frame";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { VideoFrame } from "@/components/shared/video-frame";
 
 type AboutCraftsmanshipProps = {
   content: AboutCraftsmanshipSection;
@@ -10,62 +7,34 @@ type AboutCraftsmanshipProps = {
 
 export function AboutCraftsmanship({ content }: AboutCraftsmanshipProps) {
   return (
-    <section className="bg-neutral-100/70 py-14 sm:py-18 lg:py-24 dark:bg-neutral-900/50">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 xl:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-wider text-red-600 sm:text-base">
-            {content.eyebrow}
-          </p>
-          <h2 className="type-h2 mt-4 text-neutral-950 dark:text-white">
-            {content.title}
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-neutral-600 sm:text-lg dark:text-neutral-300">
-            {content.description}
-          </p>
-        </div>
-      </div>
+    <section className="bg-neutral-100/70 py-12 sm:py-16 lg:py-20 dark:bg-neutral-900/50">
+      <div className="mx-auto max-w-[1560px] px-4 sm:px-6 xl:px-10">
+        <div className="overflow-hidden rounded-[26px] border border-neutral-200/80 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.05)] dark:border-neutral-800 dark:bg-neutral-950">
+          <div className="grid items-stretch lg:grid-cols-[minmax(0,1.18fr)_minmax(340px,0.82fr)]">
+            <div className="h-full">
+              <VideoFrame
+                type={content.showcaseVideo.type}
+                src={content.showcaseVideo.src}
+                title={content.showcaseVideo.title}
+              />
+            </div>
 
-      <div className="mt-10 sm:mt-12 lg:mt-16">
-        <ImageFrame
-          src={content.showcaseImageSrc}
-          alt={content.showcaseImageAlt}
-          caption={content.showcaseCaption}
-          aspectRatio="21/9"
-          className="shadow-2xl"
-          overlay
-        />
-      </div>
+            <div className="flex items-center justify-center border-t border-neutral-200/70 px-5 py-8 sm:px-8 sm:py-9 lg:border-t-0 lg:border-l lg:px-9 lg:py-10 dark:border-neutral-800">
+              <div className="mx-auto max-w-[35rem] text-center">
+                <p className="text-xs font-semibold tracking-[0.08em] text-neutral-500 sm:text-sm dark:text-neutral-400">
+                  {content.eyebrow}
+                </p>
 
-      <div className="mx-auto mt-12 max-w-[1440px] px-4 sm:mt-16 sm:px-6 xl:px-8">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {content.features.map((feature) => (
-            <Card
-              key={feature.title}
-              className="group relative flex flex-col justify-between border-neutral-200/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-950"
-            >
-              <div>
-                {feature.badge ? (
-                  <Badge
-                    variant="secondary"
-                    className="mb-4 bg-red-50 text-red-700 hover:bg-red-100 dark:bg-red-950/40 dark:text-red-400"
-                  >
-                    {feature.badge}
-                  </Badge>
-                ) : null}
-                <h3 className="type-h5 text-neutral-950 dark:text-white">
-                  {feature.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-                  {feature.description}
+                <h2 className="mt-3 text-balance text-[1.9rem] font-bold leading-[1.08] tracking-[-0.04em] text-neutral-950 sm:text-[2.35rem] lg:text-[3rem] dark:text-white">
+                  {content.title}
+                </h2>
+
+                <p className="mt-4 text-sm leading-6 text-neutral-600 sm:text-[15px] sm:leading-7 dark:text-neutral-300">
+                  {content.description}
                 </p>
               </div>
-
-              <div className="mt-6 flex items-center gap-2 pt-4 border-t border-neutral-100 text-xs font-semibold text-neutral-400 dark:border-neutral-800">
-                <CheckCircle2 className="size-4 text-red-600" />
-                <span>Tiêu chuẩn MemoryShard</span>
-              </div>
-            </Card>
-          ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

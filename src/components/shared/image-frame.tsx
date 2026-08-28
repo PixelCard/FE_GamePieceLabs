@@ -8,6 +8,8 @@ export type ImageFrameProps = {
   src: string;
   alt?: string;
   caption?: string;
+  eyesbrow?: string;
+  title?: string;
   aspectRatio?: ImageFrameAspectRatio | string;
   priority?: boolean;
   sizes?: string;
@@ -29,6 +31,8 @@ const aspectRatioMap: Record<ImageFrameAspectRatio, string> = {
 export function ImageFrame({
   src,
   alt = "Frame image",
+  eyesbrow="",
+  title="",
   caption,
   aspectRatio = "21/9",
   priority = false,
@@ -70,6 +74,20 @@ export function ImageFrame({
             imageClassName
           )}
         />
+
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
+          {eyesbrow ? (
+            <p className="text-xs mb-3 font-semibold tracking-[0.2em] text-white/90 sm:text-sm md:text-base">
+              {eyesbrow}
+            </p>
+          ) : null}
+
+          {title ? (
+            <h2 className="mt-3 max-w-[90%] text-[clamp(1.7rem,5vw,3rem)] font-bold leading-[1.1] text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.45)]">
+              {title}
+            </h2>
+          ) : null}
+        </div>
 
         {overlay ? (
           typeof overlay === "boolean" ? (
