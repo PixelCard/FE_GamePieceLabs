@@ -6,19 +6,33 @@ import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/utils/cn';
 
+export type CardImageTitleAspectRatio =
+    | 'default'
+    | 'portrait'
+    | 'landscape';
+
 export type CardImageTitleProps = {
-    title: string;
+    title?: string;
     imageSrc: string;
     imageAlt: string;
     href: string;
+    aspectRatio?: CardImageTitleAspectRatio;
+    isArrow?: boolean;
     sizes?: string;
     imagePosition?: CSSProperties['objectPosition'];
     className?: string;
+    titleClassName?: string;
 };
 
 export type CardImageTitleGridProps = {
     children: ReactNode;
     className?: string;
+};
+
+const aspectRatioClasses: Record<CardImageTitleAspectRatio, string> = {
+    default: 'aspect-[1.05/1]',
+    portrait: 'aspect-[4/5]',
+    landscape: 'aspect-[2.2/1]',
 };
 
 export function CardImageTitleGrid({
@@ -42,9 +56,12 @@ export function CardImageTitle({
     imageSrc,
     imageAlt,
     href,
+    aspectRatio = 'default',
+    isArrow = true,
     sizes = '(max-width: 639px) 50vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 20vw',
     imagePosition = 'center',
     className,
+    titleClassName,
 }: CardImageTitleProps) {
     return (
         <Link
@@ -54,7 +71,12 @@ export function CardImageTitle({
                 className,
             )}
         >
-            <Card className="relative aspect-[1.05/1] overflow-hidden rounded-[12px] border-0 bg-neutral-950 p-0 shadow-none">
+            <Card
+                className={cn(
+                    'relative overflow-hidden rounded-xl border-0 bg-neutral-950 p-0 shadow-none',
+                    aspectRatioClasses[aspectRatio],
+                )}
+            >
                 <Image
                     src={imageSrc}
                     alt={imageAlt}
@@ -69,15 +91,34 @@ export function CardImageTitle({
                     className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/5 transition-colors duration-300 group-hover:from-black/90"
                 />
 
-                <CardContent className="absolute inset-0 flex items-end justify-between gap-2 p-3 sm:gap-3 sm:p-5">
-                    <h2 className="m-0 text-xs font-medium leading-snug text-white drop-shadow-sm sm:text-base sm:font-normal sm:leading-[1.2]">
-                        {title}
-                    </h2>
+                {title || isArrow ? (
+                    <CardContent
+                        className={cn(
+                            'absolute inset-0 flex items-end gap-2 p-4 sm:gap-3 sm:p-5',
+                            title ? 'justify-between' : 'justify-end',
+                        )}
+                    >
+                        {title ? (
+                            <span
+                                className={cn(
+                                    'text-sm font-bold leading-snug text-white drop-shadow-sm sm:text-lg sm:leading-tight xl:text-xl',
+                                    titleClassName,
+                                )}
+                            >
+                                {title}
+                            </span>
+                        ) : null}
 
-                    <span className="hidden size-6 shrink-0 translate-x-2 items-center justify-center rounded-full bg-white text-neutral-950 opacity-0 shadow-sm transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 sm:flex sm:size-8">
-                        <ArrowRight className="size-3 sm:size-4" aria-hidden="true" />
-                    </span>
-                </CardContent>
+                        {isArrow ? (
+                            <span className="hidden size-6 shrink-0 translate-x-2 items-center justify-center rounded-full bg-white text-neutral-950 opacity-0 shadow-sm transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 sm:flex sm:size-8">
+                                <ArrowRight
+                                    className="size-3 sm:size-4"
+                                    aria-hidden="true"
+                                />
+                            </span>
+                        ) : null}
+                    </CardContent>
+                ) : null}
             </Card>
         </Link>
     );

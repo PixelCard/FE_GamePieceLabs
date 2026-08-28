@@ -25,7 +25,7 @@ import { ImageComparison } from '@/components/shared/image-comparision';
 import { ProductDemo } from '@/components/shared/product-demo';
 import { VideoFrame } from '@/components/shared/video-frame';
 import { PlayerReviewsSection } from '@/components/shared/player-reviews-section';
-import dynamic from "next/dynamic";
+import { CompanyLinksSection } from '@/features/home/components/company-links-section';
 
 const imageSliderSlides = [
     {
@@ -151,6 +151,8 @@ export default function StorefrontHomePage() {
             </CardImageTitleSectionGroup>
 
             <PlayerReviewsSection />
+
+            <CompanyLinksSection />
         </main>
     );
 }
