@@ -111,7 +111,7 @@ export function ImageSlider({
                                 <span className="mb-2 sm:mb-3 inline-flex rounded-full bg-blue-600/80 px-3.5 py-0.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.28em] text-blue-50 backdrop-blur-sm shadow-sm">
                                     {slide.badge}
                                 </span>
-                                <h2 className="type-h1 sm:type-h0 max-w-2xl text-balance">
+                                <h2 className="text-xl md:text-4xl lg:text-5xl max-w-2xl text-balance">
                                     {slide.title}
                                 </h2>
                                 <p className="mt-2 sm:mt-3 max-w-xl text-sm sm:text-base lg:text-lg leading-relaxed text-white/85 line-clamp-2 sm:line-clamp-none">

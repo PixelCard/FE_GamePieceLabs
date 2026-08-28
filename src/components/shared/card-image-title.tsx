@@ -8,6 +8,7 @@ import { cn } from '@/utils/cn';
 
 export type CardImageTitleAspectRatio =
     | 'default'
+    | 'square'
     | 'portrait'
     | 'landscape';
 
@@ -31,6 +32,7 @@ export type CardImageTitleGridProps = {
 
 const aspectRatioClasses: Record<CardImageTitleAspectRatio, string> = {
     default: 'aspect-[1.05/1]',
+    square: 'aspect-square',
     portrait: 'aspect-[4/5]',
     landscape: 'aspect-[2.2/1]',
 };
