@@ -1,4 +1,4 @@
-type TokenSession = {
+export type TokenSession = {
   accessToken: string;
   refreshToken?: string;
   expiresAt?: number;

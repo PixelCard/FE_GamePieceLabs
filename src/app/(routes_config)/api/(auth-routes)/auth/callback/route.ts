@@ -1,19 +1,24 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-
-  
 import crypto from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { setTokenSession } from "@/features/auth/server/auth-session-store";
+import {
+  ACCESS_TOKEN_COOKIE_NAME,
+  APP_URL,
+  AUTH_SERVER_URL,
+  CLIENT_ID,
+  createAccessTokenCookieOptions,
+  OIDC_CODE_VERIFIER_COOKIE_NAME,
+  OIDC_STATE_COOKIE_NAME,
+  REDIRECT_URI,
+  SESSION_COOKIE_NAME,
+  sessionCookieOptions,
+} from "@/features/auth/server/auth-config";
+import {
+  buildTokenSession,
+  extractAccessTokenProfile,
+} from "@/features/auth/server/auth-token";
 
-const AUTH_SERVER_URL =
-  process.env.NEXT_PUBLIC_AUTH_SERVER_URL ?? "https://localhost:44321";
-const CLIENT_ID =
- process.env.NEXT_PUBLIC_OIDC_CLIENT_ID ?? "MemoryShard_Next";
-const REDIRECT_URI =
-  process.env.NEXT_PUBLIC_OIDC_REDIRECT_URI ??
-  "http://localhost:3000/api/auth/callback";
-const APP_URL = 
-  process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
@@ -38,8 +43,8 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const storedState = request.cookies.get("oidc_state")?.value;
-  const codeVerifier = request.cookies.get("oidc_code_verifier")?.value;
+  const storedState = request.cookies.get(OIDC_STATE_COOKIE_NAME)?.value;
+  const codeVerifier = request.cookies.get(OIDC_CODE_VERIFIER_COOKIE_NAME)?.value;
 
   if (!storedState || !codeVerifier || storedState !== state) {
     return NextResponse.redirect(
@@ -77,95 +82,38 @@ export async function GET(request: NextRequest) {
   const sessionId = crypto.randomUUID();
   const expiresIn = Number(tokenResult.expires_in ?? 300);
   const accessToken = String(tokenResult.access_token ?? "");
+  const refreshToken = tokenResult.refresh_token
+    ? String(tokenResult.refresh_token)
+    : undefined;
 
-  try{
-    //1. Get the payload data from jwt token and extract the role information from it.
-    const payloadBase64 = accessToken.split(".")[1];
-    
-    //2. Decode the base64 payload and parse it as JSON to get the JWT claims
-    const payloadJson = JSON.parse(
-      Buffer.from(payloadBase64, "base64").toString("utf-8")
-    );
+  const tokenSession = buildTokenSession({
+    accessToken,
+    refreshToken,
+    expiresInSeconds: expiresIn,
+  });
+  setTokenSession(sessionId, tokenSession);
 
-    //3. Get the role information from the payload
-    //ABP framework uses "role" claim for role information, while Microsoft Identity platform uses "http://schemas.microsoft.com/ws/2008/06/identity/claims/role" claim
-    const userRole = payloadJson["role"] as string | typeof payloadJson["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-    
-    //4. Convert to Array for (multiple roles) 
-    const roleArray = Array.isArray(userRole) ? userRole : [userRole].filter(Boolean);
-    
-    const name = payloadJson["unique_name"] as string | undefined;
+  let destinationUrl = `${APP_URL}/`;
 
-    const email = payloadJson["email"] as string | undefined;
-
-    const preferredUsername = payloadJson["preferred_username"] as string | undefined;
-    
-    const displayName = name ?? preferredUsername ?? email ?? "Unknown User";
-    
-    //5. Store the role information in the session store along with other session data
-    setTokenSession(sessionId, {
-      accessToken: accessToken,
-      refreshToken: tokenResult.refresh_token
-        ? String(tokenResult.refresh_token)
-        : undefined,
-      expiresAt: Date.now() + expiresIn * 1000,
-      displayName: displayName,
-      email: email,
-      role: roleArray,
-    });
-  }catch(error){
+  try {
+    const profile = extractAccessTokenProfile(accessToken);
+    destinationUrl = profile.role.includes("Admin")
+      ? `${APP_URL}/admin`
+      : `${APP_URL}/`;
+  } catch (error) {
     console.error("Error processing JWT token:", error);
-  }
-
-
-  //=========================
-  // Redirect to Home with a role definition  page with session cookie set
-  //=========================
-
-  let destinationUrl = APP_URL; // Default redirect URL after successful login
-
-  try{
-
-    //1. Get the payload data from jwt token and extract the role information from it.
-    const payloadBase64 = accessToken.split(".")[1];
-
-    //2. Decode the base64 payload and parse it as JSON to get the JWT claims
-    const payloadJson = JSON.parse(
-      Buffer.from(payloadBase64, "base64").toString("utf-8")
-    );
-
-    //3. Get the role information from the payload
-    //ABP framework uses "role" claim for role information, while Microsoft Identity platform uses "http://schemas.microsoft.com/ws/2008/06/identity/claims/role" claim
-    const userRole = payloadJson["role"] as string | typeof payloadJson["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-    
-    
-    //4. Convert to Array for (multiple roles) 
-    const roleArray = Array.isArray(userRole) ? userRole : [userRole].filter(Boolean);
-    
-    //5.Redirect to the role page definition page based on the role information
-    if (roleArray.includes("Admin")) {
-      destinationUrl = `${APP_URL}/admin`;
-    } else {
-      destinationUrl = `${APP_URL}/`;
-    }  
-  }catch(error){
-    console.error("Error processing JWT token:", error);
-    // In case of any error during token processing, fallback to the default destination URL
-    destinationUrl = `${APP_URL}/`;
   }
 
   const response = NextResponse.redirect(destinationUrl);
 
-  response.cookies.set("wm_session_id", sessionId, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 10,
-  });
-
-  response.cookies.delete("oidc_state");
-  response.cookies.delete("oidc_code_verifier");
+  response.cookies.set(SESSION_COOKIE_NAME, sessionId, sessionCookieOptions);
+  response.cookies.set(
+    ACCESS_TOKEN_COOKIE_NAME,
+    accessToken,
+    createAccessTokenCookieOptions(expiresIn)
+  );
+  response.cookies.delete(OIDC_STATE_COOKIE_NAME);
+  response.cookies.delete(OIDC_CODE_VERIFIER_COOKIE_NAME);
 
   return response;
 }
