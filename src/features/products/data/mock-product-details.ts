@@ -49,6 +49,15 @@ export const mockProductDetails = [
         displayOrder: 3,
       },
     ],
+    features: [
+        "Được thiết kế riêng cho Gloomhaven: Buttons & Bugs",
+        "Sắp xếp gọn toàn bộ thẻ bài và linh kiện trong hộp game gốc",
+        "Tương thích với thẻ đã bọc sleeve cao cấp, tối đa 80 microns",
+        "Gồm 2 khay thẻ có thể tháo rời và khay đựng cube, token",
+        "Các khay có tay cầm giúp lấy ra, cất vào nhanh chóng",
+        "Tháo lắp dễ dàng, rút ngắn đáng kể thời gian setup và thu dọn",
+        "Khắc họa tiết theo chủ đề, vừa đẹp mắt vừa dễ phân loại",
+    ],
     materials: [
       { id: "gloomhaven-material-1", matterialName: "Gỗ bạch dương 3 mm" },
       { id: "gloomhaven-material-2", matterialName: "Acrylic trong suốt" },
