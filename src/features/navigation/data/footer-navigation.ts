@@ -40,6 +40,7 @@ export const footerContent: FooterContent = {
     { label: "YouTube", href: "#youtube", platform: "youtube" },
   ],
   currencyOptions: [
+    { value: "VND", label: "VND ₫" },
     { value: "EUR", label: "EUR €" },
     { value: "USD", label: "USD $" },
     { value: "GBP", label: "GBP £" },
@@ -48,7 +49,7 @@ export const footerContent: FooterContent = {
     { value: "en", label: "English", prefix: "🇬🇧" },
     { value: "vi", label: "Tiếng Việt", prefix: "🇻🇳" },
   ],
-  defaultCurrency: "EUR",
+  defaultCurrency: "VND",
   defaultLanguage: "en",
   paymentMethods: ["VISA", "Mastercard", "AMEX", "PayPal"],
   copyright: "© 2026 MemoryShard. All rights reserved.",
