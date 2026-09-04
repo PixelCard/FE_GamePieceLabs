@@ -2,30 +2,35 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Heart, AlertTriangle } from "lucide-react";
-import { getProductByIdAsync } from "@/features/products/services/products-api";
+// import { getProductByIdAsync } from "@/features/products/services/products-api";
 import AddToCartButton from "@/features/products/components/add-to-cart-button";
+import { getMockProductById } from "@/features/products/lib/mock-product-details";
+import type { ProductDetailDto } from "@/features/products/types/product-details";
 import StoreSectionHeading from "@/components/shared/store-section-heading";
+import { formatCurrency } from "@/utils/format-currency";
 
 type ProductDetailsPageProps = {
-  searchParams?: Promise<{ id?: string }>;
+  params: Promise<{ id: string }>;
 };
 
-export default async function ProductDetailPage({ searchParams }: ProductDetailsPageProps) {
-  const params = await searchParams;
-  const productId = params?.id;
+export default async function ProductDetailPage({ params }: ProductDetailsPageProps) {
+  const { id: productId } = await params;
 
-  let productDetails: Awaited<ReturnType<typeof getProductByIdAsync>> | null = null;
-  let hasError = false;
+  // let productDetails: Awaited<ReturnType<typeof getProductByIdAsync>> | null = null;
+  // let hasError = false;
+  //
+  // if (productId) {
+  //   try {
+  //     productDetails = await getProductByIdAsync(productId);
+  //   } catch {
+  //     hasError = true;
+  //   }
+  // } else {
+  //   hasError = true;
+  // }
 
-  if (productId) {
-    try {
-      productDetails = await getProductByIdAsync(productId);
-    } catch {
-      hasError = true;
-    }
-  } else {
-    hasError = true;
-  }
+  const productDetails: ProductDetailDto | null = getMockProductById(productId) ?? null;
+  const hasError = productDetails === null;
 
   const primaryImage =
     productDetails?.images.find((x) => x.isPrimary)?.publicUrl ??
@@ -88,7 +93,7 @@ export default async function ProductDetailPage({ searchParams }: ProductDetails
 
               <div className="scrollbar-hide flex justify-center gap-3 overflow-x-auto pb-2 md:gap-4 lg:justify-start">
                 {productDetails.images.length > 0 ? (
-                  productDetails.images
+                  [...productDetails.images]
                     .sort((a, b) => a.displayOrder - b.displayOrder)
                     .map((img) => (
                       <div
@@ -134,7 +139,7 @@ export default async function ProductDetailPage({ searchParams }: ProductDetails
               <div className="mb-6 w-full rounded-xl border border-neutral-200 bg-white p-4 shadow-sm md:rounded-2xl md:p-6">
                 <div className="mb-2 flex flex-wrap items-end gap-2 md:gap-3">
                   <span className="type-h2 text-neutral-950">
-                    {displayedPrice.toFixed(2)} VND
+                    {formatCurrency(displayedPrice, "VND")}
                   </span>
                   {(productDetails.discountPercentage ?? 0) > 0 ? (
                     <span className="mb-1 rounded-md bg-red-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-red-600 md:py-1 md:text-xs">

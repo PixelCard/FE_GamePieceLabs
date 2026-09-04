@@ -114,10 +114,10 @@ export default function StorefrontHomePage() {
               <CarouselContent className="-ml-5">
                 {featuredProducts.map((product) => (
                   <CarouselItem
-                    key={product.id}
+                    key={product.slug}
                     className="basis-[88%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
                   >
-                    <ProductCard {...product} />
+                    <ProductCard {...product} currency="VND" />
                   </CarouselItem>
                 ))}
               </CarouselContent>
