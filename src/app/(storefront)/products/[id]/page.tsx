@@ -1,11 +1,15 @@
 import BreadCrumbs from "@/components/shared/breadcrumbs";
+import { PlayerReviewsSection } from "@/components/shared/player-reviews-section";
+import { ProductCard } from "@/components/shared/product-card";
 import { SectionTitle } from "@/components/shared/section-title";
+import { VideoFrame } from "@/components/shared/video-frame";
 import FeatureList from "@/features/products/components/feature-list";
 import ProductDetailsSummary from "@/features/products/components/product-details-summary";
 import ProductImageGallery from "@/features/products/components/product-image-gallery";
 import ProductNotFoundMessage from "@/features/products/components/product-not-found-message";
 import ProductPurchasePanel from "@/features/products/components/product-purchase-panel";
 import { getMockProductById } from "@/features/products/lib/mock-product-details";
+import { getMockYouMayAlsoLikeProducts } from "@/features/products/lib/mock-you-may-also-like-products";
 import CustomerReviewsSection from "@/features/reviews/components/customer-reviews-section";
 import { getProductReviews } from "@/features/reviews/services/reviews-api";
 
@@ -24,6 +28,7 @@ export default async function ProductDetailsPage({
   }
 
   const reviews = getProductReviews(product.id);
+  const youMayAlsoLikeProducts = getMockYouMayAlsoLikeProducts();
 
   return (
     <main className="min-h-screen bg-neutral-100 px-4 py-5 text-neutral-950">
@@ -52,30 +57,30 @@ export default async function ProductDetailsPage({
             In Gloomhaven: Buttons & Bugs, you’re shrunk to the size of a mouse
             after a botched attempt to visit the powerful mage Hail, thrust into
             a miniaturized world of danger and chaos. Armed with a handful of
-            double-sided cards and simplified yet strategic gameplay, you&apos;ll
-            navigate intense, small-scale battles against enemies, leveling up
-            as you try to return to normal size. With a compelling solo campaign
-            and the beloved mechanics of Gloomhaven packed into a bite-sized
-            experience, this adventure is perfect for those seeking epic
-            challenges in a fraction of the space. Tame the chaos of Buttons &
-            Bugs with our expertly crafted game organizer, designed to fit every
-            figure, token, dial, and card perfectly inside the tiny game box.
-            With everything neatly in place, you can shrink into your adventure
-            and face Hail&apos;s enchanted trials without the hassle of setup. Get
-            ready to dive into action in just a few easy moves—so you can focus
-            on battling enemies and leveling up, instead of organizing your
-            table. Some versions of the game come with bigger sized dials than
-            the insert was designed for, resulting in only 3 dials fitting out
-            of the 5. Please take this into consideration when purchasing the
-            insert. If your dials are bigger than these meaurements, only 3 will
-            fit: 44.3mm diameter, 1.9mm thickness (cardboard only), 4.55mm
-            thickness (cardboard+plastic button), 9.5mm diameter of plastic
-            button. No lid-lift, the gamebox can be stored vertically. This is a
-            third-party accessory designed by Laserox and officially licensed by
-            Cephalofair Games. All product names are trademarks of their
-            respective owners, which are in no way associated or affiliated with
-            Laserox. This kit requires assembly. We advise the use of wood glue,
-            which is sold separately.
+            double-sided cards and simplified yet strategic gameplay,
+            you&apos;ll navigate intense, small-scale battles against enemies,
+            leveling up as you try to return to normal size. With a compelling
+            solo campaign and the beloved mechanics of Gloomhaven packed into a
+            bite-sized experience, this adventure is perfect for those seeking
+            epic challenges in a fraction of the space. Tame the chaos of
+            Buttons & Bugs with our expertly crafted game organizer, designed to
+            fit every figure, token, dial, and card perfectly inside the tiny
+            game box. With everything neatly in place, you can shrink into your
+            adventure and face Hail&apos;s enchanted trials without the hassle
+            of setup. Get ready to dive into action in just a few easy moves—so
+            you can focus on battling enemies and leveling up, instead of
+            organizing your table. Some versions of the game come with bigger
+            sized dials than the insert was designed for, resulting in only 3
+            dials fitting out of the 5. Please take this into consideration when
+            purchasing the insert. If your dials are bigger than these
+            meaurements, only 3 will fit: 44.3mm diameter, 1.9mm thickness
+            (cardboard only), 4.55mm thickness (cardboard+plastic button), 9.5mm
+            diameter of plastic button. No lid-lift, the gamebox can be stored
+            vertically. This is a third-party accessory designed by Laserox and
+            officially licensed by Cephalofair Games. All product names are
+            trademarks of their respective owners, which are in no way
+            associated or affiliated with Laserox. This kit requires assembly.
+            We advise the use of wood glue, which is sold separately.
           </p>
         </SectionTitle>
 
@@ -148,6 +153,27 @@ export default async function ProductDetailsPage({
 
         {reviews && <CustomerReviewsSection reviews={reviews} />}
       </div>
+
+      <VideoFrame
+        src="https://www.youtube.com/embed/EEH1XhnkODo?si=EXio06y4u52nBs8r"
+        type="youtube"
+      />
+
+      <PlayerReviewsSection />
+
+      <SectionTitle
+        title="You may also like"
+        align="left"
+        className="-ml-10 mt-20"
+        content="imageList"
+      >
+        {youMayAlsoLikeProducts.map((recommendedProduct) => (
+          <ProductCard
+            key={recommendedProduct.gui}
+            {...recommendedProduct}
+          />
+        ))}
+      </SectionTitle>
     </main>
   );
 }
