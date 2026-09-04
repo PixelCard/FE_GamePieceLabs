@@ -6,6 +6,8 @@ import ProductImageGallery from "@/features/products/components/product-image-ga
 import ProductNotFoundMessage from "@/features/products/components/product-not-found-message";
 import ProductPurchasePanel from "@/features/products/components/product-purchase-panel";
 import { getMockProductById } from "@/features/products/lib/mock-product-details";
+import CustomerReviewsSection from "@/features/reviews/components/customer-reviews-section";
+import { getProductReviews } from "@/features/reviews/services/reviews-api";
 
 interface ProductDetailsPageProps {
   params: Promise<{ id: string }>;
@@ -20,6 +22,8 @@ export default async function ProductDetailsPage({
   if (!product) {
     return <ProductNotFoundMessage />;
   }
+
+  const reviews = getProductReviews(product.id);
 
   return (
     <main className="min-h-screen bg-neutral-100 px-4 py-5 text-neutral-950">
@@ -141,6 +145,8 @@ export default async function ProductDetailsPage({
             </div>
           </dl>
         </section>
+
+        {reviews && <CustomerReviewsSection reviews={reviews} />}
       </div>
     </main>
   );
