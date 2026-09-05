@@ -13,6 +13,7 @@ import { cn } from "@/utils/cn";
 export type ProductListColumnCount = 1 | 2 | 3 | 4 | 5;
 
 interface ProductListProps {
+  isShowed?: boolean;
   products: readonly ProductCardProps[];
   alignPagination: PaginationAlign;
   columns?: ProductListColumnCount;
@@ -38,6 +39,7 @@ const productImageSizes: Record<ProductListColumnCount, string> = {
 };
 
 export function ProductList({
+  isShowed = true,
   products,
   alignPagination,
   columns = 3,
@@ -67,13 +69,17 @@ export function ProductList({
         ))}
       </div>
 
-      <div className="mt-14 border-t border-neutral-200 pt-8 sm:mt-16 sm:pt-10">
-        <Pagination
-          align={alignPagination}
-          pagination={pagination}
-          variant={variantPagination}
-        />
-      </div>
+      {isShowed && (
+        <>
+          <div className="mt-14 border-t border-neutral-200 pt-8 sm:mt-16 sm:pt-10">
+            <Pagination
+              align={alignPagination}
+              pagination={pagination}
+              variant={variantPagination}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

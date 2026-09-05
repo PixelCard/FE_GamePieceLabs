@@ -4,14 +4,14 @@ import { ImageFrame } from "@/components/shared/image-frame";
 import { ProductList } from "@/components/shared/product-list";
 import { SectionTitle } from "@/components/shared/section-title";
 import Wrapper from "@/components/shared/wrapper";
-import { CollectionsPageData } from "../types/board-game-inserts";
+import { CollectionsPageData } from "../types/ox-product-family";
 import { MarqueeText } from "@/components/shared/marquee-text";
 
-interface BoardGameInsertsProps {
+interface OXProductFamilyProps {
   data: CollectionsPageData;
 }
 
-export function BoardGameInserts({ data }: BoardGameInsertsProps) {
+export function OXProductFamily({ data }: OXProductFamilyProps) {
   const { hero, editorial, products, otherCategories } = data;
 
   return (
@@ -46,11 +46,7 @@ export function BoardGameInserts({ data }: BoardGameInsertsProps) {
 
           <div className="flex flex-1 items-start justify-center gap-2 text-center">
             <Filter
-              items={[
-                { id: "accessories", label: "Accessories", count: 1 },
-                { id: "divider", label: "Divider", count: 4 },
-                { id: "insert", label: "Insert", count: 276 },
-              ]}
+              items={[{ id: "accessories", label: "Accessories", count: 4 }]}
               title="Product"
               variant="type"
             />
@@ -86,6 +82,7 @@ export function BoardGameInserts({ data }: BoardGameInsertsProps) {
           </div>
 
           <ProductList
+            isShowed={false}
             products={products.data}
             columns={4}
             alignPagination="center"

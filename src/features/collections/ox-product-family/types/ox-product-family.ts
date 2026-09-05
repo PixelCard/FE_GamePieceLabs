@@ -28,7 +28,7 @@ export interface BoardGameInsertProduct {
   rating: number;
 }
 
-export interface PaginatedBoardGameInserts {
+export interface PaginatedOXProductFamily{
   data: readonly BoardGameInsertProduct[];
   pagination: PaginationMetadata;
 }
@@ -44,6 +44,6 @@ export interface OtherCategory {
 export interface CollectionsPageData {
   hero: CollectionHero;
   editorial: CollectionEditorial;
-  products: PaginatedBoardGameInserts;
+  products: PaginatedOXProductFamily;
   otherCategories: readonly OtherCategory[];
 }
