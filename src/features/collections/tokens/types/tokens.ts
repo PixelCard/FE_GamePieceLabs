@@ -17,7 +17,7 @@ export interface CollectionEditorial {
   description: string;
 }
 
-export interface OXProductFamily {
+export interface TokensProduct {
   slug: string;
   gui: string;
   name: string;
@@ -29,7 +29,7 @@ export interface OXProductFamily {
 }
 
 export interface PaginatedOXProductFamily {
-  data: readonly OXProductFamily[];
+  data: readonly TokensProduct[];
   pagination: PaginationMetadata;
 }
 

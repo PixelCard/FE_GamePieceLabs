@@ -4,6 +4,8 @@ import { BoardGameInserts } from "@/features/collections/board-game-inserts/comp
 import { getBoardGameInsertsAsync } from "@/features/collections/board-game-inserts/services/board-game-inserts-api";
 import { OXProductFamily } from "@/features/collections/ox-product-family/components/OXProductFamily";
 import { getOXProductFamily } from "@/features/collections/ox-product-family/services/ox-product-family-api";
+import { getTokens } from "@/features/collections/tokens/services/tokens-api";
+import { Tokens } from "@/features/collections/tokens/components/Tokens";
 
 interface CollectionPageProps {
   params: Promise<{ slug: string }>;
@@ -20,6 +22,10 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
     case "ox-product-family": {
       const oxProductFamily = await getOXProductFamily();
       return <OXProductFamily data={oxProductFamily} />;
+    }
+    case "tokens": {
+      const tokens = await getTokens();
+      return <Tokens data={tokens} />;
     }
     default:
       notFound();
