@@ -2,13 +2,22 @@ import {
   ProductCard,
   type ProductCardProps,
 } from "@/components/shared/product-card";
+import {
+  Pagination,
+  type PaginationAlign,
+  type PaginationMeta,
+  type PaginationVariant,
+} from "@/components/shared/pagination";
 import { cn } from "@/utils/cn";
 
 export type ProductListColumnCount = 1 | 2 | 3 | 4 | 5;
 
 interface ProductListProps {
   products: readonly ProductCardProps[];
+  alignPagination: PaginationAlign;
   columns?: ProductListColumnCount;
+  pagination: PaginationMeta;
+  variantPagination: PaginationVariant;
   className?: string;
 }
 
@@ -30,7 +39,10 @@ const productImageSizes: Record<ProductListColumnCount, string> = {
 
 export function ProductList({
   products,
+  alignPagination,
   columns = 3,
+  pagination,
+  variantPagination,
   className,
 }: ProductListProps) {
   if (products.length === 0) {
@@ -38,20 +50,30 @@ export function ProductList({
   }
 
   return (
-    <div
-      className={cn(
-        "grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2 lg:gap-x-6 lg:gap-y-14",
-        columnClassNames[columns],
-        className,
-      )}
-    >
-      {products.map((product) => (
-        <ProductCard
-          key={`${product.slug}-${product.gui}`}
-          {...product}
-          sizes={productImageSizes[columns]}
+    <div>
+      <div
+        className={cn(
+          "grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2 lg:gap-x-6 lg:gap-y-14",
+          columnClassNames[columns],
+          className,
+        )}
+      >
+        {products.map((product) => (
+          <ProductCard
+            key={`${product.slug}-${product.gui}`}
+            {...product}
+            sizes={productImageSizes[columns]}
+          />
+        ))}
+      </div>
+
+      <div className="mt-14 border-t border-neutral-200 pt-8 sm:mt-16 sm:pt-10">
+        <Pagination
+          align={alignPagination}
+          pagination={pagination}
+          variant={variantPagination}
         />
-      ))}
+      </div>
     </div>
   );
 }
