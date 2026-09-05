@@ -3,6 +3,7 @@ import { ImageFrame } from "@/components/shared/image-frame";
 import type { PaginationMeta } from "@/components/shared/pagination";
 import { ProductList } from "@/components/shared/product-list";
 import type { ProductCardProps } from "@/components/shared/product-card";
+import { SectionTitle } from "@/components/shared/section-title";
 import Wrapper from "@/components/shared/wrapper";
 
 const collectionHero = {
@@ -12,6 +13,18 @@ const collectionHero = {
   imageSrc:
     "https://laserox.net/cdn/shop/files/MH40S2_StillLife-GuitarStore_2016_1.jpg_2.png?v=1715757791&width=1800",
   imageAlt: "Wooden board game inserts arranged on a gaming table",
+} as const;
+
+const collectionEditorial = {
+  imageSrc:
+    "https://laserox.net/cdn/shop/collections/boardgameinsert.webp?v=1718870186&width=1200",
+  imageAlt: "Wooden board game organizer filled with cards and tokens",
+  emblemSrc:
+    "https://laserox.net/cdn/shop/files/emblem_black.png?v=1730107069&width=271",
+  emblemAlt: "Laserox emblem",
+  heading: "Clear Space, Clear Strategy",
+  description:
+    "Discover our line of expertly crafted game organizers, designed with three core principles in mind: efficient storage, speedy setup and teardown, and in-game support. Each organizer is designed to perfectly follow the theme of your favorite board games. Made from sustainably sourced birch plywood and precision-cut by laser, our organizers are built to last a lifetime, enhancing every game night with seamless organization.",
 } as const;
 
 const boardGameInsertsProducts = {
@@ -225,7 +238,7 @@ export default function CollectionPage() {
         </div>
 
         <section
-          className="pb-10 pt-8"
+          className="pt-8"
           aria-labelledby="collection-products-heading"
         >
           <div className="mb-7 flex items-center justify-between gap-4">
@@ -246,6 +259,34 @@ export default function CollectionPage() {
           />
         </section>
       </Wrapper>
+
+      <SectionTitle
+        content="split"
+        image={{
+          src: collectionEditorial.imageSrc,
+          alt: collectionEditorial.imageAlt,
+        }}
+        className="pb-5"
+      >
+        <div className="flex max-w-xl flex-col items-center text-center">
+          <ImageFrame
+            src={collectionEditorial.emblemSrc}
+            alt={collectionEditorial.emblemAlt}
+            aspectRatio="aspect-square"
+            objectFit="contain"
+            sizes="48px"
+            containerClassName="w-12 max-w-none sm:w-12 xl:w-12"
+            className="rounded-none border-0 bg-transparent shadow-none sm:rounded-none"
+          />
+
+          <h2 className="mt-7 text-3xl font-bold tracking-tight text-neutral-950 sm:text-4xl">
+            {collectionEditorial.heading}
+          </h2>
+          <p className="mt-6 text-sm leading-6 text-neutral-700 sm:text-base sm:leading-7">
+            {collectionEditorial.description}
+          </p>
+        </div>
+      </SectionTitle>
     </>
   );
 }
