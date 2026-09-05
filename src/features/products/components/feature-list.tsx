@@ -1,5 +1,5 @@
 type FeatureListProps = {
-  features: string[];
+  features?: string[];
 };
 
 export default function FeatureList({ features }: FeatureListProps) {

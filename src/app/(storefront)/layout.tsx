@@ -3,6 +3,7 @@ import { Barlow } from "next/font/google";
 import { SiteFooter } from "@/components/layouts/footer/site-footer";
 import { SiteHeader } from "@/components/layouts/header/site-header";
 import { footerContent } from "@/features/navigation/data/footer-navigation";
+import Wrapper from "@/components/shared/wrapper";
 
 const storefrontFont = Barlow({
   weight: ["500", "700"],
