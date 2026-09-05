@@ -39,6 +39,13 @@ export interface DropdownMenuCheckboxEntry {
   props?: WithoutChildren<ComponentProps<typeof DropdownMenuCheckboxItem>>;
 }
 
+export interface DropdownMenuCustomEntry {
+  id: string;
+  type: "custom";
+  children: ReactNode;
+  props?: WithoutChildren<ComponentProps<"div">>;
+}
+
 export interface DropdownMenuLabelEntry {
   id: string;
   type: "label";
@@ -92,6 +99,7 @@ export interface DropdownMenuSubEntry {
 export type DropdownMenuEntry =
   | DropdownMenuActionItem
   | DropdownMenuCheckboxEntry
+  | DropdownMenuCustomEntry
   | DropdownMenuGroupEntry
   | DropdownMenuLabelEntry
   | DropdownMenuRadioGroupEntry
@@ -149,6 +157,14 @@ function renderEntries(items: DropdownMenuEntry[]): ReactNode {
               shortcut={entry.shortcut}
             />
           </DropdownMenuCheckboxItem>
+        );
+      }
+
+      case "custom": {
+        return (
+          <div key={entry.id} {...entry.props}>
+            {entry.children}
+          </div>
         );
       }
 
