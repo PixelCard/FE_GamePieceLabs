@@ -1,25 +1,19 @@
 import type { SupportedCurrency } from "@/utils/format-currency";
 
-export interface BoardGameInsertsHeroData {
+export interface CollectionHero {
   header: string;
   description: string;
   imageSrc: string;
   imageAlt: string;
 }
 
-export interface BoardGameInsertsEditorialData {
+export interface CollectionEditorial {
   imageSrc: string;
   imageAlt: string;
   emblemSrc: string;
   emblemAlt: string;
   heading: string;
   description: string;
-}
-
-export interface BoardGameInsertsMarqueeData {
-  title: string;
-  speed: number;
-  fontSize: "text-8xl";
 }
 
 export interface BoardGameInsertProduct {
@@ -47,23 +41,6 @@ export interface PaginatedBoardGameInserts {
   pagination: PaginationMetadata;
 }
 
-export interface BoardGameInsertsTypeFilterItem {
-  id: string;
-  label: string;
-  count: number;
-}
-
-export interface BoardGameInsertsFilterData {
-  productTypes: readonly BoardGameInsertsTypeFilterItem[];
-  sortOptions: readonly string[];
-  price: {
-    min: number;
-    max: number;
-    step: number;
-    currency: "USD" | "VND";
-  };
-}
-
 export interface OtherCategory {
   title: string;
   imageSrc: string;
@@ -73,10 +50,8 @@ export interface OtherCategory {
 }
 
 export interface BoardGameInsertsPageData {
-  hero: BoardGameInsertsHeroData;
-  editorial: BoardGameInsertsEditorialData;
-  marquee: BoardGameInsertsMarqueeData;
-  filters: BoardGameInsertsFilterData;
+  hero: CollectionHero;
+  editorial: CollectionEditorial;
   products: PaginatedBoardGameInserts;
   otherCategories: readonly OtherCategory[];
 }
