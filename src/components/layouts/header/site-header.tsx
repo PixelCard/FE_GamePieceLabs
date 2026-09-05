@@ -53,8 +53,7 @@ const promoStyles: Record<HeaderPromoCard["tone"], string> = {
     "bg-[radial-gradient(circle_at_50%_25%,#52525b_0%,#18181b_55%,#09090b_100%)]",
   ocean:
     "bg-[radial-gradient(circle_at_50%_20%,#164e63_0%,#082f49_48%,#020617_100%)]",
-  walnut:
-    "bg-[linear-gradient(135deg,#78350f_0%,#3f1d0b_52%,#1c0a03_100%)]",
+  walnut: "bg-[linear-gradient(135deg,#78350f_0%,#3f1d0b_52%,#1c0a03_100%)]",
   clay: "bg-[radial-gradient(circle_at_45%_24%,#a8a29e_0%,#57534e_52%,#1c1917_100%)]",
   sand: "bg-[linear-gradient(145deg,#f5e6c8_0%,#d6b98c_48%,#6b4f32_100%)]",
   forest:
@@ -114,9 +113,7 @@ function PromoCard({
           aria-hidden="true"
         />
         <CardContent className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-5 pt-16">
-          <p className="type-h6">
-            {promo.title}
-          </p>
+          <p className="type-h6">{promo.title}</p>
           <p className="mt-1 text-sm text-white/70">{promo.description}</p>
         </CardContent>
       </Card>
@@ -178,7 +175,7 @@ function DesktopHeader() {
 
   return (
     <>
-      <div className="mx-auto hidden h-[88px] w-[calc(100%-100px)] max-w-[1580px] grid-cols-[1fr_auto_1fr] items-center gap-8 xl:grid">
+      <div className="mx-auto hidden h-[90px] w-[calc(100%-100px)] max-w-[1580px] grid-cols-[1fr_auto_1fr] items-center gap-8 xl:grid">
         <nav aria-label="Điều hướng chính" className="justify-self-start">
           <NavigationMenu
             value={openMenu}
@@ -286,7 +283,10 @@ function MobileHeader() {
               <Menu className="size-6" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-[92vw] max-w-md overflow-y-auto p-0">
+          <SheetContent
+            side="left"
+            className="w-[92vw] max-w-md overflow-y-auto p-0"
+          >
             <SheetHeader className="border-b px-5 py-6 text-left">
               <SheetTitle>
                 <Brand />

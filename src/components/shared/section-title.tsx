@@ -3,6 +3,7 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 import { CardImageTitleGrid } from "@/components/shared/card-image-title";
+import { ImageFrame } from "@/components/shared/image-frame";
 import { cn } from "@/utils/cn";
 
 export type SectionTitleAlign = "left" | "center" | "right";
@@ -21,6 +22,23 @@ export type SectionTitleMoreProps = {
   content?: "text" | "imageList";
 };
 
+export type SectionTitleSplitProps = {
+  title?: never;
+  more?: never;
+  align?: never;
+  children: ReactNode;
+  className?: string;
+  content: "split";
+  image: {
+    src: string;
+    alt: string;
+  };
+};
+
+export type SectionTitleProps =
+  | SectionTitleMoreProps
+  | SectionTitleSplitProps;
+
 export type SectionTitleGroupProps = {
   children: ReactNode;
 };
@@ -35,14 +53,45 @@ const titleAlignmentClasses: Record<SectionTitleAlign, string> = {
   right: "text-right",
 };
 
-export function SectionTitle({
-  title,
-  more,
-  align = "left",
-  children,
-  className,
-  content,
-}: SectionTitleMoreProps) {
+export function SectionTitle(props: SectionTitleProps) {
+  if (props.content === "split") {
+    const { children, className, image } = props;
+
+    return (
+      <section
+        className={cn(
+          "mx-auto w-full max-w-[1900px] px-4 sm:px-6 xl:px-[50px]",
+          className,
+        )}
+      >
+        <div className="mx-auto grid w-full overflow-hidden rounded-2xl bg-white sm:max-w-[620px] sm:rounded-3xl lg:max-w-[940px] lg:grid-cols-12 xl:max-w-[1580px]">
+          <div className="lg:col-span-6">
+            <ImageFrame
+              src={image.src}
+              alt={image.alt}
+              aspectRatio="aspect-square"
+              sizes="(max-width: 1023px) calc(100vw - 3rem), (max-width: 1919px) 50vw, 790px"
+              containerClassName="w-full max-w-none sm:w-full xl:w-full"
+              className="rounded-none border-0 shadow-none sm:rounded-none"
+            />
+          </div>
+
+          <div className="flex items-center justify-center px-6 py-14 sm:px-10 sm:py-16 lg:col-span-6 lg:px-12 lg:py-10 xl:px-20">
+            {children}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const {
+    title,
+    more,
+    align = "left",
+    children,
+    className,
+    content,
+  } = props;
   const titleId = `${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-title`;
 
   if (content !== "text") {

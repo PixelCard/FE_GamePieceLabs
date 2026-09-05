@@ -20,5 +20,5 @@ export type ProductDetailDto = {
   description?: string | null;
   images: ProductImageDto[];
   materials: MaterialDto[];
-  features: string[]
+  features?: string[]
 };
