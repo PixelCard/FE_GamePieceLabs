@@ -1,17 +1,10 @@
 "use client";
 import { CardImageTitle } from "@/components/shared/card-image-title";
-import { ProductCard } from "@/components/shared/product-card";
+import { ProductGallery } from "@/components/shared/product-gallery";
 import {
   ImageSlider,
   type ImageSliderSlide,
 } from "@/components/shared/image-slider";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { MarqueeText } from "@/components/shared/marquee-text";
 import { featuredProducts } from "@/features/home/data/featured-products";
 import { gameCategories } from "@/features/home/data/game-categories";
@@ -22,7 +15,10 @@ import { VideoFrame } from "@/components/shared/video-frame";
 import { PlayerReviewsSection } from "@/components/shared/player-reviews-section";
 import { CompanyLinksSection } from "@/features/home/components/company-links-section";
 import { UpcomingProductsSection } from "@/features/home/components/upcoming-products-section";
-import { SectionTitle, SectionTitleGroupProps } from "@/components/shared/section-title";
+import {
+  SectionTitle,
+  SectionTitleGroupProps,
+} from "@/components/shared/section-title";
 
 const imageSliderSlides = [
   {
@@ -106,25 +102,7 @@ export default function StorefrontHomePage() {
           more={{ label: "View all", href: "/products" }}
         >
           <div className="col-span-full">
-            <Carousel
-              opts={{ align: "start" }}
-              aria-label="Featured products"
-              className="w-full"
-            >
-              <CarouselContent className="-ml-5">
-                {featuredProducts.map((product) => (
-                  <CarouselItem
-                    key={product.id}
-                    className="basis-[88%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
-                  >
-                    <ProductCard {...product} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-
-              <CarouselPrevious className="max-sm:hidden left-3 z-20 size-12 border-0 bg-white text-neutral-950 shadow-lg hover:bg-neutral-100 disabled:hidden" />
-              <CarouselNext className="max-sm:hidden right-3 z-20 size-12 border-0 bg-white text-neutral-950 shadow-lg hover:bg-neutral-100 disabled:hidden" />
-            </Carousel>
+            <ProductGallery type="featured" images={featuredProducts} />
 
             <ProductDemo />
           </div>

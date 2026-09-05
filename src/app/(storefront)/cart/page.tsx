@@ -12,16 +12,25 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
+// import {
+//   clearCartAsync,
+//   getCartAsync,
+//   removeItemFromCartAsync,
+//   setCartItemSelectedAsync,
+//   updateQuantityCartAsync,
+// } from "@/features/cart/services/cart-api";
+// import { getProductByIdAsync } from "@/features/products/services/products-api";
 import {
-  clearCartAsync,
-  getCartAsync,
-  removeItemFromCartAsync,
-  setCartItemSelectedAsync,
-  updateQuantityCartAsync,
-} from "@/features/cart/services/cart-api";
-import { getProductByIdAsync } from "@/features/products/services/products-api";
+  clearMockCartAsync,
+  getMockCartAsync,
+  removeMockCartItemAsync,
+  setMockCartItemSelectedAsync,
+  updateMockCartQuantityAsync,
+} from "@/features/cart/lib/mock-cart-store";
+import { getMockProductById } from "@/features/products/lib/mock-product-details";
 import type { ProductDetailDto } from "@/features/products/types/product-details";
 import StoreSectionHeading from "@/components/shared/store-section-heading";
+import { formatCurrency } from "@/utils/format-currency";
 
 type CartViewItem = {
   id: string;
@@ -33,11 +42,14 @@ type CartViewItem = {
   isSelected: boolean;
 };
 
+const FREE_SHIPPING_THRESHOLD = 3_000_000;
+const STANDARD_SHIPPING_FEE = 30_000;
+
 function getDisplayPrice(product: ProductDetailDto): number {
   const discountPercentage = product.discountPercentage ?? 0;
   const discountedPrice = product.orginalPrice * (1 - discountPercentage / 100);
 
-  return Number(discountedPrice.toFixed(2));
+  return Math.round(discountedPrice);
 }
 
 function getDisplaySeries(product: ProductDetailDto, productId: string): string {
@@ -68,12 +80,18 @@ export default function CartPage() {
     setError(null);
 
     try {
-      const cart = await getCartAsync();
+      // const cart = await getCartAsync();
+      const cart = await getMockCartAsync();
 
       const detailedItems = await Promise.all(
         cart.productCarts.map(async (cartItem) => {
           try {
-            const product = await getProductByIdAsync(cartItem.productid);
+            // const product = await getProductByIdAsync(cartItem.productid);
+            const product = getMockProductById(cartItem.productid);
+
+            if (!product) {
+              throw new Error(`Mock product not found: ${cartItem.productid}`);
+            }
 
             return {
               id: cartItem.productid,
@@ -140,7 +158,8 @@ export default function CartPage() {
     setPendingItemId(id);
 
     try {
-      await updateQuantityCartAsync(id, nextQuantity);
+      // await updateQuantityCartAsync(id, nextQuantity);
+      await updateMockCartQuantityAsync(id, nextQuantity);
       await loadCartAsync();
     } catch (updateError) {
       setError(
@@ -157,7 +176,8 @@ export default function CartPage() {
     setPendingItemId(id);
 
     try {
-      await removeItemFromCartAsync(id);
+      // await removeItemFromCartAsync(id);
+      await removeMockCartItemAsync(id);
       await loadCartAsync();
     } catch (removeError) {
       setError(
@@ -174,7 +194,8 @@ export default function CartPage() {
     setPendingItemId(id);
 
     try {
-      await setCartItemSelectedAsync(id, selected);
+      // await setCartItemSelectedAsync(id, selected);
+      await setMockCartItemSelectedAsync(id, selected);
 
       setCartItems((previousItems) =>
         previousItems.map((item) =>
@@ -196,7 +217,8 @@ export default function CartPage() {
     setIsClearing(true);
 
     try {
-      await clearCartAsync();
+      // await clearCartAsync();
+      await clearMockCartAsync();
       setCartItems([]);
     } catch (clearError) {
       setError(
@@ -223,7 +245,10 @@ export default function CartPage() {
     [selectedItems]
   );
 
-  const shipping = selectedItems.length === 0 ? 0 : subtotal > 150 ? 0 : 15;
+  const shipping =
+    selectedItems.length === 0 || subtotal >= FREE_SHIPPING_THRESHOLD
+      ? 0
+      : STANDARD_SHIPPING_FEE;
   const total = subtotal + shipping;
 
   if (isLoading) {
@@ -397,7 +422,7 @@ export default function CartPage() {
                               <span>Đơn giá:</span>
 
                               <span className="font-semibold text-slate-700">
-                                ${item.price.toFixed(2)}
+                                {formatCurrency(item.price, "VND")}
                               </span>
                             </div>
                           </div>
@@ -408,7 +433,7 @@ export default function CartPage() {
                             </p>
 
                             <p className="type-h6 mt-1 text-slate-950">
-                              ${(item.price * item.quantity).toFixed(2)}
+                              {formatCurrency(item.price * item.quantity, "VND")}
                             </p>
                           </div>
                         </div>
@@ -499,7 +524,7 @@ export default function CartPage() {
                       <span className="text-slate-500">Tạm tính</span>
 
                       <span className="font-semibold tabular-nums text-slate-950">
-                        ${subtotal.toFixed(2)}
+                        {formatCurrency(subtotal, "VND")}
                       </span>
                     </div>
 
@@ -512,14 +537,18 @@ export default function CartPage() {
                           shipping === 0 ? "text-emerald-600" : "text-slate-950",
                         ].join(" ")}
                       >
-                        {shipping === 0 ? "Miễn phí" : `$${shipping.toFixed(2)}`}
+                        {shipping === 0 ? "Miễn phí" : formatCurrency(shipping, "VND")}
                       </span>
                     </div>
                   </div>
 
                   {shipping > 0 ? (
                     <div className="mt-5 rounded-xl border border-blue-100 bg-blue-50 px-3.5 py-3 text-xs leading-5 text-blue-800">
-                      Mua thêm <strong className="font-bold">${(150 - subtotal).toFixed(2)}</strong> để được miễn phí vận chuyển toàn quốc.
+                      Mua thêm{" "}
+                      <strong className="font-bold">
+                        {formatCurrency(FREE_SHIPPING_THRESHOLD - subtotal, "VND")}
+                      </strong>{" "}
+                      để được miễn phí vận chuyển toàn quốc.
                     </div>
                   ) : null}
 
@@ -533,7 +562,7 @@ export default function CartPage() {
                     </div>
 
                     <span className="type-h4 tabular-nums text-blue-600">
-                      ${total.toFixed(2)}
+                      {formatCurrency(total, "VND")}
                     </span>
                   </div>
 

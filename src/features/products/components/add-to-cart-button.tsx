@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { ShoppingCart } from "lucide-react";
 
-import { addItemToCartAsync } from "@/features/cart/services/cart-api";
+// import { addItemToCartAsync } from "@/features/cart/services/cart-api";
+import { addMockItemToCartAsync } from "@/features/cart/lib/mock-cart-store";
 
 type AddToCartButtonProps = {
   productId: string;
@@ -20,7 +21,8 @@ export default function AddToCartButton({ productId }: AddToCartButtonProps) {
     setIsError(false);
 
     try {
-      await addItemToCartAsync(productId, 1);
+      // await addItemToCartAsync(productId, 1);
+      await addMockItemToCartAsync(productId, 1);
       setMessage("Đã thêm sản phẩm vào giỏ hàng.");
     } catch (error) {
       const errorMessage =
