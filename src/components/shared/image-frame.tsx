@@ -9,6 +9,7 @@ export type TextAlignType = "left" | "center" | "right";
 export type ImageFrameProps = {
   src: string;
   alt?: string;
+  eyebrow?: string;
   header?: string;
   title?: string;
   description?: string;
@@ -48,6 +49,7 @@ const textAlignMap: Record<TextAlignType, string> = {
 export function ImageFrame({
   src,
   alt = "Frame image",
+  eyebrow,
   header,
   title,
   description,
@@ -64,7 +66,7 @@ export function ImageFrame({
   objectFit = "cover",
 }: ImageFrameProps) {
   const HeaderElement = headerSize;
-  const hasTextContent = Boolean(header || title || description);
+  const hasTextContent = Boolean(eyebrow || header || title || description);
   const aspectClass =
     aspectRatio in aspectRatioMap
       ? aspectRatioMap[aspectRatio as ImageFrameAspectRatio]
@@ -117,6 +119,12 @@ export function ImageFrame({
               textAlignMap[textAlign],
             )}
           >
+            {eyebrow ? (
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-white/85 drop-shadow-sm sm:text-sm">
+                {eyebrow}
+              </p>
+            ) : null}
+
             {header ? (
               <HeaderElement
                 className={cn(

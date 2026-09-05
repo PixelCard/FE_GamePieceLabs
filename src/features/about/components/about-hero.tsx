@@ -12,8 +12,8 @@ export function AboutHero({ content }: AboutHeroProps) {
         <ImageFrame
           src={content.heroImageSrc}
           alt={content.heroImageAlt}
-          eyesbrow={content.eyebrow}
-          title={content.title}
+          eyebrow={content.eyebrow}
+          header={content.title}
           priority
           aspectRatio="aspect-[4/3] sm:aspect-video lg:aspect-[21/9]"
           className="shadow-2xl"

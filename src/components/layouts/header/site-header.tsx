@@ -12,12 +12,10 @@ import {
   Menu,
   PackageOpen,
   Search,
-  ShoppingBag,
   Sparkles,
 } from "lucide-react";
 import { useState } from "react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -46,6 +44,7 @@ import type {
   HeaderNavigationItem,
   HeaderPromoCard,
 } from "@/features/navigation/types/header-navigation";
+import { CartDrawer } from "@/features/cart/components/cart-drawer";
 import { cn } from "@/utils/cn";
 
 const promoStyles: Record<HeaderPromoCard["tone"], string> = {
@@ -245,14 +244,7 @@ function DesktopHeader() {
               <CircleUserRound className="size-6" />
             </Link>
           </Button>
-          <Button asChild variant="ghost" size="icon" className="relative">
-            <Link href="/cart" aria-label="Giỏ hàng, 1 sản phẩm">
-              <ShoppingBag className="size-6" />
-              <Badge className="absolute -right-0.5 -top-0.5 size-5 border-0 bg-foreground p-0 text-[10px] font-bold text-background">
-                1
-              </Badge>
-            </Link>
-          </Button>
+          <CartDrawer />
         </div>
       </div>
 
@@ -357,14 +349,7 @@ function MobileHeader() {
         <Button variant="ghost" size="icon" aria-label="Tìm kiếm">
           <Search className="size-5" />
         </Button>
-        <Button asChild variant="ghost" size="icon" className="relative">
-          <Link href="/cart" aria-label="Giỏ hàng, 1 sản phẩm">
-            <ShoppingBag className="size-5" />
-            <Badge className="absolute -right-0.5 -top-0.5 size-4 border-0 bg-foreground p-0 text-[9px] font-bold text-background">
-              1
-            </Badge>
-          </Link>
-        </Button>
+        <CartDrawer iconSizeClassName="size-5" badgeSizeClassName="size-4 text-[9px]" />
       </div>
     </div>
   );
