@@ -22,6 +22,7 @@ export interface PaginationMeta {
 }
 
 interface PaginationProps {
+  isShowed?: boolean;
   align: PaginationAlign;
   pagination: PaginationMeta;
   variant: PaginationVariant;
@@ -69,7 +70,12 @@ function getVisiblePages(
   ];
 }
 
-export function Pagination({ align, pagination, variant }: PaginationProps) {
+export function Pagination({
+  isShowed = true,
+  align,
+  pagination,
+  variant,
+}: PaginationProps) {
   const {
     currentPage,
     pageSize,
@@ -83,6 +89,8 @@ export function Pagination({ align, pagination, variant }: PaginationProps) {
   const previousPage = Math.max(1, currentPage - 1);
   const nextPage = Math.min(totalPages, currentPage + 1);
   const summary = `Showing ${firstItem}-${lastItem} of ${totalItems} products`;
+
+  if (!isShowed) return;
 
   if (variant === "simple") {
     return (
@@ -174,9 +182,7 @@ export function Pagination({ align, pagination, variant }: PaginationProps) {
             href={`?page=${nextPage}`}
             aria-disabled={!hasNext}
             tabIndex={hasNext ? undefined : -1}
-            className={cn(
-              !hasNext && "pointer-events-none text-neutral-400",
-            )}
+            className={cn(!hasNext && "pointer-events-none text-neutral-400")}
           />
         </PaginationItem>
       </PaginationContent>

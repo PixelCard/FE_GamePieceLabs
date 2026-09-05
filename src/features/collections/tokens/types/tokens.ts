@@ -17,7 +17,7 @@ export interface CollectionEditorial {
   description: string;
 }
 
-export interface BoardGameInsertProduct {
+export interface TokensProduct {
   slug: string;
   gui: string;
   name: string;
@@ -28,8 +28,8 @@ export interface BoardGameInsertProduct {
   rating: number;
 }
 
-export interface PaginatedBoardGameInserts {
-  data: readonly BoardGameInsertProduct[];
+export interface PaginatedOXProductFamily {
+  data: readonly TokensProduct[];
   pagination: PaginationMetadata;
 }
 
@@ -44,6 +44,6 @@ export interface OtherCategory {
 export interface CollectionsPageData {
   hero: CollectionHero;
   editorial: CollectionEditorial;
-  products: PaginatedBoardGameInserts;
+  products: PaginatedOXProductFamily;
   otherCategories: readonly OtherCategory[];
 }

@@ -4,14 +4,14 @@ import { ImageFrame } from "@/components/shared/image-frame";
 import { ProductList } from "@/components/shared/product-list";
 import { SectionTitle } from "@/components/shared/section-title";
 import Wrapper from "@/components/shared/wrapper";
-import { CollectionsPageData } from "../types/board-game-inserts";
+import { CollectionsPageData } from "../types/tokens";
 import { MarqueeText } from "@/components/shared/marquee-text";
 
-interface BoardGameInsertsProps {
+interface TokensProps {
   data: CollectionsPageData;
 }
 
-export function BoardGameInserts({ data }: BoardGameInsertsProps) {
+export function Tokens({ data }: TokensProps) {
   const { hero, editorial, products, otherCategories } = data;
 
   return (
@@ -46,11 +46,7 @@ export function BoardGameInserts({ data }: BoardGameInsertsProps) {
 
           <div className="flex flex-1 items-start justify-center gap-2 text-center">
             <Filter
-              items={[
-                { id: "accessories", label: "Accessories", count: 1 },
-                { id: "divider", label: "Divider", count: 4 },
-                { id: "insert", label: "Insert", count: 276 },
-              ]}
+              items={[{ id: "accessories", label: "Accessories", count: 4 }]}
               title="Product"
               variant="type"
             />
@@ -90,7 +86,7 @@ export function BoardGameInserts({ data }: BoardGameInsertsProps) {
             columns={4}
             alignPagination="center"
             pagination={products.pagination}
-            variantPagination="default"
+            variantPagination="simple"
           />
         </section>
       </Wrapper>
