@@ -132,7 +132,11 @@ export function BoardGameInserts({ data }: BoardGameInsertsProps) {
         className="pb-16 sm:pb-20"
       >
         {otherCategories.map((category) => (
-          <CardImageTitle key={category.href} {...category} />
+          <CardImageTitle
+            key={category.href}
+            {...category}
+            prefix="/collections"
+          />
         ))}
       </SectionTitle>
     </>

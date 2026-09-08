@@ -6,6 +6,8 @@ import { OXProductFamily } from "@/features/collections/ox-product-family/compon
 import { getOXProductFamily } from "@/features/collections/ox-product-family/services/ox-product-family-api";
 import { getTokens } from "@/features/collections/tokens/services/tokens-api";
 import { Tokens } from "@/features/collections/tokens/components/Tokens";
+import { ByGameName } from "@/features/collections/by-game-name/components/ByGameName";
+import { getByGameName } from "@/features/collections/by-game-name/services/by-game-name-api";
 
 interface CollectionPageProps {
   params: Promise<{ slug: string }>;
@@ -28,8 +30,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
       return <Tokens data={tokens} />;
     }
     default:
-      notFound();
+      const byGameName = await getByGameName();
+      return <ByGameName data={byGameName} />;
   }
-
-  
 }

@@ -80,7 +80,11 @@ export default function StorefrontHomePage() {
           }}
         >
           {gearCategories.map((category) => (
-            <CardImageTitle key={category.title} {...category} />
+            <CardImageTitle
+              key={category.title}
+              {...category}
+              prefix="/collections"
+            />
           ))}
         </SectionTitle>
       </SectionTitleGroupProps>
@@ -124,7 +128,11 @@ export default function StorefrontHomePage() {
           align="left"
         >
           {gameCategories.map((game) => (
-            <CardImageTitle key={game.title} {...game} />
+            <CardImageTitle
+              key={game.title}
+              {...game}
+              prefix="/collections"
+            />
           ))}
         </SectionTitle>
       </SectionTitleGroupProps>
