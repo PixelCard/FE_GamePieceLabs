@@ -9,6 +9,10 @@ import { MarqueeText } from "@/components/shared/marquee-text";
 import { featuredProducts } from "@/features/home/data/featured-products";
 import { gameCategories } from "@/features/home/data/game-categories";
 import { gearCategories } from "@/features/home/data/gear-categories";
+import {
+  playerReviewContentList,
+  playerReviewImageList,
+} from "@/features/home/data/player-reviews";
 import { ImageComparison } from "@/components/shared/image-comparision";
 import { ProductDemo } from "@/components/shared/product-demo";
 import { VideoFrame } from "@/components/shared/video-frame";
@@ -137,7 +141,11 @@ export default function StorefrontHomePage() {
         </SectionTitle>
       </SectionTitleGroupProps>
 
-      <PlayerReviewsSection variant="content" />
+      <PlayerReviewsSection
+        variant="image"
+        imageList={playerReviewImageList}
+        contentList={playerReviewContentList}
+      />
 
       <CompanyLinksSection />
 

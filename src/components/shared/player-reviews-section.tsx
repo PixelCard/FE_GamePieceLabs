@@ -9,81 +9,25 @@ import {
     type CarouselApi,
 } from '@/components/ui/carousel';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import type {
+    PlayerReviewContent,
+    PlayerReviewImage,
+    PlayerReviewsVariant,
+} from '@/features/home/types/player-review';
 import { cn } from '@/utils/cn';
-
-interface PlayerReview {
-    id: string;
-    author: string;
-    rating: number;
-    paragraphs: string[];
-    imageSrc: string;
-    imageAlt: string;
-}
-
-export type PlayerReviewsVariant = 'content' | 'image';
 
 interface PlayerReviewsSectionProps {
     className?: string;
     variant: PlayerReviewsVariant;
+    imageList: readonly PlayerReviewImage[];
+    contentList: readonly PlayerReviewContent[];
 }
-
-const PLAYER_REVIEWS: readonly PlayerReview[] = [
-    {
-        id: 'review-1',
-        author: 'Maximilian',
-        rating: 5,
-        imageSrc: '/images/games/7-wonders.jpg',
-        imageAlt: 'Board game components organized for play',
-        paragraphs: [
-            'I was particularly impressed with the care and attention to detail Laserox show and this is evident in the design of the product, but also the individual message of thanks included and their rapid and informative response to questions. It is very clear that they sincerely care about customer satisfaction and are intending on making a quality product. I wholeheartedly support this mindset.',
-            'The assembly was mostly intuitive and presented no real problems and once complete fits perfectly and looks great. Should I ever need similar organisers for other games in future, I will most definitely be looking at Laserox first.',
-        ],
-    },
-    {
-        id: 'review-2',
-        author: 'Andrew',
-        rating: 5,
-        imageSrc: '/images/games/aeons-end.jpg',
-        imageAlt: 'Aeon’s End board game setup shared by a player',
-        paragraphs: [
-            'Absolutely beautiful. Great design and solid workmanship. Makes setting up and breaking down the game a breeze.',
-        ],
-    },
-    {
-        id: 'review-3',
-        author: 'Christopher',
-        rating: 5,
-        imageSrc: '/images/games/ankh-gods-of-egypt.jpg',
-        imageAlt: 'Ankh: Gods of Egypt board game setup shared by a player',
-        paragraphs: [
-            'It is my first laserox insert, but this one is gorgeous. The small details with thematic engravings look very nice. It does take some time to put all things together, but that is part of the fun. Really like it.',
-        ],
-    },
-    {
-        id: 'review-4',
-        author: 'Sarah L.',
-        rating: 5,
-        imageSrc: '/images/games/arkham-horror.jpg',
-        imageAlt: 'Arkham Horror board game setup shared by a player',
-        paragraphs: [
-            'Outstanding precision and quality! All miniature compartments and token trays fit smoothly into the original game box. Premium finish throughout.',
-        ],
-    },
-    {
-        id: 'review-5',
-        author: 'David M.',
-        rating: 5,
-        imageSrc: '/images/games/bloodborne-the-board-game.jpg',
-        imageAlt: 'Bloodborne board game setup shared by a player',
-        paragraphs: [
-            'Top notch materials and exceptionally thoughtful packaging. Everything arrived promptly and in pristine condition. Highly recommended for collectors!',
-        ],
-    },
-];
 
 export function PlayerReviewsSection({
     className,
     variant,
+    imageList,
+    contentList,
 }: PlayerReviewsSectionProps) {
     const [api, setApi] = React.useState<CarouselApi>();
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
@@ -155,19 +99,19 @@ export function PlayerReviewsSection({
                     className="w-full"
                 >
                     <CarouselContent className="-ml-4 sm:-ml-6">
-                        {PLAYER_REVIEWS.map((review) => (
-                            <CarouselItem
-                                key={review.id}
-                                className="basis-[88%] pl-4 sm:basis-[48%] lg:basis-[32%] sm:pl-6"
-                            >
-                                {variant === 'image' ? (
+                        {variant === 'image'
+                            ? imageList.map((review) => (
+                                <CarouselItem
+                                    key={review.id}
+                                    className="basis-[88%] pl-4 sm:basis-[48%] lg:basis-[32%] sm:pl-6"
+                                >
                                     <figure className="group relative min-h-[320px] overflow-hidden rounded-lg bg-neutral-200 sm:min-h-[360px]">
                                         <Image
                                             src={review.imageSrc}
                                             alt={review.imageAlt}
                                             fill
                                             sizes="(min-width: 1024px) 32vw, (min-width: 640px) 48vw, 88vw"
-                                            className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                                            className="object-cover transition-transform duration-300"
                                         />
                                         <figcaption className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/85 to-transparent px-6 pb-6 pt-16 text-white sm:px-8 sm:pb-8">
                                             <div
@@ -186,7 +130,13 @@ export function PlayerReviewsSection({
                                             </h3>
                                         </figcaption>
                                     </figure>
-                                ) : (
+                                </CarouselItem>
+                            ))
+                            : contentList.map((review) => (
+                                <CarouselItem
+                                    key={review.id}
+                                    className="basis-[88%] pl-4 sm:basis-[48%] lg:basis-[32%] sm:pl-6"
+                                >
                                     <div className="flex h-full min-h-[320px] flex-col rounded-lg bg-[#ededed] p-6 text-neutral-900 sm:min-h-[360px] sm:p-8">
                                         {/* Star Rating */}
                                         <div
@@ -213,9 +163,8 @@ export function PlayerReviewsSection({
                                             ))}
                                         </div>
                                     </div>
-                                )}
-                            </CarouselItem>
-                        ))}
+                                </CarouselItem>
+                            ))}
                     </CarouselContent>
                 </Carousel>
             </div>
