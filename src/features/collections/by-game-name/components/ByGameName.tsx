@@ -33,7 +33,7 @@ export function ByGameName({ data }: ByGameNameProps) {
           {title}
         </h1>
 
-        <div className="flex w-full flex-wrap items-center justify-between gap-x-5 gap-y-4 border-y border-neutral-200 py-4">
+        <div className="grid w-full grid-cols-2 items-center gap-x-2 gap-y-4 border-y border-neutral-200 py-4 sm:flex sm:justify-between sm:gap-x-5">
           <Filter
             variant="switch"
             label="In stock only"
@@ -41,15 +41,15 @@ export function ByGameName({ data }: ByGameNameProps) {
             defaultChecked={false}
             labelPosition="left"
             showActiveBadge
-            wrapperClassName="m-0 p-0"
+            wrapperClassName="m-0 w-full justify-start p-0 sm:w-auto"
           />
 
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-3">
+          <div className="contents sm:flex sm:flex-wrap sm:items-center sm:gap-x-2 sm:gap-y-3">
             <Filter
               items={[{ id: "insert", label: "Insert", count: 1 }]}
               title="Product"
               variant="type"
-              wrapperClassName="m-0 p-0"
+              wrapperClassName="m-0 w-full justify-end p-0 sm:w-auto sm:justify-start"
             />
             <Filter
               variant="price"
@@ -57,14 +57,14 @@ export function ByGameName({ data }: ByGameNameProps) {
               max={283500}
               step={5000}
               currency="VND"
-              wrapperClassName="m-0 p-0"
+              wrapperClassName="m-0 w-full justify-start p-0 sm:w-auto"
             />
           </div>
 
           <Filter
             variant="sort"
             items={sortOptions}
-            wrapperClassName="m-0 p-0"
+            wrapperClassName="m-0 w-full justify-end p-0 sm:w-auto"
           />
         </div>
 

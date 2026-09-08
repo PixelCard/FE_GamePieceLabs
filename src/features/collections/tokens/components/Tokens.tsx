@@ -32,8 +32,8 @@ export function Tokens({ data }: TokensProps) {
       />
 
       <Wrapper>
-        <div className="flex w-full items-start py-3">
-          <div className="flex-1 text-left">
+        <div className="grid w-full grid-cols-2 items-start gap-x-2 gap-y-1 py-3 sm:flex sm:gap-0">
+          <div className="min-w-0 text-left sm:flex-1">
             <Filter
               variant="switch"
               label="In stock only"
@@ -41,19 +41,28 @@ export function Tokens({ data }: TokensProps) {
               defaultChecked={false}
               labelPosition="left"
               showActiveBadge
+              wrapperClassName="m-0 w-full justify-start p-0 sm:w-auto sm:px-2 sm:py-2"
             />
           </div>
 
-          <div className="flex flex-1 items-start justify-center gap-2 text-center">
+          <div className="contents sm:flex sm:flex-1 sm:items-start sm:justify-center sm:gap-2 sm:text-center">
             <Filter
               items={[{ id: "accessories", label: "Accessories", count: 4 }]}
               title="Product"
               variant="type"
+              wrapperClassName="m-0 w-full justify-end p-0 sm:w-auto sm:px-2 sm:py-2"
             />
-            <Filter variant="price" min={0} max={274} step={1} currency="USD" />
+            <Filter
+              variant="price"
+              min={0}
+              max={274}
+              step={1}
+              currency="USD"
+              wrapperClassName="m-0 w-full justify-start p-0 sm:w-auto sm:px-2 sm:py-2"
+            />
           </div>
 
-          <div className="flex-1 text-right">
+          <div className="min-w-0 text-right sm:flex-1">
             <Filter
               variant="sort"
               items={[
@@ -67,6 +76,7 @@ export function Tokens({ data }: TokensProps) {
                 "date, old to new",
                 "date, new to old",
               ]}
+              wrapperClassName="m-0 w-full justify-end p-0 sm:w-auto sm:px-2 sm:py-2"
             />
           </div>
         </div>
