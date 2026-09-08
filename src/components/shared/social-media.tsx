@@ -144,8 +144,8 @@ export function SocialMediaRail({
       >
         <style>{`
           @keyframes social-handle-shimmer {
-            0% { transform: translateX(-180%); }
-            100% { transform: translateX(280%); }
+            0%, 15% { background-position: 200% 50%; }
+            65%, 100% { background-position: -200% 50%; }
           }
         `}</style>
         <Button
@@ -161,7 +161,7 @@ export function SocialMediaRail({
           className={cn(
             "relative z-10 h-10 w-6 rounded-none bg-background p-0 shadow-md sm:h-12 sm:w-7",
             !isOpen &&
-              "overflow-hidden border-amber-100 bg-amber-50 text-amber-500 shadow-[0_0_10px_rgba(253,230,138,0.28)] hover:bg-amber-100 after:pointer-events-none after:absolute after:inset-y-0 after:left-0 after:w-1/2 after:-translate-x-[180%] after:bg-linear-to-r after:from-transparent after:via-white/85 after:to-transparent after:content-[''] motion-safe:after:animate-[social-handle-shimmer_2.4s_ease-in-out_infinite] dark:border-amber-200 dark:bg-amber-100 dark:text-amber-700 dark:hover:bg-amber-200",
+              "border-[#f2e7b3] bg-[#fffdf4] text-[#9a7b19] shadow-[0_0_12px_rgba(244,220,120,0.2)] [background-image:linear-gradient(110deg,transparent_25%,rgba(253,230,138,0.22)_42%,rgba(255,255,255,0.95)_50%,rgba(253,230,138,0.22)_58%,transparent_75%)] [background-size:300%_100%] transition-[filter,box-shadow] hover:brightness-[0.985] hover:shadow-[0_0_14px_rgba(244,220,120,0.3)] motion-safe:animate-[social-handle-shimmer_3s_ease-in-out_infinite] dark:border-[#f2e7b3] dark:bg-[#fffdf4] dark:text-[#9a7b19]",
             side === "right"
               ? "rounded-l-full border-r-0"
               : "rounded-r-full border-l-0",
