@@ -89,6 +89,7 @@ export default function StorefrontHomePage() {
               key={category.title}
               {...category}
               prefix="/collections"
+              isClicked={true}
             />
           ))}
         </SectionTitle>
