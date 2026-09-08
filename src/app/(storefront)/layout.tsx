@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Barlow } from "next/font/google";
 import { SiteFooter } from "@/components/layouts/footer/site-footer";
 import { SiteHeader } from "@/components/layouts/header/site-header";
+import { SocialMediaRail } from "@/components/shared/social-media";
 import { footerContent } from "@/features/navigation/data/footer-navigation";
-import Wrapper from "@/components/shared/wrapper";
+import { socialMediaItems } from "@/features/navigation/data/social-media";
 
 const storefrontFont = Barlow({
   weight: ["500", "700"],
@@ -30,6 +31,7 @@ export default function ClientLayout({
       <SiteHeader />
       <div className="flex-1">{children}</div>
       <SiteFooter content={footerContent} />
+      <SocialMediaRail items={socialMediaItems} />
     </div>
   );
 }
