@@ -8,27 +8,20 @@ export type FooterNavigationGroup = {
   links: FooterNavigationLink[];
 };
 
-export type FooterSocialLink = FooterNavigationLink & {
-  platform: "facebook" | "instagram" | "youtube";
-};
-
-export type FooterPreferenceOption = {
-  value: string;
+export type FooterCertificationBadge = {
   label: string;
-  prefix?: string;
+  href: string;
+  imageSrc: string;
+  imageAlt: string;
+  width: number;
+  height: number;
 };
 
 export type FooterContent = {
-  brand: {
-    name: string;
-    description: string;
-  };
   navigationGroups: FooterNavigationGroup[];
-  socialLinks: FooterSocialLink[];
-  currencyOptions: FooterPreferenceOption[];
-  languageOptions: FooterPreferenceOption[];
-  defaultCurrency: string;
-  defaultLanguage: string;
-  paymentMethods: string[];
+  certifications: {
+    title: string;
+    badges: FooterCertificationBadge[];
+  };
   copyright: string;
 };
