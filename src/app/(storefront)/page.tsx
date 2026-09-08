@@ -137,7 +137,7 @@ export default function StorefrontHomePage() {
         </SectionTitle>
       </SectionTitleGroupProps>
 
-      <PlayerReviewsSection />
+      <PlayerReviewsSection variant="content" />
 
       <CompanyLinksSection />
 
