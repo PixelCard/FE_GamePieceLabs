@@ -39,7 +39,7 @@ export function ProductDemo({ className }: ProductDemoProps) {
         <section
             aria-label="Product organizer highlights"
             className={cn(
-                'w-full bg-neutral-100 px-4 py-10 sm:px-6 sm:py-14',
+                'w-full px-4 py-10 sm:px-6 sm:py-14',
                 className,
             )}
         >

@@ -63,7 +63,7 @@ const imageSliderSlides = [
 
 export default function StorefrontHomePage() {
   return (
-    <main className="bg-neutral-50">
+    <main className="bg-white">
       {/* Image slider */}
       <div className="pt-6 sm:pt-8">
         <div className="mx-auto w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] sm:max-w-[620px] lg:max-w-[940px] xl:w-[calc(100%-100px)] xl:max-w-[1580px]">

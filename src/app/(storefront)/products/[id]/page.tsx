@@ -31,7 +31,7 @@ export default async function ProductDetailsPage({
   const youMayAlsoLikeProducts = getMockYouMayAlsoLikeProducts();
 
   return (
-    <main className="min-h-screen bg-neutral-100 px-4 py-5 text-neutral-950">
+    <main className="min-h-screen bg-white px-4 py-5 text-neutral-950">
       <div className="mx-auto max-w-[1440px]">
         <BreadCrumbs />
 
@@ -116,7 +116,7 @@ export default async function ProductDetailsPage({
             </ul>
           </div>
 
-          <dl className="overflow-hidden rounded-2xl bg-neutral-200/70 px-6 sm:px-10 lg:px-12">
+          <dl className="overflow-hidden rounded-2xl border border-neutral-200 bg-white px-6 sm:px-10 lg:px-12">
             <div className="grid gap-2 border-b border-neutral-300 py-7 sm:grid-cols-[minmax(10rem,0.75fr)_1.5fr] sm:gap-8">
               <dt className="font-bold">Licensing partner</dt>
               <dd className="text-neutral-700">Cephalofair Games</dd>

@@ -26,7 +26,7 @@ export default function ClientLayout({
 }) {
   return (
     <div
-      className={`${storefrontFont.variable} storefront-typography flex min-h-screen flex-col bg-neutral-50 text-neutral-900 antialiased selection:bg-blue-500/10`}
+      className={`${storefrontFont.variable} storefront-typography flex min-h-screen flex-col bg-white text-neutral-900 antialiased selection:bg-blue-500/10`}
     >
       <SiteHeader />
       <div className="flex-1">{children}</div>

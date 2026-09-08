@@ -105,7 +105,7 @@ export function PlayerReviewsSection({
                                     key={review.id}
                                     className="basis-[88%] pl-4 sm:basis-[48%] lg:basis-[32%] sm:pl-6"
                                 >
-                                    <figure className="group relative min-h-[320px] overflow-hidden rounded-lg bg-neutral-200 sm:min-h-[360px]">
+                                    <figure className="group relative min-h-[320px] overflow-hidden rounded-lg sm:min-h-[360px]">
                                         <Image
                                             src={review.imageSrc}
                                             alt={review.imageAlt}
@@ -137,7 +137,7 @@ export function PlayerReviewsSection({
                                     key={review.id}
                                     className="basis-[88%] pl-4 sm:basis-[48%] lg:basis-[32%] sm:pl-6"
                                 >
-                                    <div className="flex h-full min-h-[320px] flex-col rounded-lg bg-[#ededed] p-6 text-neutral-900 sm:min-h-[360px] sm:p-8">
+                                    <div className="flex h-full min-h-[320px] flex-col rounded-lg p-6 text-neutral-900 sm:min-h-[360px] sm:p-8">
                                         {/* Star Rating */}
                                         <div
                                             className="mb-4 flex items-center gap-1 text-amber-500"
