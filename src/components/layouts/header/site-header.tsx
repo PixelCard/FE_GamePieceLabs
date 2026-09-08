@@ -11,7 +11,6 @@ import {
   Leaf,
   Menu,
   PackageOpen,
-  Search,
   Sparkles,
 } from "lucide-react";
 import { useState } from "react";
@@ -45,6 +44,7 @@ import type {
   HeaderPromoCard,
 } from "@/features/navigation/types/header-navigation";
 import { CartDrawer } from "@/features/cart/components/cart-drawer";
+import { SearchDrawer } from "@/features/search/components/search-drawer";
 import { cn } from "@/utils/cn";
 
 const promoStyles: Record<HeaderPromoCard["tone"], string> = {
@@ -236,9 +236,7 @@ function DesktopHeader() {
             English
             <ChevronDown className="size-4" aria-hidden="true" />
           </Button>
-          <Button variant="ghost" size="icon" aria-label="Tìm kiếm">
-            <Search className="size-6" />
-          </Button>
+          <SearchDrawer />
           <Button asChild variant="ghost" size="icon">
             <Link href="/auth/login" aria-label="Tài khoản">
               <CircleUserRound className="size-6" />
@@ -346,9 +344,7 @@ function MobileHeader() {
       </div>
 
       <div className="flex items-center gap-0.5 justify-self-end -mr-2">
-        <Button variant="ghost" size="icon" aria-label="Tìm kiếm">
-          <Search className="size-5" />
-        </Button>
+        <SearchDrawer iconSizeClassName="size-5" />
         <CartDrawer iconSizeClassName="size-5" badgeSizeClassName="size-4 text-[9px]" />
       </div>
     </div>
