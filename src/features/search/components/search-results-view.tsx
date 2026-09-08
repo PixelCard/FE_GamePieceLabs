@@ -4,10 +4,12 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { SlidersHorizontal, Search } from "lucide-react";
 
+import Filter, { type PriceRange } from "@/components/shared/filter";
 import { ProductList } from "@/components/shared/product-list";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
+  getSearchProducts,
   getProductTypeCounts,
   searchProducts,
 } from "@/features/search/lib/search-products";
@@ -16,25 +18,24 @@ import type {
   SearchSortOption,
 } from "@/features/search/types/search-product";
 import { formatCurrency } from "@/utils/format-currency";
-import { cn } from "@/utils/cn";
 
 type SearchResultsViewProps = {
   initialQuery: string;
 };
 
-const priceRanges = [
-  { id: "all", label: "Tất cả mức giá", minPrice: 0, maxPrice: Number.POSITIVE_INFINITY },
-  { id: "under-500", label: "Dưới 500.000 đ", minPrice: 0, maxPrice: 500_000 },
-  { id: "500-1000", label: "500.000 đ - 1.000.000 đ", minPrice: 500_000, maxPrice: 1_000_000 },
-  { id: "over-1000", label: "Trên 1.000.000 đ", minPrice: 1_000_000, maxPrice: Number.POSITIVE_INFINITY },
-] as const;
-
-const sortOptions: { value: SearchSortOption; label: string }[] = [
+const sortOptions = [
   { value: "relevance", label: "Liên quan nhất" },
   { value: "price-asc", label: "Giá thấp đến cao" },
   { value: "price-desc", label: "Giá cao đến thấp" },
   { value: "name-asc", label: "Tên A-Z" },
-];
+] satisfies { value: SearchSortOption; label: string }[];
+
+const sortValueByLabel = new Map(
+  sortOptions.map((option) => [option.label, option.value]),
+);
+const sortLabelByValue = new Map(
+  sortOptions.map((option) => [option.value, option.label]),
+);
 
 function buildSearchHref(query: string): string {
   const normalizedQuery = query.trim();
@@ -47,12 +48,15 @@ export function SearchResultsView({ initialQuery }: SearchResultsViewProps) {
   const [query, setQuery] = useState(initialQuery);
   const [inStockOnly, setInStockOnly] = useState(false);
   const [productType, setProductType] = useState<SearchProductType | "all">("all");
-  const [priceRangeId, setPriceRangeId] = useState<(typeof priceRanges)[number]["id"]>("all");
   const [sort, setSort] = useState<SearchSortOption>("relevance");
 
+  const allProducts = useMemo(() => getSearchProducts(), []);
   const productTypeCounts = useMemo(() => getProductTypeCounts(), []);
-  const selectedPriceRange =
-    priceRanges.find((range) => range.id === priceRangeId) ?? priceRanges[0];
+  const maxProductPrice = useMemo(
+    () => Math.max(...allProducts.map((product) => product.price), 0),
+    [allProducts],
+  );
+  const [priceRange, setPriceRange] = useState<PriceRange>([0, maxProductPrice]);
 
   const products = useMemo(
     () =>
@@ -60,11 +64,11 @@ export function SearchResultsView({ initialQuery }: SearchResultsViewProps) {
         query,
         inStockOnly,
         productType,
-        minPrice: selectedPriceRange.minPrice,
-        maxPrice: selectedPriceRange.maxPrice,
+        minPrice: priceRange[0],
+        maxPrice: priceRange[1],
         sort,
       }),
-    [inStockOnly, productType, query, selectedPriceRange, sort],
+    [inStockOnly, priceRange, productType, query, sort],
   );
 
   function submitSearch() {
@@ -115,47 +119,50 @@ export function SearchResultsView({ initialQuery }: SearchResultsViewProps) {
             </div>
 
             <div className="space-y-7">
-              <label className="flex cursor-pointer items-center justify-between gap-4 border-b border-neutral-200 pb-6">
-                <span className="text-sm font-bold text-neutral-900">Chỉ sản phẩm còn hàng</span>
-                <input
-                  type="checkbox"
-                  checked={inStockOnly}
-                  onChange={(event) => setInStockOnly(event.target.checked)}
-                  className="size-5 accent-neutral-950"
-                />
-              </label>
-
               <div className="border-b border-neutral-200 pb-6">
-                <p className="mb-3 text-sm font-bold text-neutral-950">Loại sản phẩm</p>
-                <div className="grid gap-2">
-                  <FilterButton
-                    active={productType === "all"}
-                    label="Tất cả"
-                    onClick={() => setProductType("all")}
-                  />
-                  {productTypeCounts.map((item) => (
-                    <FilterButton
-                      key={item.id}
-                      active={productType === item.id}
-                      label={`${item.label} (${item.count})`}
-                      onClick={() => setProductType(item.id)}
-                    />
-                  ))}
-                </div>
+                <Filter
+                  variant="switch"
+                  label="Chỉ sản phẩm còn hàng"
+                  checked={inStockOnly}
+                  onCheckedChange={setInStockOnly}
+                  wrapperClassName="mx-0 px-0 py-0"
+                  rootClassName="w-full"
+                />
               </div>
 
               <div className="border-b border-neutral-200 pb-6">
-                <p className="mb-3 text-sm font-bold text-neutral-950">Khoảng giá</p>
-                <div className="grid gap-2">
-                  {priceRanges.map((range) => (
-                    <FilterButton
-                      key={range.id}
-                      active={priceRangeId === range.id}
-                      label={range.label}
-                      onClick={() => setPriceRangeId(range.id)}
-                    />
-                  ))}
-                </div>
+                <Filter
+                  variant="type"
+                  title="Sản phẩm"
+                  triggerLabel="Loại sản phẩm"
+                  selectedId={productType}
+                  onSelectedIdChange={(nextProductType) =>
+                    setProductType(nextProductType as SearchProductType | "all")
+                  }
+                  items={[
+                    {
+                      id: "all",
+                      label: "Tất cả",
+                      count: allProducts.length,
+                    },
+                    ...productTypeCounts,
+                  ]}
+                  wrapperClassName="mx-0 px-0 py-0"
+                />
+              </div>
+
+              <div className="border-b border-neutral-200 pb-6">
+                <Filter
+                  variant="price"
+                  title="Khoảng giá"
+                  currency="VND"
+                  min={0}
+                  max={maxProductPrice}
+                  step={50_000}
+                  value={priceRange}
+                  onValueChange={setPriceRange}
+                  wrapperClassName="mx-0 px-0 py-0"
+                />
               </div>
 
               <Button
@@ -165,7 +172,7 @@ export function SearchResultsView({ initialQuery }: SearchResultsViewProps) {
                 onClick={() => {
                   setInStockOnly(false);
                   setProductType("all");
-                  setPriceRangeId("all");
+                  setPriceRange([0, maxProductPrice]);
                   setSort("relevance");
                 }}
               >
@@ -180,20 +187,16 @@ export function SearchResultsView({ initialQuery }: SearchResultsViewProps) {
                 Đang hiển thị <strong className="text-neutral-950">{products.length}</strong> sản phẩm
               </p>
 
-              <label className="flex items-center gap-3 text-sm font-bold text-neutral-950">
-                Sắp xếp
-                <select
-                  value={sort}
-                  onChange={(event) => setSort(event.target.value as SearchSortOption)}
-                  className="h-10 rounded-full border border-neutral-200 bg-white px-4 text-sm font-medium outline-none focus:border-neutral-950"
-                >
-                  {sortOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
+              <Filter
+                variant="sort"
+                label="Sắp xếp:"
+                items={sortOptions.map((option) => option.label)}
+                value={sortLabelByValue.get(sort)}
+                onValueChange={(nextSortLabel) =>
+                  setSort(sortValueByLabel.get(nextSortLabel) ?? "relevance")
+                }
+                wrapperClassName="mx-0 px-0 py-0"
+              />
             </div>
 
             {products.length > 0 ? (
@@ -227,13 +230,12 @@ export function SearchResultsView({ initialQuery }: SearchResultsViewProps) {
               <div className="mt-10 rounded-2xl bg-white p-5 text-sm text-neutral-500">
                 Khoảng giá hiện tại:{" "}
                 <strong className="text-neutral-950">
-                  {selectedPriceRange.id === "all"
+                  {priceRange[0] === 0 && priceRange[1] === maxProductPrice
                     ? "Tất cả"
-                    : `${formatCurrency(selectedPriceRange.minPrice, "VND")} - ${
-                        Number.isFinite(selectedPriceRange.maxPrice)
-                          ? formatCurrency(selectedPriceRange.maxPrice, "VND")
-                          : "trở lên"
-                      }`}
+                    : `${formatCurrency(priceRange[0], "VND")} - ${formatCurrency(
+                        priceRange[1],
+                        "VND",
+                      )}`}
                 </strong>
               </div>
             ) : null}
@@ -241,28 +243,5 @@ export function SearchResultsView({ initialQuery }: SearchResultsViewProps) {
         </div>
       </section>
     </main>
-  );
-}
-
-type FilterButtonProps = {
-  active: boolean;
-  label: string;
-  onClick: () => void;
-};
-
-function FilterButton({ active, label, onClick }: FilterButtonProps) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        "rounded-xl border px-4 py-3 text-left text-sm font-medium transition",
-        active
-          ? "border-neutral-950 bg-neutral-950 text-white"
-          : "border-neutral-200 bg-white text-neutral-600 hover:border-neutral-950 hover:text-neutral-950",
-      )}
-    >
-      {label}
-    </button>
   );
 }

@@ -11,9 +11,17 @@ import { useId, useState } from "react";
 
 export interface SortFilterProps {
   items: readonly string[];
+  label?: string;
+  value?: string;
+  onValueChange?: (value: string) => void;
 }
 
-export default function SortFilter({ items }: SortFilterProps) {
+export default function SortFilter({
+  items,
+  label = "Sort by:",
+  value,
+  onValueChange,
+}: SortFilterProps) {
   const triggerId = useId();
   const defaultValue = items.includes("best selling")
     ? "best selling"
@@ -21,9 +29,18 @@ export default function SortFilter({ items }: SortFilterProps) {
   const [selectedValue, setSelectedValue] = useState(defaultValue);
   const [isOpen, setIsOpen] = useState(false);
 
-  const currentValue = items.includes(selectedValue)
-    ? selectedValue
+  const resolvedValue = value ?? selectedValue;
+  const currentValue = items.includes(resolvedValue)
+    ? resolvedValue
     : (items[0] ?? "");
+
+  function handleValueChange(nextValue: string): void {
+    if (value === undefined) {
+      setSelectedValue(nextValue);
+    }
+
+    onValueChange?.(nextValue);
+  }
 
   const dropdownItems: DropdownMenuEntry[] = [
     {
@@ -31,7 +48,7 @@ export default function SortFilter({ items }: SortFilterProps) {
       type: "radio-group",
       props: {
         value: currentValue,
-        onValueChange: setSelectedValue,
+        onValueChange: handleValueChange,
       },
       items: items.map((item) => ({
         id: item,
@@ -50,7 +67,7 @@ export default function SortFilter({ items }: SortFilterProps) {
         htmlFor={triggerId}
         className="shrink-0 text-sm font-bold text-foreground sm:text-base"
       >
-        Sort by:
+        {label}
       </Label>
 
       <DropdownMenu
