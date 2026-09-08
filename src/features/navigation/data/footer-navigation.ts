@@ -1,21 +1,7 @@
 import type { FooterContent } from "@/features/navigation/types/footer-navigation";
 
 export const footerContent: FooterContent = {
-  brand: {
-    name: "MEMORYSHARD",
-    description:
-      "Board game organizers and tabletop accessories made for smoother, more memorable game nights.",
-  },
   navigationGroups: [
-    {
-      title: "Shop",
-      links: [
-        { label: "Organizers", href: "/products?group=organizers" },
-        { label: "Sleeves", href: "/products?group=sleeves" },
-        { label: "Tokens", href: "/products?group=tokens" },
-        { label: "Accessories", href: "/products?group=accessories" },
-      ],
-    },
     {
       title: "Information",
       links: [
@@ -34,23 +20,31 @@ export const footerContent: FooterContent = {
       ],
     },
   ],
-  socialLinks: [
-    { label: "Facebook", href: "#facebook", platform: "facebook" },
-    { label: "Instagram", href: "#instagram", platform: "instagram" },
-    { label: "YouTube", href: "#youtube", platform: "youtube" },
-  ],
-  currencyOptions: [
-    { value: "VND", label: "VND ₫" },
-    { value: "EUR", label: "EUR €" },
-    { value: "USD", label: "USD $" },
-    { value: "GBP", label: "GBP £" },
-  ],
-  languageOptions: [
-    { value: "en", label: "English", prefix: "🇬🇧" },
-    { value: "vi", label: "Tiếng Việt", prefix: "🇻🇳" },
-  ],
-  defaultCurrency: "VND",
-  defaultLanguage: "en",
-  paymentMethods: ["VISA", "Mastercard", "AMEX", "PayPal"],
-  copyright: "© 2026 MemoryShard. All rights reserved.",
+  certifications: {
+    title: "Certifications",
+    badges: [
+      {
+        label: "View DMCA.com protection status",
+        href: "https://www.dmca.com/r/1q28p05",
+        imageSrc: "/images/footer/dmca-protected.webp",
+        imageAlt: "DMCA.com Protection Status",
+        width: 121,
+        height: 24,
+      },
+      {
+        label: "View Ministry of Industry and Trade registration",
+        href: "http://online.gov.vn/nen-tang/6b21bf2e-2bcb-4523-82c2-5acbf9404ec6",
+        imageSrc: "/images/footer/bo-cong-thuong.png",
+        imageAlt: "Registered with the Ministry of Industry and Trade",
+        width: 230,
+        height: 86,
+      },
+    ],
+  },
+  fanpage: {
+    title: "Fanpage",
+    embedUrl:
+      "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FIn3DPhuKienBoardgame%3Flocale%3Dvi_VN&tabs=&width=340&height=150&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true",
+  },
+  copyright: "© 2026 Game Piece Labs. All rights reserved.",
 };

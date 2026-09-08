@@ -116,7 +116,7 @@ export default function CartPage() {
 
   if (isLoading) {
     return (
-      <main className="flex min-h-[60vh] items-center justify-center bg-slate-50 px-4 py-20">
+      <main className="flex min-h-[60vh] items-center justify-center bg-white px-4 py-20">
         <div className="text-center">
           <div className="mx-auto size-9 animate-spin rounded-full border-2 border-slate-200 border-t-slate-950" />
           <h1 className="mt-4 text-lg font-bold text-slate-950">Đang tải giỏ hàng</h1>
@@ -128,7 +128,7 @@ export default function CartPage() {
 
   if (cartItems.length === 0) {
     return (
-      <main className="flex min-h-[70vh] items-center justify-center bg-slate-50 px-4 py-16">
+      <main className="flex min-h-[70vh] items-center justify-center bg-white px-4 py-16">
         <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white px-6 py-10 text-center shadow-sm">
           <div className="mx-auto grid size-16 place-items-center rounded-full bg-slate-100 text-slate-700">
             <ShoppingBag className="size-7" />
@@ -150,7 +150,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-950">
+    <div className="min-h-screen bg-white text-slate-950">
       <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
         <header className="mb-6">
           <Link

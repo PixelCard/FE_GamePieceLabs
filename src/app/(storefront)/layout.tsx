@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Barlow } from "next/font/google";
 import { SiteFooter } from "@/components/layouts/footer/site-footer";
 import { SiteHeader } from "@/components/layouts/header/site-header";
+import { SocialMediaRail } from "@/components/shared/social-media";
 import { footerContent } from "@/features/navigation/data/footer-navigation";
-import Wrapper from "@/components/shared/wrapper";
+import { socialMediaItems } from "@/features/navigation/data/social-media";
 
 const storefrontFont = Barlow({
   weight: ["500", "700"],
@@ -15,7 +16,7 @@ const storefrontFont = Barlow({
 
 export const metadata: Metadata = {
   title: "Board Game Store",
-  description: "Discover board games and tabletop accessories at MemoryShard.",
+  description: "Discover board games and tabletop accessories at Game Piece Labs.",
 };
 
 export default function ClientLayout({
@@ -25,11 +26,12 @@ export default function ClientLayout({
 }) {
   return (
     <div
-      className={`${storefrontFont.variable} storefront-typography flex min-h-screen flex-col bg-neutral-50 text-neutral-900 antialiased selection:bg-blue-500/10`}
+      className={`${storefrontFont.variable} storefront-typography flex min-h-screen flex-col bg-white text-neutral-900 antialiased selection:bg-blue-500/10`}
     >
       <SiteHeader />
       <div className="flex-1">{children}</div>
       <SiteFooter content={footerContent} />
+      <SocialMediaRail items={socialMediaItems} />
     </div>
   );
 }

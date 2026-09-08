@@ -9,12 +9,17 @@ import { MarqueeText } from "@/components/shared/marquee-text";
 import { featuredProducts } from "@/features/home/data/featured-products";
 import { gameCategories } from "@/features/home/data/game-categories";
 import { gearCategories } from "@/features/home/data/gear-categories";
+import {
+  playerReviewContentList,
+  playerReviewImageList,
+} from "@/features/home/data/player-reviews";
 import { ImageComparison } from "@/components/shared/image-comparision";
 import { ProductDemo } from "@/components/shared/product-demo";
 import { VideoFrame } from "@/components/shared/video-frame";
 import { PlayerReviewsSection } from "@/components/shared/player-reviews-section";
 import { CompanyLinksSection } from "@/features/home/components/company-links-section";
 import { UpcomingProductsSection } from "@/features/home/components/upcoming-products-section";
+import { OrderInstruction } from "@/features/home/components/order-instruction";
 import {
   SectionTitle,
   SectionTitleGroupProps,
@@ -25,7 +30,7 @@ const imageSliderSlides = [
     id: "new-arrivals",
     title: "Bộ sưu tập mô hình mới đang mở bán",
     subtitle:
-      "Khám phá các mẫu figure, mecha và phụ kiện mới nhất vừa cập bến tại MemoryShard.",
+      "Khám phá các mẫu figure, mecha và phụ kiện mới nhất vừa cập bến tại Game Piece Labs.",
     ctaLabel: "Xem bộ sưu tập",
     ctaHref: "/",
     imageSrc: "/images/legacy/banner1.jpg",
@@ -58,7 +63,7 @@ const imageSliderSlides = [
 
 export default function StorefrontHomePage() {
   return (
-    <main className="bg-neutral-50">
+    <main className="bg-white">
       {/* Image slider */}
       <div className="pt-6 sm:pt-8">
         <div className="mx-auto w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] sm:max-w-[620px] lg:max-w-[940px] xl:w-[calc(100%-100px)] xl:max-w-[1580px]">
@@ -80,7 +85,11 @@ export default function StorefrontHomePage() {
           }}
         >
           {gearCategories.map((category) => (
-            <CardImageTitle key={category.title} {...category} />
+            <CardImageTitle
+              key={category.title}
+              {...category}
+              prefix="/collections"
+            />
           ))}
         </SectionTitle>
       </SectionTitleGroupProps>
@@ -108,11 +117,11 @@ export default function StorefrontHomePage() {
           </div>
         </SectionTitle>
       </div>
-
+{/* 
       <VideoFrame
         type="youtube"
         src="https://www.youtube.com/embed/HjsGUuQsQOY?si=ZcxnS0Ln7VPw4BqD"
-      />
+      /> */}
 
       <SectionTitleGroupProps>
         <SectionTitle
@@ -124,12 +133,22 @@ export default function StorefrontHomePage() {
           align="left"
         >
           {gameCategories.map((game) => (
-            <CardImageTitle key={game.title} {...game} />
+            <CardImageTitle
+              key={game.title}
+              {...game}
+              prefix="/collections"
+            />
           ))}
         </SectionTitle>
       </SectionTitleGroupProps>
 
-      <PlayerReviewsSection />
+      <PlayerReviewsSection
+        variant="image"
+        imageList={playerReviewImageList}
+        contentList={playerReviewContentList}
+      />
+
+      <OrderInstruction  />
 
       <CompanyLinksSection />
 

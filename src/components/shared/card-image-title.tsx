@@ -17,12 +17,14 @@ export type CardImageTitleProps = {
   imageSrc: string;
   imageAlt: string;
   href: string;
+  prefix?: string;
   aspectRatio?: CardImageTitleAspectRatio;
   isArrow?: boolean;
   sizes?: string;
   imagePosition?: CSSProperties["objectPosition"];
   className?: string;
   titleClassName?: string;
+  isClicked?: boolean;
 };
 
 export type CardImageTitleGridProps = {
@@ -36,6 +38,14 @@ const aspectRatioClasses: Record<CardImageTitleAspectRatio, string> = {
   portrait: "aspect-[4/5]",
   landscape: "aspect-[2.2/1]",
 };
+
+function getPrefixedHref(href: string, prefix?: string): string {
+  if (!prefix) {
+    return href;
+  }
+
+  return `${prefix.replace(/\/+$/, "")}/${href.replace(/^\/+/, "")}`;
+}
 
 export function CardImageTitleGrid({
   children,
@@ -58,21 +68,16 @@ export function CardImageTitle({
   imageSrc,
   imageAlt,
   href,
+  prefix,
   aspectRatio = "default",
   isArrow = true,
   sizes = "(max-width: 639px) 50vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 20vw",
   imagePosition = "center",
   className,
   titleClassName,
+  isClicked = false,
 }: CardImageTitleProps) {
-  return (
-    <Link
-      href={`/collections/${href}`}
-      className={cn(
-        "group mx-auto block w-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4",
-        className,
-      )}
-    >
+  const card = (
       <Card
         className={cn(
           "relative overflow-hidden rounded-xl border-0 bg-neutral-950 p-0 shadow-none",
@@ -85,7 +90,10 @@ export function CardImageTitle({
           fill
           sizes={sizes}
           style={{ objectPosition: imagePosition }}
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+          className={cn(
+            "object-cover transition-transform duration-500 ease-out",
+            isClicked && "group-hover:scale-[1.04]",
+          )}
         />
 
         <div
@@ -111,7 +119,7 @@ export function CardImageTitle({
               </span>
             ) : null}
 
-            {isArrow ? (
+            {isArrow && isClicked ? (
               <span className="hidden size-6 shrink-0 translate-x-2 items-center justify-center rounded-full bg-white text-neutral-950 opacity-0 shadow-sm transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 sm:flex sm:size-8">
                 <ArrowRight className="size-3 sm:size-4" aria-hidden="true" />
               </span>
@@ -119,6 +127,26 @@ export function CardImageTitle({
           </CardContent>
         ) : null}
       </Card>
+  );
+
+  const containerClassName = cn(
+    "mx-auto block w-full rounded-xl",
+    isClicked &&
+      "group outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4",
+    className,
+  );
+  const resolvedHref = getPrefixedHref(href, prefix);
+
+  if (!isClicked) {
+    return <div className={containerClassName}>{card}</div>;
+  }
+
+  return (
+    <Link
+      href={resolvedHref}
+      className={containerClassName}
+    >
+      {card}
     </Link>
   );
 }

@@ -1,6 +1,6 @@
-# MemoryShard Frontend
+# Game Piece Labs Frontend
 
-Frontend Next.js cho cửa hàng boardgame MemoryShard. Dự án dùng App Router, TypeScript, Tailwind CSS và shadcn/ui. Giai đoạn hiện tại tập trung xây dựng mockup giao diện trước khi nối đầy đủ API ABP.
+Frontend Next.js cho cửa hàng boardgame Game Piece Labs. Dự án dùng App Router, TypeScript, Tailwind CSS và shadcn/ui. Giai đoạn hiện tại tập trung xây dựng mockup giao diện trước khi nối đầy đủ API ABP.
 
 ## Trạng thái hiện tại
 
@@ -45,7 +45,7 @@ npm --version
 
 ## Cài đặt
 
-Tại thư mục `memoryshardfe`:
+Tại thư mục `FE_GamePieceLabs`:
 
 ```bash
 npm install
@@ -101,7 +101,7 @@ npm.cmd run dev
 ## Cấu trúc mã nguồn
 
 ```text
-memoryshardfe/
+FE_GamePieceLabs/
 ├── public/                         # Ảnh, icon và tài nguyên tĩnh
 ├── src/
 │   ├── app/                        # Chỉ giữ route, layout, page và route handler
@@ -164,7 +164,7 @@ Không đặt lệnh gọi API trực tiếp trong Header. Khi nối API thật,
 Footer hiện có:
 
 - Ba nhóm liên kết mock: `Shop`, `Information` và `Useful links`.
-- Card thương hiệu MemoryShard thay cho ảnh logo bên ngoài.
+- Card thương hiệu Game Piece Labs thay cho ảnh logo bên ngoài.
 - Social links dùng Button và icon Lucide.
 - Currency/language selector dùng shadcn `DropdownMenu` và chỉ giữ state tại client.
 - Payment methods dùng shadcn `Badge`, không phụ thuộc ảnh bên ngoài.

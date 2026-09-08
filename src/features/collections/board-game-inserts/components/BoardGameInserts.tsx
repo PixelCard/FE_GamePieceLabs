@@ -87,10 +87,10 @@ export function BoardGameInserts({ data }: BoardGameInsertsProps) {
 
           <ProductList
             products={products.data}
-            columns={4}
+            columns={5}
             alignPagination="center"
             pagination={products.pagination}
-            variantPagination="default"
+            variantPagination="simple"
           />
         </section>
       </Wrapper>
@@ -132,7 +132,11 @@ export function BoardGameInserts({ data }: BoardGameInsertsProps) {
         className="pb-16 sm:pb-20"
       >
         {otherCategories.map((category) => (
-          <CardImageTitle key={category.href} {...category} />
+          <CardImageTitle
+            key={category.href}
+            {...category}
+            prefix="/collections"
+          />
         ))}
       </SectionTitle>
     </>

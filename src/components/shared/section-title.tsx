@@ -32,6 +32,7 @@ export type SectionTitleSplitProps = {
   image: {
     src: string;
     alt: string;
+    aspectRatio?: string;
   };
 };
 
@@ -69,7 +70,7 @@ export function SectionTitle(props: SectionTitleProps) {
             <ImageFrame
               src={image.src}
               alt={image.alt}
-              aspectRatio="aspect-square"
+              aspectRatio={image.aspectRatio ?? "aspect-square"}
               sizes="(max-width: 1023px) calc(100vw - 3rem), (max-width: 1919px) 50vw, 790px"
               containerClassName="w-full max-w-none sm:w-full xl:w-full"
               className="rounded-none border-0 shadow-none sm:rounded-none"

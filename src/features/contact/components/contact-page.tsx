@@ -30,7 +30,7 @@ type ContactPageProps = {
 
 export function ContactPage({ content }: ContactPageProps) {
   return (
-    <main className="bg-neutral-100 text-neutral-950">
+    <main className="bg-white text-neutral-950">
       <section
         className="relative isolate h-44 overflow-hidden sm:h-52 lg:h-60"
         aria-labelledby="contact-page-title"

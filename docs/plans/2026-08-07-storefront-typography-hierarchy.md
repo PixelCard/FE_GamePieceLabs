@@ -22,7 +22,7 @@
 ### Task 2: Apply the hierarchy to the homepage
 
 **Files:**
-- Modify: `D:\E-CommerceProject\aspnet-core\src_Fe\memoryshardfe\app\(client)\page.tsx`
+- Modify: `C:\Users\Dat\Desktop\FE_GamePieceLabs\src\app\(storefront)\page.tsx`
 
 **Step 1:** Strengthen the hero badge, hero title, subtitle, and CTA balance.
 
@@ -31,7 +31,7 @@
 ### Task 3: Apply the hierarchy to the header
 
 **Files:**
-- Modify: `D:\E-CommerceProject\aspnet-core\src_Fe\memoryshardfe\app\components\header.tsx`
+- Modify: `C:\Users\Dat\Desktop\FE_GamePieceLabs\src\components\layouts\header\site-header.tsx`
 
 **Step 1:** Tighten the logo emphasis and action label scale.
 
@@ -40,8 +40,8 @@
 ### Task 4: Verify file-level consistency
 
 **Files:**
-- Verify: `D:\E-CommerceProject\aspnet-core\src_Fe\memoryshardfe\app\(client)\page.tsx`
-- Verify: `D:\E-CommerceProject\aspnet-core\src_Fe\memoryshardfe\app\components\header.tsx`
+- Verify: `C:\Users\Dat\Desktop\FE_GamePieceLabs\src\app\(storefront)\page.tsx`
+- Verify: `C:\Users\Dat\Desktop\FE_GamePieceLabs\src\components\layouts\header\site-header.tsx`
 - Verify: `D:\E-CommerceProject\aspnet-core\docs\ui\storefront-typography-guide.md`
 
 **Step 1:** Re-open the edited files and check that the typography rhythm is internally consistent.
