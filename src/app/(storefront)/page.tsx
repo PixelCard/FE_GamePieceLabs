@@ -148,7 +148,7 @@ export default function StorefrontHomePage() {
         contentList={playerReviewContentList}
       />
 
-      <OrderInstruction />
+      <OrderInstruction  />
 
       <CompanyLinksSection />
 

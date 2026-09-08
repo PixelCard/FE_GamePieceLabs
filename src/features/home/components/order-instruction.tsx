@@ -21,7 +21,11 @@ const instructionIcons: Record<OrderInstructionIcon, LucideIcon> = {
   delivery: Truck,
 };
 
-export function OrderInstruction(): ReactElement {
+export type OrderInstructionVariant = "default" | "interactive";
+
+export function OrderInstruction({
+}): ReactElement {
+ 
   return (
     <section
       className="relative isolate overflow-hidden bg-white py-16 sm:py-20 lg:py-28"
