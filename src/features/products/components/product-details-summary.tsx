@@ -86,7 +86,7 @@ export default function ProductDetailsSummary({
 
       <FeatureList features={product.features} />
 
-      <div className="mt-6 flex items-center gap-3 rounded-xl bg-neutral-100 px-4 py-3 text-sm">
+      <div className="mt-6 flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm">
         <Ruler className="size-5 shrink-0" />
         <p>
           <span className="font-bold">Kích thước hộp lắp ráp:</span> 20,5 × 15,5

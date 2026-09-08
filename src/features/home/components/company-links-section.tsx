@@ -10,7 +10,7 @@ export function CompanyLinksSection() {
   return (
     <section
       aria-labelledby="company-links-title"
-      className="bg-white py-12 sm:py-16 xl:py-20 dark:bg-neutral-950"
+      className="bg-white py-12 sm:py-16 xl:py-20"
     >
       <h2 id="company-links-title" className="sr-only">
         Explore GamePieceLabs
