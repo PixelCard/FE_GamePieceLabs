@@ -3,8 +3,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "MemoryShard",
-    template: "%s | MemoryShard",
+    default: "Game Piece Labs",
+    template: "%s | Game Piece Labs",
   },
   description: "Board games and tabletop accessories for every game night.",
 };

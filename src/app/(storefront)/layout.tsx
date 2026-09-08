@@ -16,7 +16,7 @@ const storefrontFont = Barlow({
 
 export const metadata: Metadata = {
   title: "Board Game Store",
-  description: "Discover board games and tabletop accessories at MemoryShard.",
+  description: "Discover board games and tabletop accessories at Game Piece Labs.",
 };
 
 export default function ClientLayout({

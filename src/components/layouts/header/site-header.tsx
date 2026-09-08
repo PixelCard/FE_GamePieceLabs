@@ -6,7 +6,6 @@ import {
   ChevronDown,
   CircleUserRound,
   Flame,
-  Gem,
   Layers3,
   Leaf,
   Menu,
@@ -17,6 +16,7 @@ import {
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/shared/logo";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   NavigationMenu,
@@ -67,23 +67,6 @@ const promoIcons = {
   materials: Layers3,
   green: Leaf,
 };
-
-function Brand() {
-  return (
-    <Link
-      href="/"
-      className="inline-flex items-center gap-2.5 rounded-md text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
-      aria-label="MemoryShard - Trang chủ"
-    >
-      <span className="flex size-9 items-center justify-center rounded-lg bg-red-600 text-white shadow-sm">
-        <Gem className="size-5" strokeWidth={2.2} />
-      </span>
-      <span className="text-xl font-bold tracking-[0.08em] sm:text-2xl">
-        MEMORYSHARD
-      </span>
-    </Link>
-  );
-}
 
 function PromoCard({
   promo,
@@ -223,7 +206,7 @@ function DesktopHeader() {
         </nav>
 
         <div className="justify-self-center">
-          <Brand />
+          <Logo imageClassName="size-16" />
         </div>
 
         {/* <div className="flex items-center justify-self-end gap-1 xl:gap-2">
@@ -281,10 +264,10 @@ function MobileHeader() {
           >
             <SheetHeader className="border-b px-5 py-6 text-left">
               <SheetTitle>
-                <Brand />
+                <Logo imageClassName="size-16" />
               </SheetTitle>
               <SheetDescription className="sr-only">
-                Điều hướng cửa hàng MemoryShard
+                Điều hướng cửa hàng Game Piece Labs
               </SheetDescription>
             </SheetHeader>
 
@@ -342,14 +325,17 @@ function MobileHeader() {
       </div>
 
       <div className="justify-self-center">
-        <Brand />
+        <Logo imageClassName="size-12" />
       </div>
 
       <div className="flex items-center gap-0.5 justify-self-end -mr-2">
         <Button variant="ghost" size="icon" aria-label="Tìm kiếm">
           <Search className="size-5" />
         </Button>
-        <CartDrawer iconSizeClassName="size-5" badgeSizeClassName="size-4 text-[9px]" />
+        <CartDrawer
+          iconSizeClassName="size-5"
+          badgeSizeClassName="size-4 text-[9px]"
+        />
       </div>
     </div>
   );

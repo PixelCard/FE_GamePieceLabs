@@ -29,7 +29,7 @@ const imageSliderSlides = [
     id: "new-arrivals",
     title: "Bộ sưu tập mô hình mới đang mở bán",
     subtitle:
-      "Khám phá các mẫu figure, mecha và phụ kiện mới nhất vừa cập bến tại MemoryShard.",
+      "Khám phá các mẫu figure, mecha và phụ kiện mới nhất vừa cập bến tại Game Piece Labs.",
     ctaLabel: "Xem bộ sưu tập",
     ctaHref: "/",
     imageSrc: "/images/legacy/banner1.jpg",

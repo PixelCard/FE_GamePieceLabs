@@ -13,7 +13,7 @@
 ### Task 1: Tune shared page spacing and hero framing
 
 **Files:**
-- Modify: `D:\E-CommerceProject\aspnet-core\src_Fe\memoryshardfe\app\(client)\page.tsx`
+- Modify: `C:\Users\Dat\Desktop\FE_GamePieceLabs\src\app\(storefront)\page.tsx`
 
 **Step 1:** Reduce overly airy spacing in the main layout and anchor content inside a broader storefront container.
 
@@ -22,7 +22,7 @@
 ### Task 2: Rework Search by Category into a compact quick-entry strip
 
 **Files:**
-- Modify: `D:\E-CommerceProject\aspnet-core\src_Fe\memoryshardfe\app\(client)\page.tsx`
+- Modify: `C:\Users\Dat\Desktop\FE_GamePieceLabs\src\app\(storefront)\page.tsx`
 
 **Step 1:** Replace the basic section heading with a two-part heading block and helper copy.
 
@@ -42,7 +42,7 @@
 ### Task 4: Verify the page compiles cleanly at the file level
 
 **Files:**
-- Verify: `D:\E-CommerceProject\aspnet-core\src_Fe\memoryshardfe\app\(client)\page.tsx`
+- Verify: `C:\Users\Dat\Desktop\FE_GamePieceLabs\src\app\(storefront)\page.tsx`
 
 **Step 1:** Re-open the edited file and confirm JSX structure and Tailwind classes are balanced.
 
