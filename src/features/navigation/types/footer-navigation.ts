@@ -23,5 +23,9 @@ export type FooterContent = {
     title: string;
     badges: FooterCertificationBadge[];
   };
+  fanpage: {
+    title: string;
+    embedUrl: string;
+  };
   copyright: string;
 };

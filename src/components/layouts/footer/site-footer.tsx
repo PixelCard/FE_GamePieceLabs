@@ -11,7 +11,7 @@ export function SiteFooter({ content }: SiteFooterProps) {
   return (
     <footer className="border-t border-border bg-background text-foreground">
       <div className="mx-auto w-[calc(100%-2rem)] py-12 sm:w-[calc(100%-3rem)] sm:max-w-[620px] lg:max-w-[940px] lg:py-14 xl:w-[calc(100%-100px)] xl:max-w-[1580px]">
-        <div className="grid gap-10 sm:grid-cols-3 sm:gap-8 lg:gap-16">
+        <div className="grid gap-10 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4 lg:gap-10 xl:gap-16">
           {content.navigationGroups.map((group) => {
             const headingId = `footer-${group.title
               .toLowerCase()
@@ -65,6 +65,23 @@ export function SiteFooter({ content }: SiteFooterProps) {
                 </a>
               ))}
             </div>
+          </section>
+
+          <section aria-labelledby="footer-fanpage">
+            <h2 id="footer-fanpage" className="type-h6 mb-5">
+              {content.fanpage.title}
+            </h2>
+            <iframe
+              title="Fanpage In 3D Phụ Kiện Boardgame"
+              src={content.fanpage.embedUrl}
+              width="340"
+              height="150"
+              loading="lazy"
+              className="block w-full max-w-[340px] border-0"
+              scrolling="no"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              allowFullScreen
+            />
           </section>
         </div>
       </div>
