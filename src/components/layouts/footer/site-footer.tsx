@@ -11,14 +11,18 @@ export function SiteFooter({ content }: SiteFooterProps) {
   return (
     <footer className="border-t border-border bg-background text-foreground">
       <div className="mx-auto w-[calc(100%-2rem)] py-12 sm:w-[calc(100%-3rem)] sm:max-w-[620px] lg:max-w-[940px] lg:py-14 xl:w-[calc(100%-100px)] xl:max-w-[1580px]">
-        <div className="grid gap-10 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4 lg:gap-10 xl:gap-16">
+        <div className="grid grid-cols-2 items-start gap-x-6 gap-y-12 sm:gap-8 lg:grid-cols-4 lg:gap-10 xl:gap-16">
           {content.navigationGroups.map((group) => {
             const headingId = `footer-${group.title
               .toLowerCase()
               .replace(/\s+/g, "-")}`;
 
             return (
-              <nav key={group.title} aria-labelledby={headingId}>
+              <nav
+                key={group.title}
+                aria-labelledby={headingId}
+                className="min-w-0"
+              >
                 <h2 id={headingId} className="type-h6 mb-5">
                   {group.title}
                 </h2>
@@ -38,7 +42,10 @@ export function SiteFooter({ content }: SiteFooterProps) {
             );
           })}
 
-          <section aria-labelledby="footer-certifications">
+          <section
+            aria-labelledby="footer-certifications"
+            className="col-span-2 min-w-0 lg:col-span-1"
+          >
             <h2
               id="footer-certifications"
               className="type-h6 mb-5"
@@ -67,7 +74,10 @@ export function SiteFooter({ content }: SiteFooterProps) {
             </div>
           </section>
 
-          <section aria-labelledby="footer-fanpage">
+          <section
+            aria-labelledby="footer-fanpage"
+            className="col-span-2 min-w-0 lg:col-span-1"
+          >
             <h2 id="footer-fanpage" className="type-h6 mb-5">
               {content.fanpage.title}
             </h2>
@@ -77,7 +87,7 @@ export function SiteFooter({ content }: SiteFooterProps) {
               width="340"
               height="150"
               loading="lazy"
-              className="block w-full max-w-[340px] border-0"
+              className="block aspect-[34/15] h-auto w-full max-w-[340px] border-0"
               scrolling="no"
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
               allowFullScreen
