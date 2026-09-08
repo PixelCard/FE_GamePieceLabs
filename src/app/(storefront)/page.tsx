@@ -19,6 +19,7 @@ import { VideoFrame } from "@/components/shared/video-frame";
 import { PlayerReviewsSection } from "@/components/shared/player-reviews-section";
 import { CompanyLinksSection } from "@/features/home/components/company-links-section";
 import { UpcomingProductsSection } from "@/features/home/components/upcoming-products-section";
+import { OrderInstruction } from "@/features/home/components/order-instruction";
 import {
   SectionTitle,
   SectionTitleGroupProps,
@@ -146,6 +147,8 @@ export default function StorefrontHomePage() {
         imageList={playerReviewImageList}
         contentList={playerReviewContentList}
       />
+
+      <OrderInstruction />
 
       <CompanyLinksSection />
 
