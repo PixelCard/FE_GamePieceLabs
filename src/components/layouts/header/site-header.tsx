@@ -3,14 +3,11 @@
 import Link from "next/link";
 import {
   BookOpen,
-  ChevronDown,
-  CircleUserRound,
   Flame,
   Layers3,
   Leaf,
   Menu,
   PackageOpen,
-  Search,
   Sparkles,
 } from "lucide-react";
 import { useState } from "react";
@@ -44,7 +41,6 @@ import type {
   HeaderNavigationItem,
   HeaderPromoCard,
 } from "@/features/navigation/types/header-navigation";
-import { CartDrawer } from "@/features/cart/components/cart-drawer";
 import { cn } from "@/utils/cn";
 
 const promoStyles: Record<HeaderPromoCard["tone"], string> = {
@@ -328,15 +324,7 @@ function MobileHeader() {
         <Logo imageClassName="size-12" />
       </div>
 
-      <div className="flex items-center gap-0.5 justify-self-end -mr-2">
-        <Button variant="ghost" size="icon" aria-label="Tìm kiếm">
-          <Search className="size-5" />
-        </Button>
-        <CartDrawer
-          iconSizeClassName="size-5"
-          badgeSizeClassName="size-4 text-[9px]"
-        />
-      </div>
+      <div aria-hidden="true" />
     </div>
   );
 }
