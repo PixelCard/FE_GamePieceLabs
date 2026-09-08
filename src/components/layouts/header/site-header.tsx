@@ -226,7 +226,7 @@ function DesktopHeader() {
           <Brand />
         </div>
 
-        <div className="flex items-center justify-self-end gap-1 xl:gap-2">
+        {/* <div className="flex items-center justify-self-end gap-1 xl:gap-2">
           <Button variant="ghost" className="gap-1 px-3 text-sm font-bold">
             EUR €
             <ChevronDown className="size-4" aria-hidden="true" />
@@ -245,7 +245,7 @@ function DesktopHeader() {
             </Link>
           </Button>
           <CartDrawer />
-        </div>
+        </div> */}
       </div>
 
       {isMenuOpen ? (

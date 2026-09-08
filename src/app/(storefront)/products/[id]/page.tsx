@@ -154,12 +154,12 @@ export default async function ProductDetailsPage({
         {reviews && <CustomerReviewsSection reviews={reviews} />}
       </div>
 
-      <VideoFrame
+      {/* <VideoFrame
         src="https://www.youtube.com/embed/EEH1XhnkODo?si=EXio06y4u52nBs8r"
         type="youtube"
-      />
+      /> */}
 
-      <PlayerReviewsSection />
+      {/* <PlayerReviewsSection /> */}
 
       <SectionTitle
         title="You may also like"

@@ -108,11 +108,11 @@ export default function StorefrontHomePage() {
           </div>
         </SectionTitle>
       </div>
-
+{/* 
       <VideoFrame
         type="youtube"
         src="https://www.youtube.com/embed/HjsGUuQsQOY?si=ZcxnS0Ln7VPw4BqD"
-      />
+      /> */}
 
       <SectionTitleGroupProps>
         <SectionTitle

@@ -26,9 +26,7 @@ export type FilterProps = FilterVariantProps & {
 
 function withoutWrapperProps<
   T extends { variant: string; wrapperClassName?: string },
->(
-  props: T,
-): Omit<T, "variant" | "wrapperClassName"> {
+>(props: T): Omit<T, "variant" | "wrapperClassName"> {
   const { variant, wrapperClassName, ...componentProps } = props;
   void variant;
   void wrapperClassName;

@@ -87,10 +87,10 @@ export function BoardGameInserts({ data }: BoardGameInsertsProps) {
 
           <ProductList
             products={products.data}
-            columns={4}
+            columns={5}
             alignPagination="center"
             pagination={products.pagination}
-            variantPagination="default"
+            variantPagination="simple"
           />
         </section>
       </Wrapper>
