@@ -80,6 +80,18 @@ function SocialLink({ item, railSide, railOpen }: SocialLinkProps) {
   );
 }
 
+const effect = {
+  className: "animate-[bounce-x_1s_infinite]",
+  style: {
+    "--tw-bounce-x-keyframes": `
+        @keyframes bounce-x {
+          0%, 100% { transform: translateX(-25%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+          50% { transform: translateX(0); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+        }
+      `,
+  },
+};
+
 export function SocialMediaRail({
   items,
   side = "right",
@@ -117,6 +129,8 @@ export function SocialMediaRail({
           className,
         )}
       >
+        {/* Nhúng thẻ style để trình duyệt hiểu keyframes */}
+        <style>{effect.style["--tw-bounce-x-keyframes"]}</style>{" "}
         <Button
           type="button"
           variant="outline"
@@ -128,7 +142,7 @@ export function SocialMediaRail({
           }
           onClick={() => handleOpenChange(!isOpen)}
           className={cn(
-            "relative z-10 size-11 rounded-none bg-background shadow-md sm:size-12",
+            `  ${!isOpen ? effect.className : null} relative z-10 size-11 rounded-none bg-background shadow-md max-sm:px-7 sm:px-8`,
             side === "right"
               ? "rounded-l-xl border-r-0"
               : "rounded-r-xl border-l-0",
@@ -140,7 +154,6 @@ export function SocialMediaRail({
             <ChevronLeft className="size-4" />
           )}
         </Button>
-
         <nav
           id={listId}
           aria-label="Follow us"
