@@ -11,7 +11,7 @@ export const contactNavigationItem: HeaderNavigationItem = {
 export const productMenuItems: HeaderNavigationItem[] = [
   { label: "By Game", href: "/products?group=game" },
   { label: "Board Game Inserts", href: "/products?group=inserts" },
-  { label: "MemoryShard Family", href: "/products?group=memoryshard" },
+  { label: "Game Piece Labs Family", href: "/products?group=memoryshard" },
   { label: "Tokens", href: "/products?group=tokens" },
   { label: "RPG Accessories", href: "/products?group=rpg" },
   { label: "Accessories", href: "/products?group=accessories" },
@@ -45,7 +45,7 @@ export const promoCards: HeaderPromoCard[] = [
 ];
 
 export const aboutMenuItems: HeaderNavigationItem[] = [
-  { label: "About MemoryShard", href: "/about" },
+  { label: "About Game Piece Labs", href: "/about" },
   { label: "Materials", href: "/about/materials" },
   { label: "Play Green", href: "/about/sustainability" },
   { label: "Craft & Quality", href: "/about/craft" },
@@ -54,7 +54,7 @@ export const aboutMenuItems: HeaderNavigationItem[] = [
 
 export const aboutPromoCards: HeaderPromoCard[] = [
   {
-    title: "About MemoryShard",
+    title: "About Game Piece Labs",
     description: "Made for memorable game nights",
     href: "/about",
     tone: "clay",

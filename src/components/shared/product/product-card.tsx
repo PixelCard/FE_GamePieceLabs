@@ -31,7 +31,7 @@ export function ProductCard({
   price,
   rating,
   currency,
-  quickAddLabel = "+ Quick add",
+  quickAddLabel = "Liên hệ",
   sizes = "(max-width: 639px) 88vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 25vw",
   className,
   slug,
@@ -43,7 +43,7 @@ export function ProductCard({
   return (
     <Card
       className={cn(
-        "group h-full overflow-hidden rounded-xl border-0 bg-white p-0 shadow-none",
+        "group h-full overflow-hidden rounded-xl bg-white p-0 shadow-none border border-gray-200",
         className,
       )}
     >
@@ -58,19 +58,22 @@ export function ProductCard({
           />
         </Link>
 
-        <Button
+        {/* <Button
           asChild
           aria-label={`${quickAddLabel}: ${name}`}
           className="absolute bottom-4 right-4 z-10 h-11 translate-y-0 rounded-full bg-neutral-950 px-6 text-sm font-bold text-white opacity-100 shadow-lg transition-all duration-300 hover:bg-neutral-800 focus-visible:opacity-100 md:translate-y-2 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 md:group-focus-within:translate-y-0 md:group-focus-within:opacity-100"
         >
           <Link href={productHref}>{quickAddLabel}</Link>
-        </Button>
+        </Button> */}
       </div>
 
-      <CardContent className="flex min-h-[132px] flex-col gap-2 p-5 sm:p-6">
+      <CardContent className="flex min-h-[148px] flex-col gap-2 p-4 sm:p-6">
         <div className="flex items-start justify-between gap-4">
-          <h3 className="m-0 line-clamp-2 text-base leading-[1.45] text-neutral-950">
-            <Link href={productHref} className="transition-colors hover:text-blue-700">
+          <h3 className="type-h6 m-0 line-clamp-2 text-neutral-950">
+            <Link
+              href={productHref}
+              className="transition-colors hover:text-blue-700"
+            >
               {name}
             </Link>
           </h3>
@@ -87,7 +90,24 @@ export function ProductCard({
           </span>
         </div>
 
-        <p className="m-0 text-sm text-neutral-600">{formattedPrice}</p>
+        <p className="m-0 text-base font-semibold leading-snug tabular-nums text-neutral-700">{formattedPrice}</p>
+
+        <div className="text-center">
+          <Button
+            asChild
+            aria-label={`${quickAddLabel}: ${name}`}
+            className="translate-y-0 rounded-full bg-neutral-950 px-6 text-base font-bold leading-snug text-white hover:bg-black"
+          >
+            <Link
+              href={
+                "https://www.facebook.com/In3DPhuKienBoardgame?locale=vi_VN"
+              }
+              target="_blank"
+            >
+              {quickAddLabel}
+            </Link>
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );

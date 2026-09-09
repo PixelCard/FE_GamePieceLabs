@@ -17,12 +17,14 @@ export type CardImageTitleProps = {
   imageSrc: string;
   imageAlt: string;
   href: string;
+  prefix?: string;
   aspectRatio?: CardImageTitleAspectRatio;
   isArrow?: boolean;
   sizes?: string;
   imagePosition?: CSSProperties["objectPosition"];
   className?: string;
   titleClassName?: string;
+  isClicked?: boolean;
 };
 
 export type CardImageTitleGridProps = {
@@ -37,6 +39,14 @@ const aspectRatioClasses: Record<CardImageTitleAspectRatio, string> = {
   landscape: "aspect-[2.2/1]",
 };
 
+function getPrefixedHref(href: string, prefix?: string): string {
+  if (!prefix) {
+    return href;
+  }
+
+  return `${prefix.replace(/\/+$/, "")}/${href.replace(/^\/+/, "")}`;
+}
+
 export function CardImageTitleGrid({
   children,
   className,
@@ -44,7 +54,7 @@ export function CardImageTitleGrid({
   return (
     <div
       className={cn(
-        "grid grid-cols-2 gap-3 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5",
+        "grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-5",
         className,
       )}
     >
@@ -58,67 +68,82 @@ export function CardImageTitle({
   imageSrc,
   imageAlt,
   href,
+  prefix,
   aspectRatio = "default",
   isArrow = true,
   sizes = "(max-width: 639px) 50vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 20vw",
   imagePosition = "center",
   className,
   titleClassName,
+  isClicked = false,
 }: CardImageTitleProps) {
-  return (
-    <Link
-      href={`/collections/${href}`}
+  const card = (
+    <Card
       className={cn(
-        "group mx-auto block w-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4",
-        className,
+        "relative overflow-hidden rounded-xl border-0 bg-neutral-950 p-0 shadow-none",
+        aspectRatioClasses[aspectRatio],
       )}
     >
-      <Card
+      <Image
+        src={imageSrc}
+        alt={imageAlt}
+        fill
+        sizes={sizes}
+        style={{ objectPosition: imagePosition }}
         className={cn(
-          "relative overflow-hidden rounded-xl border-0 bg-neutral-950 p-0 shadow-none",
-          aspectRatioClasses[aspectRatio],
+          "object-cover transition-transform duration-500 ease-out",
+          isClicked && "group-hover:scale-[1.04]",
         )}
-      >
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          fill
-          sizes={sizes}
-          style={{ objectPosition: imagePosition }}
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-        />
+      />
 
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/5 transition-colors duration-300 group-hover:from-black/90"
-        />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/5 transition-colors duration-300 group-hover:from-black/90"
+      />
 
-        {title || isArrow ? (
-          <CardContent
-            className={cn(
-              "absolute inset-0 flex items-end gap-2 p-4 sm:gap-3 sm:p-5",
-              title ? "justify-between" : "justify-end",
-            )}
-          >
-            {title ? (
-              <span
-                className={cn(
-                  "text-sm font-bold leading-snug text-white drop-shadow-sm sm:text-lg sm:leading-tight xl:text-xl",
-                  titleClassName,
-                )}
-              >
-                {title}
-              </span>
-            ) : null}
+      {title || isArrow ? (
+        <CardContent
+          className={cn(
+            "absolute inset-0 flex items-end gap-2 p-4 sm:gap-3 sm:p-5",
+            title ? "justify-between" : "justify-end",
+          )}
+        >
+          {title ? (
+            <span
+              className={cn(
+                "max-w-[18ch] text-balance text-base font-bold leading-snug text-white drop-shadow-sm sm:text-lg xl:text-xl m-1 max-sm:text-2xl",
+                titleClassName,
+              )}
+            >
+              {title}
+            </span>
+          ) : null}
 
-            {isArrow ? (
-              <span className="hidden size-6 shrink-0 translate-x-2 items-center justify-center rounded-full bg-white text-neutral-950 opacity-0 shadow-sm transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 sm:flex sm:size-8">
-                <ArrowRight className="size-3 sm:size-4" aria-hidden="true" />
-              </span>
-            ) : null}
-          </CardContent>
-        ) : null}
-      </Card>
+          {isArrow && isClicked ? (
+            <span className="hidden size-6 shrink-0 translate-x-2 items-center justify-center rounded-full bg-white text-neutral-950 opacity-0 shadow-sm transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 sm:flex sm:size-8">
+              <ArrowRight className="size-3 sm:size-4" aria-hidden="true" />
+            </span>
+          ) : null}
+        </CardContent>
+      ) : null}
+    </Card>
+  );
+
+  const containerClassName = cn(
+    "mx-auto block w-full rounded-xl",
+    isClicked &&
+      "group outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4",
+    className,
+  );
+  const resolvedHref = getPrefixedHref(href, prefix);
+
+  if (!isClicked) {
+    return <div className={containerClassName}>{card}</div>;
+  }
+
+  return (
+    <Link href={resolvedHref} className={containerClassName}>
+      {card}
     </Link>
   );
 }

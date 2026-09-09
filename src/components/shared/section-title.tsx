@@ -3,8 +3,8 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 import { CardImageTitleGrid } from "@/components/shared/card-image-title";
-import { ImageFrame } from "@/components/shared/image-frame";
 import { cn } from "@/utils/cn";
+import { ImageFrame } from "./image/image-frame";
 
 export type SectionTitleAlign = "left" | "center" | "right";
 
@@ -32,12 +32,11 @@ export type SectionTitleSplitProps = {
   image: {
     src: string;
     alt: string;
+    aspectRatio?: string;
   };
 };
 
-export type SectionTitleProps =
-  | SectionTitleMoreProps
-  | SectionTitleSplitProps;
+export type SectionTitleProps = SectionTitleMoreProps | SectionTitleSplitProps;
 
 export type SectionTitleGroupProps = {
   children: ReactNode;
@@ -69,7 +68,7 @@ export function SectionTitle(props: SectionTitleProps) {
             <ImageFrame
               src={image.src}
               alt={image.alt}
-              aspectRatio="aspect-square"
+              aspectRatio={image.aspectRatio ?? "aspect-square"}
               sizes="(max-width: 1023px) calc(100vw - 3rem), (max-width: 1919px) 50vw, 790px"
               containerClassName="w-full max-w-none sm:w-full xl:w-full"
               className="rounded-none border-0 shadow-none sm:rounded-none"
@@ -84,14 +83,7 @@ export function SectionTitle(props: SectionTitleProps) {
     );
   }
 
-  const {
-    title,
-    more,
-    align = "left",
-    children,
-    className,
-    content,
-  } = props;
+  const { title, more, align = "left", children, className, content } = props;
   const titleId = `${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-title`;
 
   if (content !== "text") {
@@ -108,14 +100,14 @@ export function SectionTitle(props: SectionTitleProps) {
             <h2
               id={titleId}
               className={cn(
-                "m-0 min-w-0 flex-1 text-2xl font-bold tracking-[-0.035em] text-neutral-950 sm:text-[clamp(2rem,2.4vw,3rem)] sm:leading-none",
+                "type-h2 m-0 min-w-0 flex-1 text-neutral-950",
                 titleAlignmentClasses[align],
               )}
             >
               {title}
             </h2>
 
-            <div className="flex inline-flex">
+            <div className="flex">
               <Link
                 href={more?.href || "#"}
                 className="group inline-flex w-fit items-center gap-4 rounded-full text-base font-bold text-neutral-950 outline-none transition-colors hover:text-red-600 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 sm:text-lg"
@@ -142,24 +134,21 @@ export function SectionTitle(props: SectionTitleProps) {
   return (
     <section
       aria-labelledby={titleId}
-      className={cn(
-        "mx-auto w-full max-w-[1900px] px-4 sm:px-6 xl:px-[50px]",
-        className,
-      )}
+      className={cn("mx-auto w-full max-w-[1900px]", className)}
     >
-      <div className="mx-auto w-full sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]">
-        <div className="mb-6 flex flex-col gap-3 sm:mb-10 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
+      <div className="w-full sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]">
+        <div className="flex flex-col gap-3 sm:mb-5 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
           <h2
             id={titleId}
             className={cn(
-              "m-0 min-w-0 flex-1 text-2xl font-bold tracking-[-0.035em] text-neutral-950 sm:text-[clamp(2rem,2.4vw,3rem)] sm:leading-none",
+              "type-h2 m-0 min-w-0 flex-1 text-neutral-950",
               titleAlignmentClasses[align],
             )}
           >
             {title}
           </h2>
 
-          <div className="flex inline-flex">
+          <div className="flex">
             <Link
               href={more?.href || "#"}
               className="group inline-flex w-fit items-center gap-4 rounded-full text-base font-bold text-neutral-950 outline-none transition-colors hover:text-red-600 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 sm:text-lg"

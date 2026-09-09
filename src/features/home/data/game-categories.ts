@@ -2,6 +2,15 @@ import type { CardImageTitleProps } from "@/components/shared/card-image-title";
 
 export const gameCategories = [
   {
+    title: "Gloomhaven Buttons & Bugs Organizer",
+    imageSrc:
+      "https://laserox.net/cdn/shop/collections/LGBB.jpg?v=1727172485&width=800",
+    imageAlt: "Gloomhaven Buttons and Bugs cover art",
+    href: "gloomhaven-buttons-bugs-organizer",
+    isClicked: true,
+  },
+  /*
+  {
     title: "Arkham Horror",
     imageSrc: "/images/games/arkham-horror.jpg",
     imageAlt: "Arkham Horror: The Card Game cover art",
@@ -31,4 +40,5 @@ export const gameCategories = [
     imageAlt: "Bloodborne: The Board Game cover art",
     href: "/products?game=bloodborne-the-board-game",
   },
+  */
 ] as const satisfies readonly CardImageTitleProps[];

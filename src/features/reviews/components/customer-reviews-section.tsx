@@ -16,7 +16,7 @@ export default function CustomerReviewsSection({
     >
       <h2
         id="customer-reviews-heading"
-        className="text-4xl leading-tight font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+        className="type-h1"
       >
         Customer reviews
       </h2>

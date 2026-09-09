@@ -116,10 +116,10 @@ export default function CartPage() {
 
   if (isLoading) {
     return (
-      <main className="flex min-h-[60vh] items-center justify-center bg-slate-50 px-4 py-20">
+      <main className="flex min-h-[60vh] items-center justify-center bg-white px-4 py-20">
         <div className="text-center">
           <div className="mx-auto size-9 animate-spin rounded-full border-2 border-slate-200 border-t-slate-950" />
-          <h1 className="mt-4 text-lg font-bold text-slate-950">Đang tải giỏ hàng</h1>
+          <h1 className="type-h5 mt-4 text-slate-950">Đang tải giỏ hàng</h1>
           <p className="mt-1 text-sm text-slate-500">Vui lòng chờ trong giây lát...</p>
         </div>
       </main>
@@ -128,13 +128,13 @@ export default function CartPage() {
 
   if (cartItems.length === 0) {
     return (
-      <main className="flex min-h-[70vh] items-center justify-center bg-slate-50 px-4 py-16">
+      <main className="flex min-h-[70vh] items-center justify-center bg-white px-4 py-16">
         <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white px-6 py-10 text-center shadow-sm">
           <div className="mx-auto grid size-16 place-items-center rounded-full bg-slate-100 text-slate-700">
             <ShoppingBag className="size-7" />
           </div>
-          <h1 className="mt-5 text-2xl font-bold text-slate-950">Giỏ hàng đang trống</h1>
-          <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-500">
+          <h1 className="type-h3 mt-5 text-slate-950">Giỏ hàng đang trống</h1>
+          <p className="type-prose mx-auto mt-2 max-w-sm text-base text-slate-500">
             Bạn chưa thêm sản phẩm nào vào giỏ hàng. Hãy tiếp tục khám phá cửa hàng.
           </p>
           <Link
@@ -150,7 +150,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-950">
+    <div className="min-h-screen bg-white text-slate-950">
       <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
         <header className="mb-6">
           <Link
@@ -204,7 +204,7 @@ export default function CartPage() {
 
           <aside className="min-w-0 lg:col-span-4">
             <div className="lg:sticky lg:top-24">
-              <h2 className="mb-3 text-lg font-bold text-slate-950">Tóm tắt đơn hàng</h2>
+              <h2 className="type-h6 mb-3 text-slate-950">Tóm tắt đơn hàng</h2>
               <CartSummary totals={totals} />
             </div>
           </aside>

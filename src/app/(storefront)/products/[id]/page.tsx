@@ -1,6 +1,6 @@
 import BreadCrumbs from "@/components/shared/breadcrumbs";
 import { PlayerReviewsSection } from "@/components/shared/player-reviews-section";
-import { ProductCard } from "@/components/shared/product-card";
+import { ProductList } from "@/components/shared/product/product-list";
 import { SectionTitle } from "@/components/shared/section-title";
 import { VideoFrame } from "@/components/shared/video-frame";
 import FeatureList from "@/features/products/components/feature-list";
@@ -31,8 +31,8 @@ export default async function ProductDetailsPage({
   const youMayAlsoLikeProducts = getMockYouMayAlsoLikeProducts();
 
   return (
-    <main className="min-h-screen bg-neutral-100 px-4 py-5 text-neutral-950">
-      <div className="mx-auto max-w-[1440px]">
+    <main className="min-h-screen bg-white px-4 py-5 text-neutral-950">
+      <div className="mx-auto md:w-[calc(100%-100px)]  max-w-[1580px] grid-cols-[1fr_auto_1fr]">
         <BreadCrumbs />
 
         <section className="grid gap-10 rounded-3xl bg-white p-4 shadow-[0_18px_60px_rgba(0,0,0,0.06)] sm:p-7 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:p-10 xl:gap-16">
@@ -43,14 +43,14 @@ export default async function ProductDetailsPage({
 
           <div className="min-w-0 lg:py-1">
             <ProductDetailsSummary product={product} />
-            <ProductPurchasePanel />
+            {/* <ProductPurchasePanel /> */}
           </div>
         </section>
 
         <SectionTitle
           title="More details"
           align="left"
-          className="-ml-10 mt-5"
+          className="mt-10"
           content="text"
         >
           <p className="w-full">
@@ -87,7 +87,7 @@ export default async function ProductDetailsPage({
         <SectionTitle
           title="Features"
           align="left"
-          className="-ml-10 mt-20"
+          className="mt-10"
           content="text"
         >
           <FeatureList features={product.features} />
@@ -100,7 +100,7 @@ export default async function ProductDetailsPage({
           <div>
             <h2
               id="supported-games-heading"
-              className="text-4xl leading-tight font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+              className="type-h1"
             >
               Supports the following
             </h2>
@@ -116,7 +116,7 @@ export default async function ProductDetailsPage({
             </ul>
           </div>
 
-          <dl className="overflow-hidden rounded-2xl bg-neutral-200/70 px-6 sm:px-10 lg:px-12">
+          <dl className="overflow-hidden rounded-2xl border border-neutral-200 bg-white px-6 sm:px-10 lg:px-12">
             <div className="grid gap-2 border-b border-neutral-300 py-7 sm:grid-cols-[minmax(10rem,0.75fr)_1.5fr] sm:gap-8">
               <dt className="font-bold">Licensing partner</dt>
               <dd className="text-neutral-700">Cephalofair Games</dd>
@@ -151,28 +151,39 @@ export default async function ProductDetailsPage({
           </dl>
         </section>
 
-        {reviews && <CustomerReviewsSection reviews={reviews} />}
+        {/* {reviews && <CustomerReviewsSection reviews={reviews} />} */}
       </div>
 
-      <VideoFrame
+      {/* <VideoFrame
         src="https://www.youtube.com/embed/EEH1XhnkODo?si=EXio06y4u52nBs8r"
         type="youtube"
-      />
+      /> */}
 
-      <PlayerReviewsSection />
+      {/* <PlayerReviewsSection /> */}
 
       <SectionTitle
         title="You may also like"
         align="left"
-        className="-ml-10 mt-20"
+        className=""
         content="imageList"
       >
-        {youMayAlsoLikeProducts.map((recommendedProduct) => (
-          <ProductCard
-            key={recommendedProduct.gui}
-            {...recommendedProduct}
+        <div className="col-span-full">
+          <ProductList
+            isShowed={false}
+            products={youMayAlsoLikeProducts}
+            columns={3}
+            alignPagination="center"
+            pagination={{
+              currentPage: 1,
+              pageSize: youMayAlsoLikeProducts.length,
+              totalItems: youMayAlsoLikeProducts.length,
+              totalPages: 1,
+              hasNext: false,
+              hasPrevious: false,
+            }}
+            variantPagination="default"
           />
-        ))}
+        </div>
       </SectionTitle>
     </main>
   );

@@ -24,7 +24,7 @@ export const aboutPageContent: AboutPageContent = {
     showcaseImageAlt:
       "Máy cắt laser đang khắc chi tiết bảng điều khiển người chơi bằng gỗ",
     showcaseCaption:
-      "Quy trình khắc laser CO2 chính xác trên gỗ bạch dương cao cấp tại xưởng MemoryShard",
+      "Quy trình khắc laser CO2 chính xác trên gỗ bạch dương cao cấp tại xưởng Game Piece Labs",
     features: [
       {
         title: "Khắc laser vi mô chính xác",

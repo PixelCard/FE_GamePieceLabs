@@ -16,7 +16,7 @@ export default function ProductDetailsSummary({
 
   return (
     <>
-      <p className="mb-4 text-xs font-semibold tracking-[0.18em] text-neutral-500 uppercase">
+      <p className="type-eyebrow mb-4 text-neutral-500">
         GamePiece Labs
       </p>
 
@@ -41,7 +41,7 @@ export default function ProductDetailsSummary({
         </button>
       </div>
 
-      <h1 className="max-w-xl text-3xl leading-[1.05] font-extrabold tracking-tight sm:text-4xl xl:text-5xl">
+      <h1 className="type-h1 max-w-xl">
         {product.name}
       </h1>
 
@@ -80,13 +80,13 @@ export default function ProductDetailsSummary({
         </div>
       </div>
 
-      <p className="text-sm leading-6 text-neutral-600">
+      <p className="type-prose text-base text-neutral-600">
         {product.description}
       </p>
 
       <FeatureList features={product.features} />
 
-      <div className="mt-6 flex items-center gap-3 rounded-xl bg-neutral-100 px-4 py-3 text-sm">
+      <div className="mt-6 flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm">
         <Ruler className="size-5 shrink-0" />
         <p>
           <span className="font-bold">Kích thước hộp lắp ráp:</span> 20,5 × 15,5
@@ -95,7 +95,7 @@ export default function ProductDetailsSummary({
       </div>
 
       <div className="mt-5">
-        <p className="text-xs font-semibold tracking-wide text-neutral-500 uppercase">
+        <p className="type-eyebrow text-neutral-500">
           Vật liệu
         </p>
         <div className="mt-2 flex flex-wrap gap-2">

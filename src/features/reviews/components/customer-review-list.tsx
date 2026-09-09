@@ -36,7 +36,7 @@ export default function CustomerReviewList({
               label={`${review.rating} out of 5 stars`}
             />
             <h4 className="mt-4 text-lg font-bold">{review.title}</h4>
-            <p className="mt-3 max-w-3xl leading-7 text-neutral-700">
+            <p className="type-prose mt-3 max-w-3xl text-base text-neutral-700">
               {review.content}
             </p>
           </div>

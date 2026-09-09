@@ -39,7 +39,7 @@ export function ProductDemo({ className }: ProductDemoProps) {
         <section
             aria-label="Product organizer highlights"
             className={cn(
-                'w-full bg-neutral-100 px-4 py-10 sm:px-6 sm:py-14',
+                'w-full px-4 py-10 sm:px-6 sm:py-14',
                 className,
             )}
         >
@@ -77,7 +77,7 @@ export function ProductDemo({ className }: ProductDemoProps) {
                                 side={hotspot.side}
                                 sideOffset={18}
                                 collisionPadding={16}
-                                className="text-sm sm:px-8 sm:py-7 sm:text-base sm:leading-7"
+                                className="max-w-xs px-4 py-3 text-base leading-relaxed sm:px-8 sm:py-7"
                             >
                                 {hotspot.text}
                             </TooltipContent>

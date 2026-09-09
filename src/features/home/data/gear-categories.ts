@@ -22,18 +22,18 @@ export const gearCategories = [
     href: "tokens",
     imagePosition: "58% center",
   },
-  {
-    title: "Roleplaying Games",
-    imageSrc: "/images/legacy/banner2.jpg",
-    imageAlt: "A roleplaying adventurer beneath a dramatic blue sky",
-    href: "roleplaying-games",
-    imagePosition: "52% center",
-  },
-  {
-    title: "Accessories",
-    imageSrc: "/images/legacy/banner3.jpg",
-    imageAlt: "Fantasy gaming accessories and illustrated collection boxes",
-    href: "accessories",
-    imagePosition: "82% center",
-  },
+  // {
+  //   title: "Roleplaying Games",
+  //   imageSrc: "/images/legacy/banner2.jpg",
+  //   imageAlt: "A roleplaying adventurer beneath a dramatic blue sky",
+  //   href: "roleplaying-games",
+  //   imagePosition: "52% center",
+  // },
+  // {
+  //   title: "Accessories",
+  //   imageSrc: "/images/legacy/banner3.jpg",
+  //   imageAlt: "Fantasy gaming accessories and illustrated collection boxes",
+  //   href: "accessories",
+  //   imagePosition: "82% center",
+  // },
 ] as const satisfies readonly CardImageTitleProps[];

@@ -55,7 +55,7 @@ export default function SortFilter({
         label: item,
         props: {
           value: item,
-          className: "cursor-pointer rounded-lg px-3 py-2 text-sm capitalize",
+          className: "cursor-pointer rounded-lg px-3 py-2.5 capitalize",
         },
       })),
     },
@@ -65,7 +65,7 @@ export default function SortFilter({
     <div className="inline-flex items-center gap-2">
       <Label
         htmlFor={triggerId}
-        className="shrink-0 text-sm font-bold text-foreground sm:text-base"
+        className="shrink-0 text-base font-bold leading-snug text-foreground"
       >
         {label}
       </Label>
@@ -85,7 +85,7 @@ export default function SortFilter({
             type="button"
             variant="ghost"
             aria-label={`Sort products by ${currentValue || "an option"}`}
-            className="group h-auto gap-2 rounded-full bg-transparent p-0 text-sm font-normal text-foreground shadow-none hover:bg-transparent active:translate-y-0 sm:text-base"
+            className="group h-auto gap-2 rounded-full bg-transparent p-0 text-base font-normal leading-snug text-foreground shadow-none hover:bg-transparent active:translate-y-0"
           >
             <span className="relative capitalize after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 group-hover:after:scale-x-100">
               {currentValue || "Select option"}

@@ -16,32 +16,16 @@ export interface CountedFilterItem {
 
 export interface TypeFilterProps {
   title?: string;
-  triggerLabel?: string;
   items: readonly CountedFilterItem[];
-  selectedId?: string | null;
-  onSelectedIdChange?: (id: string) => void;
 }
 
 export default function TypeFilter({
   items,
-  onSelectedIdChange,
-  selectedId: controlledSelectedId,
   title = "Product",
-  triggerLabel,
 }: TypeFilterProps) {
   const triggerId = useId();
   const [isOpen, setIsOpen] = useState(false);
-  const [internalSelectedId, setInternalSelectedId] = useState<string | null>(null);
-  const selectedId =
-    controlledSelectedId !== undefined ? controlledSelectedId : internalSelectedId;
-
-  function handleSelectedIdChange(nextSelectedId: string): void {
-    if (controlledSelectedId === undefined) {
-      setInternalSelectedId(nextSelectedId);
-    }
-
-    onSelectedIdChange?.(nextSelectedId);
-  }
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const dropdownItems: DropdownMenuEntry[] = [
     {
@@ -55,7 +39,7 @@ export default function TypeFilter({
         type: "item",
         label: `${item.label} (${item.count})`,
         props: {
-          onSelect: () => handleSelectedIdChange(item.id),
+          onSelect: () => setSelectedId(item.id),
           className: cn(
             "justify-center rounded-lg px-4 py-4 text-center text-base text-muted-foreground transition-colors sm:py-5",
             selectedId === item.id &&
@@ -85,8 +69,8 @@ export default function TypeFilter({
           aria-label={`Filter by ${title.toLowerCase()} type`}
           className="group h-auto gap-3 rounded-full bg-transparent p-0 text-base shadow-none hover:bg-transparent active:translate-y-0"
         >
-          <span className="shrink-0 text-sm font-bold text-foreground sm:text-base">
-            {triggerLabel ?? `${title} type`}
+          <span className="shrink-0 text-base font-bold leading-snug text-foreground">
+            {title} type
           </span>
           <span className="inline-flex size-8 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors duration-300 group-hover:bg-foreground group-hover:text-background">
             <ChevronDown

@@ -18,9 +18,9 @@ export const contactPageContent = {
   details: [
     {
       label: "General support",
-      value: "support@memoryshard.example",
+      value: "support@gamepiecelabs.example",
       supportingText: "For product, order, and shipping questions.",
-      href: "mailto:support@memoryshard.example",
+      href: "mailto:support@gamepiecelabs.example",
     },
     {
       label: "Order support",
@@ -53,7 +53,7 @@ export const contactPageContent = {
     },
     {
       title: "Collector-first support",
-      description: "Clear answers before and after every MemoryShard purchase.",
+      description: "Clear answers before and after every Game Piece Labs purchase.",
       icon: "messages",
     },
     {

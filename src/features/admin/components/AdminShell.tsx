@@ -6,7 +6,7 @@ import AdminTopbar from "./AdminTopbar";
 
 export default function AdminShell({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-950 dark:bg-[#050816] dark:text-slate-100">
+    <div className="min-h-screen bg-white text-slate-950">
       <div className="flex min-h-screen">
         <AdminSidebar />
 

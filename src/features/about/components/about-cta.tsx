@@ -11,21 +11,12 @@ export function AboutCta({ content }: AboutCtaProps) {
   return (
     <section className="py-16 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 xl:px-8">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-900 via-neutral-950 to-black px-6 py-14 text-center text-white shadow-2xl sm:px-12 sm:py-20 lg:px-20">
-          <div
-            aria-hidden="true"
-            className="absolute -top-24 -left-24 size-96 rounded-full bg-red-600/15 blur-3xl pointer-events-none"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute -bottom-24 -right-24 size-96 rounded-full bg-amber-600/10 blur-3xl pointer-events-none"
-          />
-
+        <div className="relative overflow-hidden rounded-3xl border border-neutral-200 bg-white px-6 py-14 text-center text-neutral-950 shadow-[0_18px_50px_rgba(15,23,42,0.08)] sm:px-12 sm:py-20 lg:px-20">
           <div className="relative z-10 mx-auto max-w-3xl">
-            <h2 className="type-h1 text-white drop-shadow-sm">
+            <h2 className="type-h1 text-neutral-950">
               {content.title}
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-neutral-300 sm:text-lg sm:leading-relaxed">
+            <p className="type-prose mt-6 text-base text-neutral-600 sm:text-lg">
               {content.description}
             </p>
 
@@ -48,7 +39,7 @@ export function AboutCta({ content }: AboutCtaProps) {
                 asChild
                 variant="outline"
                 size="lg"
-                className="h-14 rounded-full border-neutral-700 bg-transparent px-8 text-base font-bold text-white hover:bg-white/10 w-full sm:w-auto"
+                className="h-14 w-full rounded-full border-neutral-300 bg-white px-8 text-base font-bold text-neutral-950 hover:bg-neutral-50 sm:w-auto"
               >
                 <Link href={content.secondaryAction.href}>
                   {content.secondaryAction.label}
