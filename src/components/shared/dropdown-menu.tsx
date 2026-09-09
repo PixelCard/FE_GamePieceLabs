@@ -18,6 +18,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { cn } from "@/utils/cn";
 
 type WithoutChildren<T> = Omit<T, "children">;
 
@@ -125,7 +126,7 @@ function ItemContent({
   return (
     <>
       {icon}
-      <span>{label}</span>
+      <span className="text-base leading-snug sm:text-sm">{label}</span>
       {shortcut ? (
         <DropdownMenuShortcut>{shortcut}</DropdownMenuShortcut>
       ) : null}
@@ -209,7 +210,7 @@ function renderEntries(items: DropdownMenuEntry[]): ReactNode {
           <DropdownMenuSub key={entry.id} {...entry.props}>
             <DropdownMenuSubTrigger {...entry.triggerProps}>
               {entry.icon}
-              <span>{entry.label}</span>
+              <span className="text-base leading-snug sm:text-sm">{entry.label}</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuSubContent {...entry.contentProps}>
               {renderEntries(entry.items)}
@@ -231,7 +232,10 @@ export function DropdownMenu({
   return (
     <DropdownMenuRoot {...rootProps}>
       <DropdownMenuTrigger {...triggerProps}>{trigger}</DropdownMenuTrigger>
-      <DropdownMenuContent {...contentProps}>
+      <DropdownMenuContent
+        {...contentProps}
+        className={cn("max-w-[calc(100vw-2rem)]", contentProps?.className)}
+      >
         {renderEntries(items)}
       </DropdownMenuContent>
     </DropdownMenuRoot>

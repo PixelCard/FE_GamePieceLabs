@@ -16,7 +16,7 @@ export default function ProductDetailsSummary({
 
   return (
     <>
-      <p className="mb-4 text-xs font-semibold tracking-[0.18em] text-neutral-500 uppercase">
+      <p className="type-eyebrow mb-4 text-neutral-500">
         GamePiece Labs
       </p>
 
@@ -41,7 +41,7 @@ export default function ProductDetailsSummary({
         </button>
       </div>
 
-      <h1 className="max-w-xl text-3xl leading-[1.05] font-extrabold tracking-tight sm:text-4xl xl:text-5xl">
+      <h1 className="type-h1 max-w-xl">
         {product.name}
       </h1>
 
@@ -80,7 +80,7 @@ export default function ProductDetailsSummary({
         </div>
       </div>
 
-      <p className="text-sm leading-6 text-neutral-600">
+      <p className="type-prose text-base text-neutral-600">
         {product.description}
       </p>
 
@@ -95,7 +95,7 @@ export default function ProductDetailsSummary({
       </div>
 
       <div className="mt-5">
-        <p className="text-xs font-semibold tracking-wide text-neutral-500 uppercase">
+        <p className="type-eyebrow text-neutral-500">
           Vật liệu
         </p>
         <div className="mt-2 flex flex-wrap gap-2">

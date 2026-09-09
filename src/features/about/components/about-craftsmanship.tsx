@@ -21,15 +21,15 @@ export function AboutCraftsmanship({ content }: AboutCraftsmanshipProps) {
 
             <div className="flex items-center justify-center border-t border-neutral-200/70 px-5 py-8 sm:px-8 sm:py-9 lg:border-t-0 lg:border-l lg:px-9 lg:py-10">
               <div className="mx-auto max-w-[35rem] text-center">
-                <p className="text-xs font-semibold tracking-[0.08em] text-neutral-500 sm:text-sm">
+                <p className="type-eyebrow text-neutral-500">
                   {content.eyebrow}
                 </p>
 
-                <h2 className="mt-3 text-balance text-[1.9rem] font-bold leading-[1.08] tracking-[-0.04em] text-neutral-950 sm:text-[2.35rem] lg:text-[3rem]">
+                <h2 className="type-h2 mt-3 text-neutral-950">
                   {content.title}
                 </h2>
 
-                <p className="mt-4 text-sm leading-6 text-neutral-600 sm:text-[15px] sm:leading-7">
+                <p className="type-prose mt-4 text-base text-neutral-600">
                   {content.description}
                 </p>
               </div>

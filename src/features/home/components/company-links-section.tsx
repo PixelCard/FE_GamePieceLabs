@@ -4,13 +4,13 @@ import { companyLinks } from "@/features/home/data/company-links";
 const fullWidthSizes =
   "(max-width: 1023px) calc(100vw - 2rem), (max-width: 1279px) 50vw, 790px";
 const halfWidthSizes =
-  "(max-width: 1023px) calc(50vw - 1.5rem), (max-width: 1279px) 25vw, 385px";
+  "(max-width: 1024px) calc(50vw - 1.5rem), (max-width: 1279px) 25vw, 385px";
 
 export function CompanyLinksSection() {
   return (
     <section
       aria-labelledby="company-links-title"
-      className="bg-white py-12 sm:py-16 xl:py-20"
+      className="bg-white py-12 sm:py-8 xl:py-10"
     >
       <h2 id="company-links-title" className="sr-only">
         Explore GamePieceLabs
@@ -22,6 +22,7 @@ export function CompanyLinksSection() {
             {...companyLinks.about}
             isArrow={false}
             sizes={fullWidthSizes}
+            className="[&>[data-slot=card]]:aspect-[6/5]"
             titleClassName="sm:text-2xl lg:text-3xl xl:text-4xl"
             isClicked={true}
           />
@@ -31,12 +32,14 @@ export function CompanyLinksSection() {
               {...companyLinks.materials}
               isArrow={false}
               sizes={halfWidthSizes}
+              className="[&>[data-slot=card]]:aspect-[6/5]"
               isClicked={true}
             />
             <CardImageTitle
               {...companyLinks.sustainability}
               isArrow={false}
               sizes={halfWidthSizes}
+              className="[&>[data-slot=card]]:aspect-[6/5]"
               isClicked={true}
             />
             <CardImageTitle
@@ -44,7 +47,7 @@ export function CompanyLinksSection() {
               aspectRatio="landscape"
               isArrow={false}
               sizes={fullWidthSizes}
-              className="col-span-2"
+              className="col-span-2 [&>[data-slot=card]]:aspect-[5/2]"
               titleClassName="sm:text-2xl xl:text-3xl"
               isClicked={true}
             />

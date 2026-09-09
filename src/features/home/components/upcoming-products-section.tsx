@@ -17,7 +17,7 @@ export function UpcomingProductsSection() {
           <div className="">
             <h2
               id="upcoming-products-title"
-              className="mb-8 text-center text-3xl font-bold tracking-[-0.035em] text-neutral-950 sm:mb-10 sm:text-[clamp(2rem,2.4vw,3rem)] sm:leading-none"
+              className="type-h2 mb-8 text-center text-neutral-950 sm:mb-10"
             >
               Upcoming Products
             </h2>

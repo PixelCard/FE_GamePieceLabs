@@ -28,16 +28,16 @@ export type ImageFrameProps = {
 
 const aspectRatioMap: Record<ImageFrameAspectRatio, string> = {
   "16/9": "aspect-video",
-  "21/9": "aspect-[21/9]",
+  "21/9": "aspect-[4/3] sm:aspect-video lg:aspect-[21/9]",
   "4/3": "aspect-[4/3]",
   "3/2": "aspect-[3/2]",
   auto: "aspect-auto",
 };
 
 const headingSizeMap: Record<ImageHeaderElementSize, string> = {
-  h1: "text-4xl sm:text-5xl lg:text-7xl",
-  h2: "text-3xl sm:text-4xl lg:text-6xl",
-  h3: "text-2xl sm:text-3xl lg:text-5xl",
+  h1: "type-h1",
+  h2: "type-h2",
+  h3: "type-h3",
 };
 
 const textAlignMap: Record<TextAlignType, string> = {
@@ -120,7 +120,7 @@ export function ImageFrame({
             )}
           >
             {eyebrow ? (
-              <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-white/85 drop-shadow-sm sm:text-sm">
+              <p className="type-eyebrow mb-3 text-white/90 drop-shadow-sm">
                 {eyebrow}
               </p>
             ) : null}
@@ -128,7 +128,7 @@ export function ImageFrame({
             {header ? (
               <HeaderElement
                 className={cn(
-                  "max-w-4xl font-bold leading-tight tracking-tight text-balance drop-shadow-sm max-sm:w-full max-sm:self-center max-sm:text-center max-sm:text-4xl",
+                  "max-w-4xl text-balance drop-shadow-sm max-sm:w-full max-sm:self-center max-sm:text-center",
                   headingSizeMap[headerSize],
                 )}
               >
@@ -137,7 +137,7 @@ export function ImageFrame({
             ) : null}
 
             {title ? (
-              <p className="mt-6 max-w-4xl text-lg font-semibold leading-snug text-balance drop-shadow-sm sm:text-xl lg:mt-8 lg:text-2xl">
+              <p className="mt-4 max-w-[38ch] text-balance text-lg font-semibold leading-snug drop-shadow-sm sm:mt-6 sm:text-xl lg:mt-8 lg:text-2xl">
                 {title}
               </p>
             ) : null}
@@ -145,8 +145,8 @@ export function ImageFrame({
             {description ? (
               <p
                 className={cn(
-                  "max-w-2xl text-md text-white drop-shadow-sm sm:text-md lg:leading-8 text-wrap",
-                  header && !title ? "mt-10 sm:mt-14 lg:mt-20" : "mt-3 sm:mt-4",
+                  "type-prose max-w-2xl text-base text-white/90 drop-shadow-sm lg:text-lg",
+                  header && !title ? "mt-4 sm:mt-6 lg:mt-8" : "mt-3 sm:mt-4",
                 )}
               >
                 {description}
@@ -157,7 +157,7 @@ export function ImageFrame({
       </div>
 
       {caption ? (
-        <figcaption className="mt-3 text-center text-xs font-medium text-neutral-500 sm:text-sm dark:text-neutral-400">
+        <figcaption className="mx-auto mt-3 max-w-[65ch] text-center text-sm font-medium leading-relaxed text-neutral-500 dark:text-neutral-400">
           {caption}
         </figcaption>
       ) : null}

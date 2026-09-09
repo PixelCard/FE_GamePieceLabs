@@ -3,13 +3,13 @@ import type { CSSProperties } from 'react';
 import { cn } from '@/utils/cn';
 
 const fontSizeClasses = {
-    'text-2xl': 'text-2xl',
-    'text-3xl': 'text-3xl',
-    'text-4xl': 'text-4xl',
-    'text-5xl': 'text-5xl',
-    'text-6xl': 'text-6xl',
-    'text-7xl': 'text-7xl',
-    'text-8xl': 'text-8xl',
+    'text-2xl': 'text-xl sm:text-2xl',
+    'text-3xl': 'text-2xl sm:text-3xl',
+    'text-4xl': 'text-3xl sm:text-4xl',
+    'text-5xl': 'text-3xl sm:text-5xl',
+    'text-6xl': 'text-4xl sm:text-6xl',
+    'text-7xl': 'text-4xl sm:text-7xl',
+    'text-8xl': 'text-5xl sm:text-7xl lg:text-8xl',
 } as const;
 
 export type MarqueeTextProps = {
@@ -71,7 +71,7 @@ export function MarqueeText({
                         {repetitions.map((item) => (
                             <span
                                 className={cn(
-                                    'shrink-0 whitespace-nowrap px-10 font-bold tracking-[-0.025em] sm:px-14',
+                                    'shrink-0 whitespace-nowrap px-7 font-bold leading-none tracking-tight sm:px-14',
                                     fontSizeClasses[fontSize],
                                 )}
                                 key={item}

@@ -1,10 +1,5 @@
 "use client";
 import { CardImageTitle } from "@/components/shared/card-image-title";
-import { ProductGallery } from "@/components/shared/product-gallery";
-import {
-  ImageSlider,
-  type ImageSliderSlide,
-} from "@/components/shared/image-slider";
 import { MarqueeText } from "@/components/shared/marquee-text";
 import { featuredProducts } from "@/features/home/data/featured-products";
 import { gameCategories } from "@/features/home/data/game-categories";
@@ -13,8 +8,6 @@ import {
   playerReviewContentList,
   playerReviewImageList,
 } from "@/features/home/data/player-reviews";
-import { ImageComparison } from "@/components/shared/image-comparision";
-import { ProductDemo } from "@/components/shared/product-demo";
 import { VideoFrame } from "@/components/shared/video-frame";
 import { PlayerReviewsSection } from "@/components/shared/player-reviews-section";
 import { CompanyLinksSection } from "@/features/home/components/company-links-section";
@@ -24,6 +17,13 @@ import {
   SectionTitle,
   SectionTitleGroupProps,
 } from "@/components/shared/section-title";
+import {
+  ImageSlider,
+  ImageSliderSlide,
+} from "@/components/shared/image/image-slider";
+import { ImageComparison } from "@/components/shared/image/image-comparision";
+import { ProductGallery } from "@/components/shared/product/product-gallery";
+import { ProductDemo } from "@/components/shared/product/product-demo";
 
 const imageSliderSlides = [
   {
@@ -118,7 +118,7 @@ export default function StorefrontHomePage() {
           </div>
         </SectionTitle>
       </div>
-{/* 
+      {/* 
       <VideoFrame
         type="youtube"
         src="https://www.youtube.com/embed/HjsGUuQsQOY?si=ZcxnS0Ln7VPw4BqD"
@@ -134,11 +134,7 @@ export default function StorefrontHomePage() {
           align="left"
         >
           {gameCategories.map((game) => (
-            <CardImageTitle
-              key={game.title}
-              {...game}
-              prefix="/collections"
-            />
+            <CardImageTitle key={game.title} {...game} prefix="/collections" />
           ))}
         </SectionTitle>
       </SectionTitleGroupProps>
@@ -149,7 +145,7 @@ export default function StorefrontHomePage() {
         contentList={playerReviewContentList}
       />
 
-      <OrderInstruction  />
+      <OrderInstruction />
 
       <CompanyLinksSection />
 

@@ -1,8 +1,8 @@
 import { CardImageTitle } from "@/components/shared/card-image-title";
 import Filter from "@/components/shared/filter";
-import { ImageFrame } from "@/components/shared/image-frame";
+import { ImageFrame } from "@/components/shared/image/image-frame";
 import { MarqueeText } from "@/components/shared/marquee-text";
-import { ProductList } from "@/components/shared/product-list";
+import { ProductList } from "@/components/shared/product/product-list";
 import { SectionTitle } from "@/components/shared/section-title";
 import Wrapper from "@/components/shared/wrapper";
 import type { ByGameNamePageData } from "@/features/collections/by-game-name/types/by-game-name";
@@ -29,11 +29,11 @@ export function ByGameName({ data }: ByGameNameProps) {
   return (
     <>
       <Wrapper>
-        <h1 className="pb-8 text-3xl font-bold tracking-tight text-neutral-950 sm:text-5xl text-center">
+        <h1 className="type-h1 pb-8 text-center text-neutral-950">
           {title}
         </h1>
 
-        <div className="flex w-full flex-wrap items-center justify-between gap-x-5 gap-y-4 border-y border-neutral-200 py-4">
+        <div className="grid w-full grid-cols-2 items-center gap-x-2 gap-y-4 border-y border-neutral-200 py-4 sm:flex sm:justify-between sm:gap-x-5">
           <Filter
             variant="switch"
             label="In stock only"
@@ -41,15 +41,15 @@ export function ByGameName({ data }: ByGameNameProps) {
             defaultChecked={false}
             labelPosition="left"
             showActiveBadge
-            wrapperClassName="m-0 p-0"
+            wrapperClassName="m-0 w-full justify-start p-0 sm:w-auto"
           />
 
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-3">
+          <div className="contents sm:flex sm:flex-wrap sm:items-center sm:gap-x-2 sm:gap-y-3">
             <Filter
               items={[{ id: "insert", label: "Insert", count: 1 }]}
               title="Product"
               variant="type"
-              wrapperClassName="m-0 p-0"
+              wrapperClassName="m-0 w-full justify-end p-0 sm:w-auto sm:justify-start"
             />
             <Filter
               variant="price"
@@ -57,14 +57,14 @@ export function ByGameName({ data }: ByGameNameProps) {
               max={283500}
               step={5000}
               currency="VND"
-              wrapperClassName="m-0 p-0"
+              wrapperClassName="m-0 w-full justify-start p-0 sm:w-auto"
             />
           </div>
 
           <Filter
             variant="sort"
             items={sortOptions}
-            wrapperClassName="m-0 p-0"
+            wrapperClassName="m-0 w-full justify-end p-0 sm:w-auto"
           />
         </div>
 

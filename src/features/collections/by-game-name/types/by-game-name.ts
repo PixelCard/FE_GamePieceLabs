@@ -1,4 +1,4 @@
-import type { ProductCardProps } from "@/components/shared/product-card";
+import type { ProductCardProps } from "@/components/shared/product/product-card";
 import type { PaginationMetadata } from "@/types";
 
 export type ByGameNameProduct = ProductCardProps;

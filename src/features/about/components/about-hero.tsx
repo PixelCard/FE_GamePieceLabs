@@ -1,5 +1,5 @@
+import { ImageFrame } from "@/components/shared/image/image-frame";
 import type { AboutHeroContent } from "@/features/about/types/about-content";
-import { ImageFrame } from "@/components/shared/image-frame";
 
 type AboutHeroProps = {
   content: AboutHeroContent;

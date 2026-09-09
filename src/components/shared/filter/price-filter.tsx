@@ -159,7 +159,7 @@ export default function PriceFilter({
           aria-label={`Filter by ${title.toLowerCase()}`}
           className="group h-auto gap-3 rounded-full bg-transparent p-0 text-base shadow-none hover:bg-transparent active:translate-y-0"
         >
-          <span className="shrink-0 text-sm font-bold text-foreground sm:text-base">
+          <span className="shrink-0 text-base font-bold leading-snug text-foreground">
             {title}
           </span>
           <span className="inline-flex size-8 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors duration-300 group-hover:bg-foreground group-hover:text-background">
@@ -186,7 +186,7 @@ function PriceOutput({ currencyLabel, value }: PriceOutputProps) {
   return (
     <output
       aria-live="polite"
-      className="flex min-h-14 items-center justify-between gap-3 rounded-xl border border-border bg-background px-4 text-sm sm:min-h-16"
+      className="flex min-h-14 items-center justify-between gap-3 rounded-xl border border-border bg-background px-4 text-base leading-snug tabular-nums sm:min-h-16"
     >
       <span className="font-medium text-muted-foreground">{currencyLabel}</span>
       <span className="font-semibold text-foreground">{value}</span>

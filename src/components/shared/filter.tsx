@@ -41,7 +41,7 @@ interface FilterWrapperProps {
 
 function FilterWrapper({ children, className }: FilterWrapperProps) {
   return (
-    <div className={cn("mx-2 inline-flex px-2 py-2", className)}>
+    <div className={cn("inline-flex min-w-0 py-1 sm:mx-2 sm:px-2 sm:py-2", className)}>
       {children}
     </div>
   );

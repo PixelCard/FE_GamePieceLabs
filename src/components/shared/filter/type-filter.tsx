@@ -69,7 +69,7 @@ export default function TypeFilter({
           aria-label={`Filter by ${title.toLowerCase()} type`}
           className="group h-auto gap-3 rounded-full bg-transparent p-0 text-base shadow-none hover:bg-transparent active:translate-y-0"
         >
-          <span className="shrink-0 text-sm font-bold text-foreground sm:text-base">
+          <span className="shrink-0 text-base font-bold leading-snug text-foreground">
             {title} type
           </span>
           <span className="inline-flex size-8 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors duration-300 group-hover:bg-foreground group-hover:text-background">

@@ -57,13 +57,13 @@ export function ContactPage({ content }: ContactPageProps) {
       <div className="mx-auto w-full max-w-[1440px] px-4 py-12 sm:px-6 sm:py-16 xl:px-8 xl:py-20">
         <section className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14 xl:gap-20">
           <div className="max-w-2xl">
-            <p className="text-base font-bold text-red-600">
+            <p className="type-eyebrow text-red-600">
               {content.introduction.eyebrow}
             </p>
             <h2 className="type-h2 mt-5">
               {content.introduction.title}
             </h2>
-            <p className="mt-6 max-w-xl text-base leading-[1.6] text-neutral-600">
+            <p className="type-prose mt-6 max-w-xl text-base text-neutral-600">
               {content.introduction.description}{" "}
               <Link
                 href={content.introduction.faqHref}
@@ -80,7 +80,7 @@ export function ContactPage({ content }: ContactPageProps) {
                   <dt className="text-base font-bold text-neutral-950">
                     {detail.label}
                   </dt>
-                  <dd className="mt-1 text-base leading-[1.6] text-neutral-700">
+                  <dd className="mt-1 text-base leading-relaxed text-neutral-700">
                     {detail.href ? (
                       <a
                         href={detail.href}
@@ -181,7 +181,7 @@ export function ContactPage({ content }: ContactPageProps) {
                 <h3 className="type-h6 mt-5">
                   {benefit.title}
                 </h3>
-                <p className="mt-3 text-base leading-[1.6] text-neutral-600">
+                <p className="type-prose mt-3 text-base text-neutral-600">
                   {benefit.description}
                 </p>
               </article>

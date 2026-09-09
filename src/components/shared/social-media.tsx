@@ -36,6 +36,18 @@ const socialIcons: Record<string, IconType> = {
   tiktok: FaTiktok,
 };
 
+const socialLinkStyles: Record<string, string> = {
+  facebook: "bg-[#1877F2] text-white hover:bg-[#0C63D4]",
+  instagram:
+    "bg-gradient-to-br from-[#833AB4] via-[#E1306C] to-[#F77737] text-white hover:brightness-110",
+  tiktok: "bg-[#010101] text-white hover:bg-[#181818]",
+};
+
+const socialIconStyles: Record<string, string> = {
+  tiktok:
+    "[filter:drop-shadow(1px_0_0_#25F4EE)_drop-shadow(-1px_0_0_#FE2C55)]",
+};
+
 interface SocialLinkProps {
   item: SocialMediaItem;
   railSide: "left" | "right";
@@ -43,7 +55,8 @@ interface SocialLinkProps {
 }
 
 function SocialLink({ item, railSide, railOpen }: SocialLinkProps) {
-  const Icon = socialIcons[item.platform.toLowerCase()];
+  const platform = item.platform.toLowerCase();
+  const Icon = socialIcons[platform];
 
   return (
     <Tooltip>
@@ -55,15 +68,20 @@ function SocialLink({ item, railSide, railOpen }: SocialLinkProps) {
           aria-label={item.label}
           tabIndex={railOpen ? 0 : -1}
           className={cn(
-            "flex size-11 items-center justify-center text-muted-foreground",
-            "transition-colors hover:bg-accent hover:text-accent-foreground",
-            "focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
-            "sm:size-12",
+            "flex size-8 items-center justify-center rounded-md shadow-md ring-1 ring-black/5",
+            "transition-[transform,filter,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-lg",
+            "focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+            "sm:size-10 sm:rounded-lg",
+            socialLinkStyles[platform] ??
+              "bg-foreground text-background hover:brightness-110",
           )}
         >
           <span
             aria-hidden="true"
-            className="flex size-5 items-center justify-center text-lg sm:text-xl"
+            className={cn(
+              "flex size-3.5 items-center justify-center text-sm sm:size-4 sm:text-lg",
+              socialIconStyles[platform],
+            )}
           >
             {item.icon ??
               (Icon ? <Icon /> : item.label.slice(0, 1).toUpperCase())}
@@ -72,25 +90,13 @@ function SocialLink({ item, railSide, railOpen }: SocialLinkProps) {
       </TooltipTrigger>
       <TooltipContent
         side={railSide === "right" ? "left" : "right"}
-        className="rounded-md border-border bg-popover px-3 py-1.5 text-xs text-popover-foreground shadow-md"
+        className="rounded-md border-border bg-popover px-3 py-2 text-sm leading-snug text-popover-foreground shadow-md"
       >
         {item.label}
       </TooltipContent>
     </Tooltip>
   );
 }
-
-const effect = {
-  className: "animate-[bounce-x_1s_infinite]",
-  style: {
-    "--tw-bounce-x-keyframes": `
-        @keyframes bounce-x {
-          0%, 100% { transform: translateX(-25%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
-          50% { transform: translateX(0); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
-        }
-      `,
-  },
-};
 
 export function SocialMediaRail({
   items,
@@ -113,7 +119,14 @@ export function SocialMediaRail({
     onOpenChange?.(nextOpen);
   }
 
-  const opensTowardLeft = side === "right";
+  const ToggleIcon =
+    side === "right"
+      ? isOpen
+        ? ChevronRight
+        : ChevronLeft
+      : isOpen
+        ? ChevronLeft
+        : ChevronRight;
 
   return (
     <TooltipProvider>
@@ -124,13 +137,17 @@ export function SocialMediaRail({
           side === "right" ? "right-0" : "left-0 flex-row-reverse",
           !isOpen &&
             (side === "right"
-              ? "translate-x-[calc(100%-2.75rem)] sm:translate-x-[calc(100%-3rem)]"
-              : "-translate-x-[calc(100%-2.75rem)] sm:-translate-x-[calc(100%-3rem)]"),
+              ? "translate-x-[calc(100%-1.5rem)] sm:translate-x-[calc(100%-1.75rem)]"
+              : "-translate-x-[calc(100%-1.5rem)] sm:-translate-x-[calc(100%-1.75rem)]"),
           className,
         )}
       >
-        {/* Nhúng thẻ style để trình duyệt hiểu keyframes */}
-        <style>{effect.style["--tw-bounce-x-keyframes"]}</style>{" "}
+        <style>{`
+          @keyframes social-handle-shimmer {
+            0%, 15% { background-position: 200% 50%; }
+            65%, 100% { background-position: -200% 50%; }
+          }
+        `}</style>
         <Button
           type="button"
           variant="outline"
@@ -142,29 +159,26 @@ export function SocialMediaRail({
           }
           onClick={() => handleOpenChange(!isOpen)}
           className={cn(
-            `  ${!isOpen ? effect.className : null} relative z-10 size-11 rounded-none bg-background shadow-md max-sm:px-7 sm:px-8`,
+            "relative z-10 h-10 w-6 rounded-none bg-background p-0 shadow-md sm:h-12 sm:w-7",
+            !isOpen &&
+              "border-[#f2e7b3] bg-[#fffdf4] text-[#9a7b19] shadow-[0_0_12px_rgba(244,220,120,0.2)] [background-image:linear-gradient(110deg,transparent_25%,rgba(253,230,138,0.22)_42%,rgba(255,255,255,0.95)_50%,rgba(253,230,138,0.22)_58%,transparent_75%)] [background-size:300%_100%] transition-[filter,box-shadow] hover:brightness-[0.985] hover:shadow-[0_0_14px_rgba(244,220,120,0.3)] motion-safe:animate-[social-handle-shimmer_3s_ease-in-out_infinite] dark:border-[#f2e7b3] dark:bg-[#fffdf4] dark:text-[#9a7b19]",
             side === "right"
-              ? "rounded-l-xl border-r-0"
-              : "rounded-r-xl border-l-0",
+              ? "rounded-l-full border-r-0"
+              : "rounded-r-full border-l-0",
           )}
         >
-          {isOpen === opensTowardLeft ? (
-            <ChevronRight className="size-4" />
-          ) : (
-            <ChevronLeft className="size-4" />
-          )}
+          <ToggleIcon className="size-3.5 sm:size-4" />
         </Button>
         <nav
           id={listId}
           aria-label="Follow us"
           aria-hidden={!isOpen}
           className={cn(
-            "overflow-hidden border border-border bg-background text-foreground shadow-lg",
-            side === "right" ? "rounded-l-xl" : "rounded-r-xl",
+            "overflow-visible p-1 sm:p-1.5",
             !isOpen && "pointer-events-none",
           )}
         >
-          <div className="flex flex-col divide-y divide-border">
+          <div className="flex flex-col gap-1 sm:gap-1.5">
             {items.map((item) => (
               <SocialLink
                 key={`${item.platform}-${item.href}`}

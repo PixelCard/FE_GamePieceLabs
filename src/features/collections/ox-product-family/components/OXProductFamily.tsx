@@ -1,11 +1,11 @@
 import { CardImageTitle } from "@/components/shared/card-image-title";
 import Filter from "@/components/shared/filter";
-import { ImageFrame } from "@/components/shared/image-frame";
-import { ProductList } from "@/components/shared/product-list";
 import { SectionTitle } from "@/components/shared/section-title";
 import Wrapper from "@/components/shared/wrapper";
 import { CollectionsPageData } from "../types/ox-product-family";
 import { MarqueeText } from "@/components/shared/marquee-text";
+import { ImageFrame } from "@/components/shared/image/image-frame";
+import { ProductList } from "@/components/shared/product/product-list";
 
 interface OXProductFamilyProps {
   data: CollectionsPageData;
@@ -32,8 +32,8 @@ export function OXProductFamily({ data }: OXProductFamilyProps) {
       />
 
       <Wrapper>
-        <div className="flex w-full items-start py-3">
-          <div className="flex-1 text-left">
+        <div className="grid w-full grid-cols-2 items-start gap-x-2 gap-y-1 py-3 sm:flex sm:gap-0">
+          <div className="min-w-0 text-left sm:flex-1">
             <Filter
               variant="switch"
               label="In stock only"
@@ -41,19 +41,28 @@ export function OXProductFamily({ data }: OXProductFamilyProps) {
               defaultChecked={false}
               labelPosition="left"
               showActiveBadge
+              wrapperClassName="m-0 w-full justify-start p-0 sm:w-auto sm:px-2 sm:py-2"
             />
           </div>
 
-          <div className="flex flex-1 items-start justify-center gap-2 text-center">
+          <div className="contents sm:flex sm:flex-1 sm:items-start sm:justify-center sm:gap-2 sm:text-center">
             <Filter
               items={[{ id: "accessories", label: "Accessories", count: 4 }]}
               title="Product"
               variant="type"
+              wrapperClassName="m-0 w-full justify-end p-0 sm:w-auto sm:px-2 sm:py-2"
             />
-            <Filter variant="price" min={0} max={274} step={1} currency="USD" />
+            <Filter
+              variant="price"
+              min={0}
+              max={274}
+              step={1}
+              currency="USD"
+              wrapperClassName="m-0 w-full justify-start p-0 sm:w-auto sm:px-2 sm:py-2"
+            />
           </div>
 
-          <div className="flex-1 text-right">
+          <div className="min-w-0 text-right sm:flex-1">
             <Filter
               variant="sort"
               items={[
@@ -67,6 +76,7 @@ export function OXProductFamily({ data }: OXProductFamilyProps) {
                 "date, old to new",
                 "date, new to old",
               ]}
+              wrapperClassName="m-0 w-full justify-end p-0 sm:w-auto sm:px-2 sm:py-2"
             />
           </div>
         </div>
@@ -114,10 +124,10 @@ export function OXProductFamily({ data }: OXProductFamilyProps) {
             className="rounded-none border-0 bg-transparent shadow-none sm:rounded-none"
           />
 
-          <h2 className="mt-7 text-3xl font-bold tracking-tight text-neutral-950 sm:text-4xl">
+          <h2 className="type-h2 mt-7 text-neutral-950">
             {editorial.heading}
           </h2>
-          <p className="mt-6 text-sm leading-6 text-neutral-700 sm:text-base sm:leading-7">
+          <p className="type-prose mt-6 text-base text-neutral-700">
             {editorial.description}
           </p>
         </div>

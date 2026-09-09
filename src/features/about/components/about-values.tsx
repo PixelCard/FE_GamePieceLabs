@@ -11,13 +11,13 @@ export function AboutValues({ content }: AboutValuesProps) {
     <section className="py-14 sm:py-18 lg:py-24">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 xl:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-wider text-red-600 sm:text-base">
+          <p className="type-eyebrow text-red-600">
             {content.eyebrow}
           </p>
           <h2 className="type-h2 mt-4 text-neutral-950">
             {content.title}
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-neutral-600 sm:text-lg">
+          <p className="type-prose mt-4 text-base text-neutral-600 sm:text-lg">
             {content.description}
           </p>
         </div>
@@ -42,7 +42,7 @@ export function AboutValues({ content }: AboutValuesProps) {
                 {value.title}
               </h3>
 
-              <p className="mt-3 text-sm leading-relaxed text-neutral-600">
+              <p className="mt-3 text-base leading-relaxed text-neutral-600">
                 {value.description}
               </p>
             </Card>

@@ -16,7 +16,7 @@ export function AboutCta({ content }: AboutCtaProps) {
             <h2 className="type-h1 text-neutral-950">
               {content.title}
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-neutral-600 sm:text-lg sm:leading-relaxed">
+            <p className="type-prose mt-6 text-base text-neutral-600 sm:text-lg">
               {content.description}
             </p>
 
