@@ -1,4 +1,3 @@
-import "server-only";
 
 import { byGameNameProducts } from "@/features/collections/by-game-name/data/by-game-name-products";
 import { collectionEditorial } from "@/features/collections/by-game-name/data/collection-editorial";

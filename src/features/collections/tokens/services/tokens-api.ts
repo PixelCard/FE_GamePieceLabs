@@ -1,5 +1,3 @@
-import "server-only";
-
 import { otherCategories } from "@/features/collections/board-game-inserts/data/other-categories";
 import { CollectionsPageData } from "@/features/collections/tokens/types/tokens";
 import { collectionHero } from "@/features/collections/tokens/data/collection-hero";

@@ -1,7 +1,7 @@
 import {
   ProductCard,
   type ProductCardProps,
-} from "@/components/shared/product-card";
+} from "@/components/shared/product/product-card";
 import {
   Pagination,
   type PaginationAlign,

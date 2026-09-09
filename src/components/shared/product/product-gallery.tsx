@@ -13,7 +13,7 @@ import {
 import {
   ProductCard,
   type ProductCardProps,
-} from "@/components/shared/product-card";
+} from "@/components/shared/product/product-card";
 import {
   ProductThumbnail,
   type ProductThumbnailImage,
@@ -143,17 +143,12 @@ export function ProductGallery(props: ProductGalleryProps) {
       <CarouselPrevious className="static top-auto left-auto z-20 size-7 shrink-0 translate-x-0 border-0 bg-white text-neutral-950 shadow-lg hover:bg-neutral-100 disabled:hidden sm:rotate-90" />
 
       <CarouselContent
-        className={cn(
-          "h-full w-full",
-          isMobileDetail ? "-ml-1" : "-mt-1",
-        )}
+        className={cn("h-full w-full", isMobileDetail ? "-ml-1" : "-mt-1")}
       >
         {loopImages.map(({ copy, image, originalIndex }) => (
           <CarouselItem
             key={`${image.id}-copy-${copy}`}
-            className={cn(
-              isMobileDetail ? "basis-16 pl-1" : "basis-1/4 pt-1",
-            )}
+            className={cn(isMobileDetail ? "basis-16 pl-1" : "basis-1/4 pt-1")}
           >
             <ProductThumbnail
               image={image}
