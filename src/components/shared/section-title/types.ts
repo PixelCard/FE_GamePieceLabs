@@ -14,20 +14,16 @@ export interface SectionTitleMoreProps {
   more?: SectionTitleMore;
   align?: SectionTitleAlign;
   orientation?: SectionTitleOrientation;
-  topContent?: ReactNode;
-  bottomContent?: ReactNode;
   children: ReactNode;
   className?: string;
-  content?: "text" | "imageList" | "custom";
+  content?: "text" | "imageList";
 }
 
-export interface SectionTitleSplitProps {
+export interface SectionTitleHorizonSplitProps {
   title?: never;
   more?: never;
   align?: never;
-  orientation?: never;
-  topContent?: never;
-  bottomContent?: never;
+  orientation?: "horizon";
   children: ReactNode;
   className?: string;
   content: "split";
@@ -38,6 +34,22 @@ export interface SectionTitleSplitProps {
     aspectRatio?: string;
   };
 }
+
+export interface SectionTitleVerticalSplitProps {
+  title: string;
+  more?: SectionTitleMore;
+  align?: SectionTitleAlign;
+  orientation: "vertical";
+  children: ReactNode;
+  className?: string;
+  content: "split";
+  contentPosition?: never;
+  image?: never;
+}
+
+export type SectionTitleSplitProps =
+  | SectionTitleHorizonSplitProps
+  | SectionTitleVerticalSplitProps;
 
 export type SectionTitleProps =
   | SectionTitleMoreProps

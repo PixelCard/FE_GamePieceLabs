@@ -11,8 +11,6 @@ export function CardGridSection({
   more,
   align,
   orientation,
-  topContent,
-  bottomContent,
   children,
   className,
 }: SectionTitleMoreProps): ReactElement {
@@ -33,8 +31,6 @@ export function CardGridSection({
           more={more}
           align={align}
           orientation={orientation}
-          topContent={topContent}
-          bottomContent={bottomContent}
           className="mb-6 sm:mb-10"
         />
 

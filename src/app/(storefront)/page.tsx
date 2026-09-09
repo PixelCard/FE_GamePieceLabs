@@ -105,21 +105,21 @@ export default function StorefrontHomePage() {
         title="Maximize Your Game Time"
         orientation="vertical"
         align="center"
-        content="custom"
+        content="split"
         className="py-16 sm:py-20"
-        topContent={
+      >
+        <div className="mb-8 space-y-3 text-center sm:mb-10 sm:space-y-4">
           <p className="text-sm font-bold tracking-[0.12em] text-red-600 uppercase sm:text-base">
             Clear Space, Clear Strategy
           </p>
-        }
-        bottomContent={
+
           <p className="mx-auto max-w-3xl text-pretty text-base leading-relaxed font-semibold text-neutral-700 sm:text-lg">
             We all know the frustration of wasting hours of precious game time
             on game setup and teardown. With Laserox, you can set up in a snap
             and stay organized, no matter how complex the campaign gets.
           </p>
-        }
-      >
+        </div>
+
         <ImageComparison
           imageOne="https://laserox.net/cdn/shop/files/Picture_201509_MH40S5_marbletableplant_2_jpg.png?v=1714735329&width=1000"
           imageTwo="https://laserox.net/cdn/shop/files/2024-05-03T132444.466.png?v=1714735542&width=1000"

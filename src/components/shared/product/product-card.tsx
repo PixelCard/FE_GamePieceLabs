@@ -68,13 +68,13 @@ export function ProductCard({
       </div>
 
       <CardContent className="flex min-h-[148px] flex-col gap-2 p-4 sm:p-6">
-        <div className="flex items-start justify-between gap-4">
-          <h3 className="type-h6 m-0 line-clamp-2 text-neutral-950">
+        <div className="flex items-start justify-between">
+          <h3 className="text-lg sm:text-lg text-neutral-950">
             <Link
               href={productHref}
               className="transition-colors hover:text-blue-700"
             >
-              {name}
+              <span className="text-wrap line-clamp-2">{name}</span>
             </Link>
           </h3>
 
@@ -90,7 +90,9 @@ export function ProductCard({
           </span>
         </div>
 
-        <p className="m-0 text-base font-semibold leading-snug tabular-nums text-neutral-700">{formattedPrice}</p>
+        <p className="m-0 text-base font-semibold leading-snug tabular-nums text-neutral-700">
+          {formattedPrice}
+        </p>
 
         <div className="text-center">
           <Button

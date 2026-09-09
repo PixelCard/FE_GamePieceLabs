@@ -10,8 +10,6 @@ export function TextContentSection({
   more,
   align,
   orientation,
-  topContent,
-  bottomContent,
   children,
   className,
 }: SectionTitleMoreProps): ReactElement {
@@ -29,8 +27,6 @@ export function TextContentSection({
           more={more}
           align={align}
           orientation={orientation}
-          topContent={topContent}
-          bottomContent={bottomContent}
           className="sm:mb-5"
         />
 

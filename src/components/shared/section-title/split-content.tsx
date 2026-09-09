@@ -3,14 +3,19 @@ import type { ReactElement } from "react";
 import { ImageFrame } from "@/components/shared/image/image-frame";
 import { cn } from "@/utils/cn";
 
-import type { SectionTitleSplitProps } from "./types";
+import { createSectionTitleId, SectionHeading } from "./section-heading";
+import type {
+  SectionTitleHorizonSplitProps,
+  SectionTitleSplitProps,
+  SectionTitleVerticalSplitProps,
+} from "./types";
 
-export function SplitImageContentSection({
+function HorizonSplitContentSection({
   children,
   className,
   contentPosition = "right",
   image,
-}: SectionTitleSplitProps): ReactElement {
+}: SectionTitleHorizonSplitProps): ReactElement {
   return (
     <section
       className={cn(
@@ -46,4 +51,49 @@ export function SplitImageContentSection({
       </div>
     </section>
   );
+}
+
+function VerticalSplitContentSection({
+  title,
+  more,
+  align,
+  children,
+  className,
+}: SectionTitleVerticalSplitProps): ReactElement {
+  const titleId = createSectionTitleId(title);
+
+  return (
+    <section
+      aria-labelledby={titleId}
+      className={cn(
+        "mx-auto w-full max-w-[1900px] px-4 sm:px-6 xl:px-[50px]",
+        className,
+      )}
+    >
+      <div className="mx-auto w-full sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]">
+        <SectionHeading
+          title={title}
+          titleId={titleId}
+          more={more}
+          align={align}
+          orientation="vertical"
+          className="mb-6 sm:mb-10"
+        />
+
+        {children}
+      </div>
+    </section>
+  );
+}
+
+export function SplitContentSection(
+  props: SectionTitleSplitProps,
+): ReactElement {
+  switch (props.orientation) {
+    case "vertical":
+      return <VerticalSplitContentSection {...props} />;
+    case "horizon":
+    default:
+      return <HorizonSplitContentSection {...props} />;
+  }
 }
