@@ -11,7 +11,6 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useState } from "react";
-
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/shared/logo";
 import { Card, CardContent } from "@/components/ui/card";
@@ -176,7 +175,7 @@ function DesktopHeader() {
 
               <NavigationMenuItem value="about">
                 <NavigationMenuTrigger className="h-11 rounded-md bg-transparent px-4 text-base font-bold hover:bg-transparent focus:bg-transparent data-open:bg-transparent data-popup-open:bg-transparent">
-                  About us
+                  <Link href={"/about"}>About us</Link>
                 </NavigationMenuTrigger>
                 <MegaMenuPanel
                   items={aboutMenuItems}

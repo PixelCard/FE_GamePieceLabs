@@ -18,8 +18,7 @@ import { cn } from "@/utils/cn";
 export type ImageSliderSlide = {
   id: string | number;
   title: string;
-  subtitle: string;
-  badge: string;
+  subtitle?: string;
   imageSrc: string;
   imageAlt: string;
   ctaLabel: string;
@@ -45,26 +44,6 @@ export function ImageSlider({
   className,
 }: ImageSliderProps) {
   const [api, setApi] = useState<CarouselApi>();
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    const updateCurrentSlide = () => {
-      setCurrentSlide(api.selectedScrollSnap());
-    };
-
-    updateCurrentSlide();
-    api.on("select", updateCurrentSlide);
-    api.on("reInit", updateCurrentSlide);
-
-    return () => {
-      api.off("select", updateCurrentSlide);
-      api.off("reInit", updateCurrentSlide);
-    };
-  }, [api]);
 
   useEffect(() => {
     if (!api || !autoplay || slides.length < 2) {
@@ -111,10 +90,7 @@ export function ImageSlider({
                 className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/35 to-transparent"
               />
               <div className="relative z-10 flex min-h-[280px] max-w-3xl flex-col items-start justify-center p-5 pb-12 text-white sm:min-h-[340px] sm:p-8 sm:pb-14 md:min-h-[400px] md:p-10 md:pb-16 lg:min-h-[460px] lg:p-12 xl:min-h-[500px]">
-                <span className="mb-2 inline-flex rounded-full bg-blue-600/80 px-3 py-1 text-[0.6875rem] leading-[1.35] font-bold tracking-[0.12em] text-blue-50 uppercase shadow-sm backdrop-blur-sm sm:mb-3 sm:px-3.5 md:text-xs lg:text-sm">
-                  {slide.badge}
-                </span>
-                <h2 className="max-w-[20ch] text-balance font-heading text-[clamp(1.375rem,1.1rem+1.35vw,1.75rem)] leading-[1.08] font-bold tracking-[-0.025em] md:max-w-[19ch] md:text-[clamp(2rem,1.43rem+1.19vw,2.5rem)] md:leading-[1.06] lg:max-w-[18ch] lg:text-[clamp(2.5rem,1.5rem+1.56vw,3rem)] lg:leading-[1.04]">
+                <h2 className="max-sm:text-center max-sm:text-3xl font-heading text-[clamp(1.375rem,1.1rem+1.35vw,1.75rem)] leading-[1.08] font-bold tracking-[-0.025em] md:max-w-[19ch] md:text-[clamp(2rem,1.43rem+1.19vw,2.5rem)] md:leading-[1.06] lg:max-w-[18ch] lg:text-[clamp(2.5rem,1.5rem+1.56vw,3rem)] lg:leading-[1.04]">
                   {slide.title}
                 </h2>
                 <p className="mt-2 max-w-[58ch] text-pretty text-base leading-[1.5] text-white/90 line-clamp-2 sm:mt-3 sm:line-clamp-none md:text-[1.0625rem] md:leading-[1.55] lg:text-lg lg:leading-[1.6]">
@@ -122,7 +98,7 @@ export function ImageSlider({
                 </p>
                 <Link
                   href={slide.ctaHref}
-                  className="mt-3 inline-flex min-h-11 items-center rounded-full bg-white px-4 py-2 text-sm leading-[1.35] font-bold text-neutral-950 shadow-md transition-all hover:bg-neutral-100 hover:shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50 sm:mt-5 sm:px-5 sm:py-2.5 md:text-base lg:min-h-12 lg:px-6 lg:text-lg"
+                  className="max-sm:absolute max-sm:bottom-10 max-sm:left-1/2 max-sm:-translate-x-1/2 mt-3 inline-flex min-h-11 items-center rounded-full bg-white px-4 py-4 text-md leading-[1.35] font-bold text-neutral-950 shadow-md transition-all hover:bg-neutral-100 hover:shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50 sm:mt-5 sm:px-5 sm:py-5 md:text-base lg:min-h-12 lg:px-6 lg:text-lg"
                 >
                   {slide.ctaLabel}
                 </Link>
@@ -132,34 +108,12 @@ export function ImageSlider({
         ))}
       </CarouselContent>
 
-      {hasMultipleSlides ? (
-        <>
-          <div className="absolute inset-x-0 bottom-3 sm:bottom-4 z-20 flex justify-center gap-1.5 sm:gap-2">
-            {slides.map((slide, index) => (
-              <Button
-                key={slide.id}
-                type="button"
-                variant="ghost"
-                size="icon-sm"
-                aria-label={`Go to slide ${index + 1}`}
-                aria-current={currentSlide === index ? "true" : undefined}
-                onClick={() => api?.scrollTo(index)}
-                className={cn(
-                  "h-2 rounded-full p-0 transition-all duration-300",
-                  currentSlide === index
-                    ? "w-6 bg-white shadow-sm"
-                    : "w-2 bg-white/50 hover:bg-white/80",
-                )}
-              />
-            ))}
-
-            <div className="absolute right-4 bottom-0 hidden items-center gap-2 sm:flex">
-              <CarouselPrevious className={liquidGlassNavigationButton} />
-              <CarouselNext className={liquidGlassNavigationButton} />
-            </div>
-          </div>
-        </>
-      ) : null}
+      <div className="absolute inset-x-0 bottom-3 sm:bottom-4 z-20 flex justify-center gap-1.5 sm:gap-2">
+        <div className="absolute right-4 bottom-0 hidden items-center gap-2 sm:flex">
+          <CarouselPrevious className={liquidGlassNavigationButton} />
+          <CarouselNext className={liquidGlassNavigationButton} />
+        </div>
+      </div>
     </Carousel>
   );
 }

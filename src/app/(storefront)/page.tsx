@@ -33,34 +33,25 @@ const imageSliderSlides = [
   {
     id: "new-arrivals",
     title: "Bộ sưu tập mô hình mới đang mở bán",
-    subtitle:
-      "Khám phá các mẫu figure, mecha và phụ kiện mới nhất vừa cập bến tại Game Piece Labs.",
     ctaLabel: "Xem bộ sưu tập",
     ctaHref: "/",
     imageSrc: "/images/legacy/banner1.jpg",
-    badge: "Mới về",
     imageAlt: "Banner bộ sưu tập mới",
   },
   {
     id: "preorders",
     title: "Đặt trước những mẫu figure nổi bật trước khi cháy hàng",
-    subtitle:
-      "Theo dõi các đợt mở bán được săn đón nhiều nhất và giữ chỗ sớm cho góc trưng bày của bạn.",
     ctaLabel: "Đặt trước ngay",
     ctaHref: "/",
     imageSrc: "/images/legacy/banner2.jpg",
-    badge: "Đặt trước",
     imageAlt: "Banner sản phẩm đặt trước",
   },
   {
     id: "featured-display",
     title: "Góc trưng bày dành cho người sưu tầm thật sự",
-    subtitle:
-      "Từ scale figure nổi bật đến phụ kiện hoàn thiện setup, mọi thứ bạn cần đều đang có mặt tại đây.",
     ctaLabel: "Xem sản phẩm nổi bật",
     ctaHref: "/",
     imageSrc: "/images/legacy/banner3.jpg",
-    badge: "Nổi bật",
     imageAlt: "Banner sản phẩm nổi bật",
   },
 ] as const satisfies readonly ImageSliderSlide[];
