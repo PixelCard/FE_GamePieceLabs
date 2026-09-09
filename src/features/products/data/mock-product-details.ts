@@ -33,7 +33,7 @@ export const mockProductDetails = [
         displayOrder: 2,
       },
       {
-        id: "gloomhaven-secondary",
+        id: "gloomhaven-secondary-1",
         publicUrl:
           "https://laserox.net/cdn/shop/files/LGBB-3.jpg?v=1727173082&width=112",
         altText: "Các khay bên trong Gloomhaven Buttons & Bugs Organizer",
@@ -41,7 +41,7 @@ export const mockProductDetails = [
         displayOrder: 3,
       },
       {
-        id: "gloomhaven-secondary",
+        id: "gloomhaven-secondary-2",
         publicUrl:
           "https://laserox.net/cdn/shop/files/LGBB-1.jpg?v=1727173087&width=112",
         altText: "Các khay bên trong Gloomhaven Buttons & Bugs Organizer",

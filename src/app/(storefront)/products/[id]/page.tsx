@@ -53,7 +53,7 @@ export default async function ProductDetailsPage({
           className="mt-10"
           content="text"
         >
-          <p className="w-full">
+          <p className="w-fit">
             In Gloomhaven: Buttons & Bugs, you’re shrunk to the size of a mouse
             after a botched attempt to visit the powerful mage Hail, thrust into
             a miniaturized world of danger and chaos. Armed with a handful of
@@ -98,10 +98,7 @@ export default async function ProductDetailsPage({
           className="mt-20 grid items-center gap-12 pb-8 lg:grid-cols-[1.2fr_1fr] lg:gap-20"
         >
           <div>
-            <h2
-              id="supported-games-heading"
-              className="type-h1"
-            >
+            <h2 id="supported-games-heading" className="type-h1">
               Supports the following
             </h2>
 

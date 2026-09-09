@@ -2,17 +2,13 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { ZoomIn } from "lucide-react";
+import { ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import type { ProductImageDto } from "@/features/products/types/product-details";
 import { ProductGallery } from "@/components/shared/product/product-gallery";
+import { cn } from "@/utils/cn";
 
 interface ProductImageGalleryProps {
   images: ProductImageDto[];
@@ -34,18 +30,29 @@ export default function ProductImageGallery({
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isZoomOpen, setIsZoomOpen] = useState(false);
   const selectedImage = sortedImages[selectedImageIndex] ?? sortedImages[0];
+  const totalImages = sortedImages.length;
   const galleryImages = sortedImages.map((image, index) => ({
     id: `${image.id}-${index}`,
     src: image.publicUrl ? getLargeImageUrl(image.publicUrl) : "/window.svg",
     alt: image.altText ?? `${productName} - ảnh ${index + 1}`,
   }));
 
+  const selectAdjacentImage = (offset: number): void => {
+    if (totalImages < 2) {
+      return;
+    }
+
+    setSelectedImageIndex(
+      (currentIndex) => (currentIndex + offset + totalImages) % totalImages,
+    );
+  };
+
   return (
     <>
       <div className="min-w-0 lg:sticky lg:top-6 lg:self-start">
         <div className="flex flex-col gap-3 sm:grid sm:grid-cols-[4.5rem_minmax(0,1fr)] sm:gap-5">
           {sortedImages.length > 1 && (
-            <div className="order-2 flex min-w-0 sm:order-1 sm:min-h-0">
+            <div className="order-2 hidden min-w-0 sm:order-1 sm:flex sm:min-h-0">
               <ProductGallery
                 type="detail"
                 images={galleryImages}
@@ -86,31 +93,95 @@ export default function ProductImageGallery({
               </Button>
             )}
           </div>
+
+          {sortedImages.length > 1 && (
+            <div
+              role="group"
+              aria-label="Chọn ảnh sản phẩm"
+              className="order-2 flex items-center justify-center gap-1 sm:hidden"
+            >
+              {sortedImages.map((image, index) => {
+                const isSelected = selectedImageIndex === index;
+
+                return (
+                  <Button
+                    key={image.id}
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    aria-label={`Xem ảnh ${index + 1} của ${productName}`}
+                    aria-pressed={isSelected}
+                    onClick={() => setSelectedImageIndex(index)}
+                    className="group size-10 rounded-full hover:bg-transparent focus-visible:ring-neutral-950"
+                  >
+                    <span
+                      className={cn(
+                        "size-2 rounded-full transition-colors",
+                        isSelected
+                          ? "bg-neutral-950"
+                          : "bg-neutral-300 group-hover:bg-neutral-500",
+                      )}
+                    />
+                  </Button>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
 
       <Dialog open={isZoomOpen} onOpenChange={setIsZoomOpen}>
         <DialogContent
-          overlayClassName="bg-black/75 supports-backdrop-filter:backdrop-blur-sm"
-          className="max-h-[calc(100dvh-1.5rem)] w-[calc(100vw-1.5rem)] max-w-5xl gap-0 overflow-hidden rounded-2xl border border-neutral-200 bg-white p-0 text-neutral-950 shadow-[0_24px_80px_rgba(0,0,0,0.3)] ring-1 ring-black/5 sm:w-[calc(100vw-3rem)] sm:rounded-3xl lg:max-w-7xl xl:max-w-[90rem] [&_[data-slot=dialog-close]]:top-3 [&_[data-slot=dialog-close]]:right-3 [&_[data-slot=dialog-close]]:z-20 [&_[data-slot=dialog-close]]:size-9 [&_[data-slot=dialog-close]]:rounded-full [&_[data-slot=dialog-close]]:bg-neutral-100 [&_[data-slot=dialog-close]]:text-neutral-500 [&_[data-slot=dialog-close]]:ring-1 [&_[data-slot=dialog-close]]:ring-neutral-200 [&_[data-slot=dialog-close]]:hover:bg-neutral-200 [&_[data-slot=dialog-close]]:hover:text-neutral-700"
+          overlayClassName="bg-white backdrop-blur-none"
+          className="inset-0 flex h-dvh w-screen max-w-none translate-x-0 translate-y-0 items-center justify-center gap-0 overflow-hidden rounded-none border-0 bg-white p-4 text-neutral-950 shadow-none ring-0 sm:max-w-none sm:p-8 data-open:zoom-in-100 data-closed:zoom-out-100 [&_[data-slot=dialog-close]]:top-4 [&_[data-slot=dialog-close]]:right-4 [&_[data-slot=dialog-close]]:z-20 [&_[data-slot=dialog-close]]:size-10 [&_[data-slot=dialog-close]]:rounded-full [&_[data-slot=dialog-close]]:bg-white [&_[data-slot=dialog-close]]:text-neutral-950 [&_[data-slot=dialog-close]]:shadow-md [&_[data-slot=dialog-close]]:ring-1 [&_[data-slot=dialog-close]]:ring-neutral-200 [&_[data-slot=dialog-close]]:hover:bg-neutral-100 sm:[&_[data-slot=dialog-close]]:top-6 sm:[&_[data-slot=dialog-close]]:right-6"
         >
-          <DialogHeader className="relative border-b border-neutral-200 bg-white px-4 py-4 pr-16 text-left sm:px-6 sm:py-5">
-            <DialogTitle className="line-clamp-1 text-base leading-snug font-semibold text-neutral-950 sm:text-lg">
-              {productName}
-            </DialogTitle>
-          </DialogHeader>
+          <DialogTitle className="sr-only">
+            Ảnh phóng to của {productName}
+          </DialogTitle>
 
           {selectedImage?.publicUrl && (
-            <div className="flex min-h-0 items-center justify-center bg-neutral-50 p-3 sm:p-6">
-              <div className="relative h-[min(58dvh,28rem)] w-full sm:h-[min(70dvh,44rem)] lg:h-[min(74dvh,48rem)]">
-                <Image
-                  src={getLargeImageUrl(selectedImage.publicUrl)}
-                  alt={selectedImage.altText ?? productName}
-                  fill
-                  unoptimized
-                  sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 1023px) calc(100vw - 96px), 1024px"
-                  className="object-contain"
-                />
+            <div className="relative h-full w-full">
+              <Image
+                src={getLargeImageUrl(selectedImage.publicUrl)}
+                alt={selectedImage.altText ?? productName}
+                fill
+                unoptimized
+                sizes="100vw"
+                className="object-contain"
+              />
+
+              {totalImages > 1 && (
+                <>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="icon-lg"
+                    aria-label="Xem ảnh trước"
+                    onClick={() => selectAdjacentImage(-1)}
+                    className="absolute top-1/2 left-0 z-10 -translate-y-1/2 rounded-full bg-white/90 text-neutral-950 shadow-lg ring-1 ring-neutral-200 backdrop-blur-sm hover:bg-white sm:left-2 sm:size-12"
+                  >
+                    <ChevronLeft className="size-5 sm:size-6" />
+                  </Button>
+
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="icon-lg"
+                    aria-label="Xem ảnh tiếp theo"
+                    onClick={() => selectAdjacentImage(1)}
+                    className="absolute top-1/2 right-0 z-10 -translate-y-1/2 rounded-full bg-white/90 text-neutral-950 shadow-lg ring-1 ring-neutral-200 backdrop-blur-sm hover:bg-white sm:right-2 sm:size-12"
+                  >
+                    <ChevronRight className="size-5 sm:size-6" />
+                  </Button>
+                </>
+              )}
+
+              <div
+                aria-live="polite"
+                aria-atomic="true"
+                className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2 rounded-full bg-neutral-950/75 px-3 py-1.5 text-sm font-medium text-white tabular-nums backdrop-blur-sm sm:bottom-2"
+              >
+                {selectedImageIndex + 1} / {totalImages}
               </div>
             </div>
           )}
