@@ -78,55 +78,55 @@ export function CardImageTitle({
   isClicked = false,
 }: CardImageTitleProps) {
   const card = (
-      <Card
+    <Card
+      className={cn(
+        "relative overflow-hidden rounded-xl border-0 bg-neutral-950 p-0 shadow-none",
+        aspectRatioClasses[aspectRatio],
+      )}
+    >
+      <Image
+        src={imageSrc}
+        alt={imageAlt}
+        fill
+        sizes={sizes}
+        style={{ objectPosition: imagePosition }}
         className={cn(
-          "relative overflow-hidden rounded-xl border-0 bg-neutral-950 p-0 shadow-none",
-          aspectRatioClasses[aspectRatio],
+          "object-cover transition-transform duration-500 ease-out",
+          isClicked && "group-hover:scale-[1.04]",
         )}
-      >
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          fill
-          sizes={sizes}
-          style={{ objectPosition: imagePosition }}
+      />
+
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/5 transition-colors duration-300 group-hover:from-black/90"
+      />
+
+      {title || isArrow ? (
+        <CardContent
           className={cn(
-            "object-cover transition-transform duration-500 ease-out",
-            isClicked && "group-hover:scale-[1.04]",
+            "absolute inset-0 flex items-end gap-2 p-4 sm:gap-3 sm:p-5",
+            title ? "justify-between" : "justify-end",
           )}
-        />
+        >
+          {title ? (
+            <span
+              className={cn(
+                "max-w-[18ch] text-balance text-base font-bold leading-snug text-white drop-shadow-sm sm:text-lg xl:text-xl m-1 max-sm:text-2xl",
+                titleClassName,
+              )}
+            >
+              {title}
+            </span>
+          ) : null}
 
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/5 transition-colors duration-300 group-hover:from-black/90"
-        />
-
-        {title || isArrow ? (
-          <CardContent
-            className={cn(
-              "absolute inset-0 flex items-end gap-2 p-4 sm:gap-3 sm:p-5",
-              title ? "justify-between" : "justify-end",
-            )}
-          >
-            {title ? (
-              <span
-                className={cn(
-                  "max-w-[18ch] text-balance text-base font-bold leading-snug text-white drop-shadow-sm sm:text-lg xl:text-xl",
-                  titleClassName,
-                )}
-              >
-                {title}
-              </span>
-            ) : null}
-
-            {isArrow && isClicked ? (
-              <span className="hidden size-6 shrink-0 translate-x-2 items-center justify-center rounded-full bg-white text-neutral-950 opacity-0 shadow-sm transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 sm:flex sm:size-8">
-                <ArrowRight className="size-3 sm:size-4" aria-hidden="true" />
-              </span>
-            ) : null}
-          </CardContent>
-        ) : null}
-      </Card>
+          {isArrow && isClicked ? (
+            <span className="hidden size-6 shrink-0 translate-x-2 items-center justify-center rounded-full bg-white text-neutral-950 opacity-0 shadow-sm transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 sm:flex sm:size-8">
+              <ArrowRight className="size-3 sm:size-4" aria-hidden="true" />
+            </span>
+          ) : null}
+        </CardContent>
+      ) : null}
+    </Card>
   );
 
   const containerClassName = cn(
@@ -142,10 +142,7 @@ export function CardImageTitle({
   }
 
   return (
-    <Link
-      href={resolvedHref}
-      className={containerClassName}
-    >
+    <Link href={resolvedHref} className={containerClassName}>
       {card}
     </Link>
   );
