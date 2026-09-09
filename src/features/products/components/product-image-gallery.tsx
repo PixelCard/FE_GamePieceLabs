@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { ZoomIn } from "lucide-react";
+import { ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
@@ -30,11 +30,22 @@ export default function ProductImageGallery({
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isZoomOpen, setIsZoomOpen] = useState(false);
   const selectedImage = sortedImages[selectedImageIndex] ?? sortedImages[0];
+  const totalImages = sortedImages.length;
   const galleryImages = sortedImages.map((image, index) => ({
     id: `${image.id}-${index}`,
     src: image.publicUrl ? getLargeImageUrl(image.publicUrl) : "/window.svg",
     alt: image.altText ?? `${productName} - ảnh ${index + 1}`,
   }));
+
+  const selectAdjacentImage = (offset: number): void => {
+    if (totalImages < 2) {
+      return;
+    }
+
+    setSelectedImageIndex(
+      (currentIndex) => (currentIndex + offset + totalImages) % totalImages,
+    );
+  };
 
   return (
     <>
@@ -138,6 +149,40 @@ export default function ProductImageGallery({
                 sizes="100vw"
                 className="object-contain"
               />
+
+              {totalImages > 1 && (
+                <>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="icon-lg"
+                    aria-label="Xem ảnh trước"
+                    onClick={() => selectAdjacentImage(-1)}
+                    className="absolute top-1/2 left-0 z-10 -translate-y-1/2 rounded-full bg-white/90 text-neutral-950 shadow-lg ring-1 ring-neutral-200 backdrop-blur-sm hover:bg-white sm:left-2 sm:size-12"
+                  >
+                    <ChevronLeft className="size-5 sm:size-6" />
+                  </Button>
+
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="icon-lg"
+                    aria-label="Xem ảnh tiếp theo"
+                    onClick={() => selectAdjacentImage(1)}
+                    className="absolute top-1/2 right-0 z-10 -translate-y-1/2 rounded-full bg-white/90 text-neutral-950 shadow-lg ring-1 ring-neutral-200 backdrop-blur-sm hover:bg-white sm:right-2 sm:size-12"
+                  >
+                    <ChevronRight className="size-5 sm:size-6" />
+                  </Button>
+                </>
+              )}
+
+              <div
+                aria-live="polite"
+                aria-atomic="true"
+                className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2 rounded-full bg-neutral-950/75 px-3 py-1.5 text-sm font-medium text-white tabular-nums backdrop-blur-sm sm:bottom-2"
+              >
+                {selectedImageIndex + 1} / {totalImages}
+              </div>
             </div>
           )}
         </DialogContent>
