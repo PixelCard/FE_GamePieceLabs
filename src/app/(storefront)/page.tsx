@@ -1,4 +1,7 @@
 "use client";
+
+import Link from "next/link";
+
 import { CardImageTitle } from "@/components/shared/card-image-title";
 import { MarqueeText } from "@/components/shared/marquee-text";
 import { featuredProducts } from "@/features/home/data/featured-products";
@@ -23,7 +26,8 @@ import {
 } from "@/components/shared/image/image-slider";
 import { ImageComparison } from "@/components/shared/image/image-comparision";
 import { ProductGallery } from "@/components/shared/product/product-gallery";
-import { ProductDemo } from "@/components/shared/product/product-demo";
+import { Button } from "@/components/ui/button";
+import { ProductDemo } from "@/features/home/components/product-demo";
 
 const imageSliderSlides = [
   {
@@ -133,11 +137,48 @@ export default function StorefrontHomePage() {
         >
           <div className="col-span-full">
             <ProductGallery type="featured" images={featuredProducts} />
-
-            <ProductDemo />
           </div>
         </SectionTitle>
       </div>
+
+      <SectionTitle
+        orientation="vertical"
+        align="center"
+        content="split"
+        ariaLabel="The Game Piece Labs philosophy"
+        className="overflow-hidden bg-neutral-50/60 pt-16 pb-0 sm:pt-20 lg:pt-24"
+      >
+        <div className="flex flex-col items-center text-center">
+          <h2 className="bg-gradient-to-b from-neutral-300 to-white bg-clip-text text-[clamp(2.25rem,9.5vw,9rem)] leading-[0.82] font-black tracking-[-0.065em] whitespace-nowrap text-transparent">
+            GAME PIECE LABS
+          </h2>
+
+          <div className="mt-14 flex max-w-5xl flex-col items-center sm:mt-20">
+            <h3 className="text-2xl leading-tight font-bold text-balance text-neutral-950 sm:text-3xl lg:text-4xl">
+              From Our Table to Yours:
+              <br />
+              The Game Piece Labs Philosophy
+            </h3>
+
+            <p className="mt-7 max-w-4xl text-base leading-relaxed font-medium text-pretty text-neutral-700 sm:mt-9 sm:text-lg lg:text-xl">
+              We believe that the best gaming experiences are born from
+              hassle-free setups and crystal-clear organization. We craft our
+              organizers and accessories with precision and passion, using
+              eco-friendly, hand-selected, premium materials. Prepare to
+              transform how you play!
+            </p>
+
+            <Button
+              asChild
+              className="mt-8 h-14 rounded-full bg-neutral-950 px-10 text-base font-bold text-white hover:bg-neutral-800 focus-visible:ring-neutral-950 sm:mt-10 sm:h-16 sm:px-12 sm:text-lg"
+            >
+              <Link href="/about">Discover more</Link>
+            </Button>
+          </div>
+        </div>
+
+        <ProductDemo className="px-0 pt-12 pb-0 sm:px-0 sm:pt-16 sm:pb-0" />
+      </SectionTitle>
       {/* 
       <VideoFrame
         type="youtube"

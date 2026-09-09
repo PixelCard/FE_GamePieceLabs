@@ -36,7 +36,8 @@ export interface SectionTitleHorizonSplitProps {
 }
 
 export interface SectionTitleVerticalSplitProps {
-  title: string;
+  title?: string;
+  ariaLabel?: string;
   more?: SectionTitleMore;
   align?: SectionTitleAlign;
   orientation: "vertical";

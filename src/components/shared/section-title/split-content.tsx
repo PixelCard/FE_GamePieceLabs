@@ -55,30 +55,34 @@ function HorizonSplitContentSection({
 
 function VerticalSplitContentSection({
   title,
+  ariaLabel,
   more,
   align,
   children,
   className,
 }: SectionTitleVerticalSplitProps): ReactElement {
-  const titleId = createSectionTitleId(title);
+  const titleId = title ? createSectionTitleId(title) : undefined;
 
   return (
     <section
       aria-labelledby={titleId}
+      aria-label={title ? undefined : ariaLabel}
       className={cn(
         "mx-auto w-full max-w-[1900px] px-4 sm:px-6 xl:px-[50px]",
         className,
       )}
     >
       <div className="mx-auto w-full sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]">
-        <SectionHeading
-          title={title}
-          titleId={titleId}
-          more={more}
-          align={align}
-          orientation="vertical"
-          className="mb-6 sm:mb-10"
-        />
+        {title && titleId ? (
+          <SectionHeading
+            title={title}
+            titleId={titleId}
+            more={more}
+            align={align}
+            orientation="vertical"
+            className="mb-6 sm:mb-10"
+          />
+        ) : null}
 
         {children}
       </div>
