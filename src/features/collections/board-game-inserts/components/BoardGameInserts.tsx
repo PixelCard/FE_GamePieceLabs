@@ -97,7 +97,7 @@ export function BoardGameInserts({ data }: BoardGameInsertsProps) {
 
           <ProductList
             products={products.data}
-            columns={5}
+            columns={4}
             alignPagination="center"
             pagination={products.pagination}
             variantPagination="simple"
