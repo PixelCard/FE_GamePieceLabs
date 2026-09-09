@@ -151,7 +151,7 @@ export default async function ProductDetailsPage({
           </dl>
         </section>
 
-        {reviews && <CustomerReviewsSection reviews={reviews} />}
+        {/* {reviews && <CustomerReviewsSection reviews={reviews} />} */}
       </div>
 
       {/* <VideoFrame
