@@ -1,8 +1,8 @@
 import { CardImageTitle } from "@/components/shared/card-image-title";
 import Filter from "@/components/shared/filter";
-import { ImageFrame } from "@/components/shared/image-frame";
+import { ImageFrame } from "@/components/shared/image/image-frame";
 import { MarqueeText } from "@/components/shared/marquee-text";
-import { ProductList } from "@/components/shared/product-list";
+import { ProductList } from "@/components/shared/product/product-list";
 import { SectionTitle } from "@/components/shared/section-title";
 import Wrapper from "@/components/shared/wrapper";
 import type { ByGameNamePageData } from "@/features/collections/by-game-name/types/by-game-name";

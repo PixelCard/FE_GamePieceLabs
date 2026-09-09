@@ -3,8 +3,8 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 import { CardImageTitleGrid } from "@/components/shared/card-image-title";
-import { ImageFrame } from "@/components/shared/image-frame";
 import { cn } from "@/utils/cn";
+import { ImageFrame } from "./image/image-frame";
 
 export type SectionTitleAlign = "left" | "center" | "right";
 

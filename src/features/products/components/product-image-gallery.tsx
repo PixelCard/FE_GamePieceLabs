@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import { ZoomIn } from "lucide-react";
 
-import { ProductGallery } from "@/components/shared/product-gallery";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,6 +12,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import type { ProductImageDto } from "@/features/products/types/product-details";
+import { ProductGallery } from "@/components/shared/product/product-gallery";
 
 interface ProductImageGalleryProps {
   images: ProductImageDto[];

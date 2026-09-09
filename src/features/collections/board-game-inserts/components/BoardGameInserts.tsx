@@ -1,11 +1,11 @@
 import { CardImageTitle } from "@/components/shared/card-image-title";
 import Filter from "@/components/shared/filter";
-import { ImageFrame } from "@/components/shared/image-frame";
-import { ProductList } from "@/components/shared/product-list";
 import { SectionTitle } from "@/components/shared/section-title";
 import Wrapper from "@/components/shared/wrapper";
 import { CollectionsPageData } from "../types/board-game-inserts";
 import { MarqueeText } from "@/components/shared/marquee-text";
+import { ImageFrame } from "@/components/shared/image/image-frame";
+import { ProductList } from "@/components/shared/product/product-list";
 
 interface BoardGameInsertsProps {
   data: CollectionsPageData;

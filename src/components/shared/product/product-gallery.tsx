@@ -14,11 +14,8 @@ import {
   ProductCard,
   type ProductCardProps,
 } from "@/components/shared/product/product-card";
-import {
-  ProductThumbnail,
-  type ProductThumbnailImage,
-} from "@/components/shared/product-thumbnail";
 import { cn } from "@/utils/cn";
+import { ProductThumbnail, ProductThumbnailImage } from "./product-thumbnail";
 
 interface ProductGalleryBaseProps {
   className?: string;
