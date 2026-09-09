@@ -158,7 +158,7 @@ export default function ProductImageGallery({
                     size="icon-lg"
                     aria-label="Xem ảnh trước"
                     onClick={() => selectAdjacentImage(-1)}
-                    className="absolute top-1/2 left-0 z-10 -translate-y-1/2 rounded-full bg-white/90 text-neutral-950 shadow-lg ring-1 ring-neutral-200 backdrop-blur-sm hover:bg-white sm:left-2 sm:size-12"
+                    className="absolute top-1/2 left-0 z-10 rounded-full bg-white/90 text-neutral-950 shadow-lg ring-1 ring-neutral-200 backdrop-blur-sm hover:bg-white sm:left-2 sm:size-12"
                   >
                     <ChevronLeft className="size-5 sm:size-6" />
                   </Button>
@@ -169,7 +169,7 @@ export default function ProductImageGallery({
                     size="icon-lg"
                     aria-label="Xem ảnh tiếp theo"
                     onClick={() => selectAdjacentImage(1)}
-                    className="absolute top-1/2 right-0 z-10 -translate-y-1/2 rounded-full bg-white/90 text-neutral-950 shadow-lg ring-1 ring-neutral-200 backdrop-blur-sm hover:bg-white sm:right-2 sm:size-12"
+                    className="absolute top-1/2 right-0 z-10 rounded-full bg-white/90 text-neutral-950 shadow-lg ring-1 ring-neutral-200 backdrop-blur-sm hover:bg-white sm:right-2 sm:size-12"
                   >
                     <ChevronRight className="size-5 sm:size-6" />
                   </Button>

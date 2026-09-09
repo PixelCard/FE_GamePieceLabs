@@ -82,8 +82,7 @@ export function ImageFrame({
       <div
         className={cn(
           "group relative w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-neutral-200/80 bg-neutral-950 shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:border-neutral-800",
-          hasTextContent &&
-            "min-h-[360px] sm:min-h-[420px] lg:min-h-[500px]",
+          hasTextContent && "min-h-[360px] sm:min-h-[420px] lg:min-h-[500px]",
           aspectClass,
           className,
         )}
