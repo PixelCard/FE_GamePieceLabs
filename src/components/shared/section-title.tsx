@@ -7,6 +7,7 @@ import { cn } from "@/utils/cn";
 import { ImageFrame } from "./image/image-frame";
 
 export type SectionTitleAlign = "left" | "center" | "right";
+export type SectionTitleOrientation = "vertical" | "horizon";
 
 export type SectionTitleMore = {
   label?: string;
@@ -17,15 +18,21 @@ export type SectionTitleMoreProps = {
   title: string;
   more?: SectionTitleMore;
   align?: SectionTitleAlign;
+  orientation?: SectionTitleOrientation;
+  topContent?: ReactNode;
+  bottomContent?: ReactNode;
   children: ReactNode;
   className?: string;
-  content?: "text" | "imageList";
+  content?: "text" | "imageList" | "custom";
 };
 
 export type SectionTitleSplitProps = {
   title?: never;
   more?: never;
   align?: never;
+  orientation?: never;
+  topContent?: never;
+  bottomContent?: never;
   children: ReactNode;
   className?: string;
   content: "split";
@@ -50,6 +57,12 @@ const titleAlignmentClasses: Record<SectionTitleAlign, string> = {
   left: "text-left",
   center: "text-center",
   right: "text-right",
+};
+
+const verticalAlignmentClasses: Record<SectionTitleAlign, string> = {
+  left: "items-start",
+  center: "items-center",
+  right: "items-end",
 };
 
 export function SectionTitle(props: SectionTitleProps) {
@@ -83,10 +96,73 @@ export function SectionTitle(props: SectionTitleProps) {
     );
   }
 
-  const { title, more, align = "left", children, className, content } = props;
+  const {
+    title,
+    more,
+    align = "left",
+    orientation = "horizon",
+    topContent,
+    bottomContent,
+    children,
+    className,
+    content,
+  } = props;
   const titleId = `${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-title`;
 
-  if (content !== "text") {
+  const titleBlock = (
+    <div
+      className={cn(
+        "space-y-3 sm:space-y-4",
+        content === "text" ? "sm:mb-5" : "mb-6 sm:mb-10",
+      )}
+    >
+      {topContent ? (
+        <div className={cn("w-full", titleAlignmentClasses[align])}>
+          {topContent}
+        </div>
+      ) : null}
+
+      <div
+        className={cn(
+          "flex w-full flex-col gap-3",
+          orientation === "horizon"
+            ? "sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+            : verticalAlignmentClasses[align],
+        )}
+      >
+        <h2
+          id={titleId}
+          className={cn(
+            "type-h2 m-0 min-w-0 flex-1 text-neutral-950",
+            titleAlignmentClasses[align],
+          )}
+        >
+          {title}
+        </h2>
+
+        {more ? (
+          <Link
+            href={more.href || "#"}
+            className="group inline-flex w-fit items-center gap-4 rounded-full text-base font-bold text-neutral-950 outline-none transition-colors hover:text-red-600 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 sm:text-lg"
+          >
+            {more.label}
+
+            <span className="flex size-8 items-center justify-center rounded-full bg-neutral-200 text-neutral-700 transition-colors group-hover:bg-red-600 group-hover:text-white">
+              <ChevronRight className="size-4" aria-hidden="true" />
+            </span>
+          </Link>
+        ) : null}
+      </div>
+
+      {bottomContent ? (
+        <div className={cn("w-full", titleAlignmentClasses[align])}>
+          {bottomContent}
+        </div>
+      ) : null}
+    </div>
+  );
+
+  if (content !== "text" && content !== "custom") {
     return (
       <section
         aria-labelledby={titleId}
@@ -96,34 +172,7 @@ export function SectionTitle(props: SectionTitleProps) {
         )}
       >
         <div className="mx-auto w-full sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]">
-          <div className="mb-6 flex flex-col gap-3 sm:mb-10 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
-            <h2
-              id={titleId}
-              className={cn(
-                "type-h2 m-0 min-w-0 flex-1 text-neutral-950",
-                titleAlignmentClasses[align],
-              )}
-            >
-              {title}
-            </h2>
-
-            <div className="flex">
-              <Link
-                href={more?.href || "#"}
-                className="group inline-flex w-fit items-center gap-4 rounded-full text-base font-bold text-neutral-950 outline-none transition-colors hover:text-red-600 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 sm:text-lg"
-              >
-                {more?.label}
-
-                {more && (
-                  <>
-                    <span className="flex size-8 items-center justify-center rounded-full bg-neutral-200 text-neutral-700 transition-colors group-hover:bg-red-600 group-hover:text-white">
-                      <ChevronRight className="size-4" aria-hidden="true" />
-                    </span>
-                  </>
-                )}
-              </Link>
-            </div>
-          </div>
+          {titleBlock}
 
           <CardImageTitleGrid>{children}</CardImageTitleGrid>
         </div>
@@ -134,37 +183,19 @@ export function SectionTitle(props: SectionTitleProps) {
   return (
     <section
       aria-labelledby={titleId}
-      className={cn("mx-auto w-full max-w-[1900px]", className)}
+      className={cn(
+        "mx-auto w-full max-w-[1900px]",
+        content === "custom" && "px-4 sm:px-6 xl:px-[50px]",
+        className,
+      )}
     >
-      <div className="w-full sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]">
-        <div className="flex flex-col gap-3 sm:mb-5 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
-          <h2
-            id={titleId}
-            className={cn(
-              "type-h2 m-0 min-w-0 flex-1 text-neutral-950",
-              titleAlignmentClasses[align],
-            )}
-          >
-            {title}
-          </h2>
-
-          <div className="flex">
-            <Link
-              href={more?.href || "#"}
-              className="group inline-flex w-fit items-center gap-4 rounded-full text-base font-bold text-neutral-950 outline-none transition-colors hover:text-red-600 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 sm:text-lg"
-            >
-              {more?.label}
-
-              {more && (
-                <>
-                  <span className="flex size-8 items-center justify-center rounded-full bg-neutral-200 text-neutral-700 transition-colors group-hover:bg-red-600 group-hover:text-white">
-                    <ChevronRight className="size-4" aria-hidden="true" />
-                  </span>
-                </>
-              )}
-            </Link>
-          </div>
-        </div>
+      <div
+        className={cn(
+          "w-full sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]",
+          content === "custom" && "mx-auto",
+        )}
+      >
+        {titleBlock}
         {children}
       </div>
     </section>
