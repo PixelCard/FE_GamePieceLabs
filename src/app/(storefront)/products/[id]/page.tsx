@@ -164,7 +164,7 @@ export default async function ProductDetailsPage({
       <SectionTitle
         title="You may also like"
         align="left"
-        className="-ml-10 mt-20"
+        className=""
         content="imageList"
       >
         {youMayAlsoLikeProducts.map((recommendedProduct) => (
