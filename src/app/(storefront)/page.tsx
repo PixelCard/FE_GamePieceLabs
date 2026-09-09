@@ -110,7 +110,6 @@ export default function StorefrontHomePage() {
         orientation="vertical"
         align="center"
         content="split"
-        className="py-16 sm:py-20"
       >
         <div className="mb-8 space-y-3 text-center sm:mb-10 sm:space-y-4">
           <p className="text-sm font-bold tracking-[0.12em] text-red-600 uppercase sm:text-base">
@@ -146,7 +145,7 @@ export default function StorefrontHomePage() {
         align="center"
         content="split"
         ariaLabel="The Game Piece Labs philosophy"
-        className="overflow-hidden bg-neutral-50/60 pt-16 pb-0 sm:pt-20 lg:pt-24"
+        className="overflow-hidden bg-neutral-50/60"
       >
         <div className="flex flex-col items-center text-center">
           <h2 className="bg-gradient-to-b from-neutral-300 to-white bg-clip-text text-[clamp(2.25rem,9.5vw,9rem)] leading-[0.82] font-black tracking-[-0.065em] whitespace-nowrap text-transparent">
