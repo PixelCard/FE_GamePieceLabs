@@ -97,7 +97,7 @@ export function ImageSlider({
       <CarouselContent className="ml-0">
         {slides.map((slide, index) => (
           <CarouselItem key={slide.id} className="pl-0">
-            <div className="relative min-h-[280px] sm:min-h-[340px] md:min-h-[400px] lg:min-h-[460px] xl:min-h-[500px]">
+            <div className="relative min-h-[280px] sm:min-h-[340px] md:min-h-[400px] lg:min-h-[460px] xl:min-h-[570px]">
               <Image
                 src={slide.imageSrc}
                 alt={slide.imageAlt}
