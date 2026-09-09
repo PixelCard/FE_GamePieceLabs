@@ -5,12 +5,7 @@ import Image from "next/image";
 import { ZoomIn } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import type { ProductImageDto } from "@/features/products/types/product-details";
 import { ProductGallery } from "@/components/shared/product/product-gallery";
 
@@ -91,27 +86,23 @@ export default function ProductImageGallery({
 
       <Dialog open={isZoomOpen} onOpenChange={setIsZoomOpen}>
         <DialogContent
-          overlayClassName="bg-black/75 supports-backdrop-filter:backdrop-blur-sm"
-          className="max-h-[calc(100dvh-1.5rem)] w-[calc(100vw-1.5rem)] max-w-5xl gap-0 overflow-hidden rounded-2xl border border-neutral-200 bg-white p-0 text-neutral-950 shadow-[0_24px_80px_rgba(0,0,0,0.3)] ring-1 ring-black/5 sm:w-[calc(100vw-3rem)] sm:rounded-3xl lg:max-w-7xl xl:max-w-[90rem] [&_[data-slot=dialog-close]]:top-3 [&_[data-slot=dialog-close]]:right-3 [&_[data-slot=dialog-close]]:z-20 [&_[data-slot=dialog-close]]:size-9 [&_[data-slot=dialog-close]]:rounded-full [&_[data-slot=dialog-close]]:bg-neutral-100 [&_[data-slot=dialog-close]]:text-neutral-500 [&_[data-slot=dialog-close]]:ring-1 [&_[data-slot=dialog-close]]:ring-neutral-200 [&_[data-slot=dialog-close]]:hover:bg-neutral-200 [&_[data-slot=dialog-close]]:hover:text-neutral-700"
+          overlayClassName="bg-white backdrop-blur-none"
+          className="inset-0 flex h-dvh w-screen max-w-none translate-x-0 translate-y-0 items-center justify-center gap-0 overflow-hidden rounded-none border-0 bg-white p-4 text-neutral-950 shadow-none ring-0 sm:max-w-none sm:p-8 data-open:zoom-in-100 data-closed:zoom-out-100 [&_[data-slot=dialog-close]]:top-4 [&_[data-slot=dialog-close]]:right-4 [&_[data-slot=dialog-close]]:z-20 [&_[data-slot=dialog-close]]:size-10 [&_[data-slot=dialog-close]]:rounded-full [&_[data-slot=dialog-close]]:bg-white [&_[data-slot=dialog-close]]:text-neutral-950 [&_[data-slot=dialog-close]]:shadow-md [&_[data-slot=dialog-close]]:ring-1 [&_[data-slot=dialog-close]]:ring-neutral-200 [&_[data-slot=dialog-close]]:hover:bg-neutral-100 sm:[&_[data-slot=dialog-close]]:top-6 sm:[&_[data-slot=dialog-close]]:right-6"
         >
-          <DialogHeader className="relative border-b border-neutral-200 bg-white px-4 py-4 pr-16 text-left sm:px-6 sm:py-5">
-            <DialogTitle className="line-clamp-1 text-base leading-snug font-semibold text-neutral-950 sm:text-lg">
-              {productName}
-            </DialogTitle>
-          </DialogHeader>
+          <DialogTitle className="sr-only">
+            Ảnh phóng to của {productName}
+          </DialogTitle>
 
           {selectedImage?.publicUrl && (
-            <div className="flex min-h-0 items-center justify-center bg-neutral-50 p-3 sm:p-6">
-              <div className="relative h-[min(58dvh,28rem)] w-full sm:h-[min(70dvh,44rem)] lg:h-[min(74dvh,48rem)]">
-                <Image
-                  src={getLargeImageUrl(selectedImage.publicUrl)}
-                  alt={selectedImage.altText ?? productName}
-                  fill
-                  unoptimized
-                  sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 1023px) calc(100vw - 96px), 1024px"
-                  className="object-contain"
-                />
-              </div>
+            <div className="relative h-full w-full">
+              <Image
+                src={getLargeImageUrl(selectedImage.publicUrl)}
+                alt={selectedImage.altText ?? productName}
+                fill
+                unoptimized
+                sizes="100vw"
+                className="object-contain"
+              />
             </div>
           )}
         </DialogContent>

@@ -74,7 +74,9 @@ export function ProductCard({
               href={productHref}
               className="transition-colors hover:text-blue-700"
             >
-              <span className="text-wrap line-clamp-2">{name}</span>
+              <span className="text-wrap line-clamp-2 max-sm:text-xl">
+                {name}
+              </span>
             </Link>
           </h3>
 
@@ -84,13 +86,13 @@ export function ProductCard({
           >
             {rating.toFixed(1)}
             <Star
-              className="size-4 fill-amber-400 text-amber-400"
+              className="size-4 max-sm:size-5 fill-amber-400 text-amber-400"
               aria-hidden="true"
             />
           </span>
         </div>
 
-        <p className="m-0 text-base font-semibold leading-snug tabular-nums text-neutral-700">
+        <p className="m-0 text-md font-semibold leading-snug tabular-nums text-neutral-700">
           {formattedPrice}
         </p>
 
@@ -98,7 +100,7 @@ export function ProductCard({
           <Button
             asChild
             aria-label={`${quickAddLabel}: ${name}`}
-            className="translate-y-0 rounded-full bg-neutral-950 px-6 text-base font-bold leading-snug text-white hover:bg-black"
+            className="translate-y-0 rounded-full bg-neutral-950 p-6 text-md font-bold leading-snug text-white hover:bg-black"
           >
             <Link
               href={
