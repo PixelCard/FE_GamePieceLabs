@@ -1,6 +1,6 @@
 import BreadCrumbs from "@/components/shared/breadcrumbs";
 import { PlayerReviewsSection } from "@/components/shared/player-reviews-section";
-import { ProductCard } from "@/components/shared/product-card";
+import { ProductList } from "@/components/shared/product-list";
 import { SectionTitle } from "@/components/shared/section-title";
 import { VideoFrame } from "@/components/shared/video-frame";
 import FeatureList from "@/features/products/components/feature-list";
@@ -167,9 +167,23 @@ export default async function ProductDetailsPage({
         className=""
         content="imageList"
       >
-        {youMayAlsoLikeProducts.map((recommendedProduct) => (
-          <ProductCard key={recommendedProduct.gui} {...recommendedProduct} />
-        ))}
+        <div className="col-span-full">
+          <ProductList
+            isShowed={false}
+            products={youMayAlsoLikeProducts}
+            columns={3}
+            alignPagination="center"
+            pagination={{
+              currentPage: 1,
+              pageSize: youMayAlsoLikeProducts.length,
+              totalItems: youMayAlsoLikeProducts.length,
+              totalPages: 1,
+              hasNext: false,
+              hasPrevious: false,
+            }}
+            variantPagination="default"
+          />
+        </div>
       </SectionTitle>
     </main>
   );
