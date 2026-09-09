@@ -1,6 +1,13 @@
 "use client";
 
-import { useId, useState, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa6";
 import type { IconType } from "react-icons";
@@ -44,8 +51,7 @@ const socialLinkStyles: Record<string, string> = {
 };
 
 const socialIconStyles: Record<string, string> = {
-  tiktok:
-    "[filter:drop-shadow(1px_0_0_#25F4EE)_drop-shadow(-1px_0_0_#FE2C55)]",
+  tiktok: "[filter:drop-shadow(1px_0_0_#25F4EE)_drop-shadow(-1px_0_0_#FE2C55)]",
 };
 
 interface SocialLinkProps {
@@ -68,10 +74,10 @@ function SocialLink({ item, railSide, railOpen }: SocialLinkProps) {
           aria-label={item.label}
           tabIndex={railOpen ? 0 : -1}
           className={cn(
-            "flex size-8 items-center justify-center rounded-md shadow-md ring-1 ring-black/5",
+            "flex size-12 items-center justify-center rounded-md shadow-md ring-1 ring-black/5",
             "transition-[transform,filter,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-lg",
             "focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-            "sm:size-10 sm:rounded-lg",
+            "sm:size-12 sm:rounded-lg",
             socialLinkStyles[platform] ??
               "bg-foreground text-background hover:brightness-110",
           )}
@@ -79,7 +85,7 @@ function SocialLink({ item, railSide, railOpen }: SocialLinkProps) {
           <span
             aria-hidden="true"
             className={cn(
-              "flex size-3.5 items-center justify-center text-sm sm:size-4 sm:text-lg",
+              "flex size-6 items-center justify-center text-2xl sm:size-6 sm:text-2xl",
               socialIconStyles[platform],
             )}
           >
@@ -107,30 +113,57 @@ export function SocialMediaRail({
   className,
 }: SocialMediaRailProps) {
   const listId = useId();
+  const railRef = useRef<HTMLElement>(null);
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
   const isControlled = controlledOpen !== undefined;
   const isOpen = isControlled ? controlledOpen : internalOpen;
 
-  function handleOpenChange(nextOpen: boolean): void {
-    if (!isControlled) {
-      setInternalOpen(nextOpen);
+  const handleOpenChange = useCallback(
+    (nextOpen: boolean): void => {
+      if (!isControlled) {
+        setInternalOpen(nextOpen);
+      }
+
+      onOpenChange?.(nextOpen);
+    },
+    [isControlled, onOpenChange],
+  );
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
     }
 
-    onOpenChange?.(nextOpen);
-  }
+    function handlePointerDown(event: PointerEvent): void {
+      if (
+        event.target instanceof Node &&
+        !railRef.current?.contains(event.target)
+      ) {
+        handleOpenChange(false);
+      }
+    }
 
-  const ToggleIcon =
-    side === "right"
-      ? isOpen
-        ? ChevronRight
-        : ChevronLeft
-      : isOpen
-        ? ChevronLeft
-        : ChevronRight;
+    function handleKeyDown(event: KeyboardEvent): void {
+      if (event.key === "Escape") {
+        handleOpenChange(false);
+      }
+    }
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleOpenChange, isOpen]);
+
+  const ToggleIcon = side === "right" ? ChevronLeft : ChevronRight;
 
   return (
     <TooltipProvider>
       <aside
+        ref={railRef}
         aria-label="Social media links"
         className={cn(
           "fixed top-1/2 z-50 flex -translate-y-1/2 items-center transition-transform duration-300 ease-in-out motion-reduce:transition-none",
@@ -154,14 +187,15 @@ export function SocialMediaRail({
           size="icon"
           aria-expanded={isOpen}
           aria-controls={listId}
-          aria-label={
-            isOpen ? "Close social media links" : "Open social media links"
-          }
-          onClick={() => handleOpenChange(!isOpen)}
+          aria-hidden={isOpen}
+          aria-label="Open social media links"
+          tabIndex={isOpen ? -1 : 0}
+          onClick={() => handleOpenChange(true)}
           className={cn(
-            "relative z-10 h-10 w-6 rounded-none bg-background p-0 shadow-md sm:h-12 sm:w-7",
-            !isOpen &&
-              "border-[#f2e7b3] bg-[#fffdf4] text-[#9a7b19] shadow-[0_0_12px_rgba(244,220,120,0.2)] [background-image:linear-gradient(110deg,transparent_25%,rgba(253,230,138,0.22)_42%,rgba(255,255,255,0.95)_50%,rgba(253,230,138,0.22)_58%,transparent_75%)] [background-size:300%_100%] transition-[filter,box-shadow] hover:brightness-[0.985] hover:shadow-[0_0_14px_rgba(244,220,120,0.3)] motion-safe:animate-[social-handle-shimmer_3s_ease-in-out_infinite] dark:border-[#f2e7b3] dark:bg-[#fffdf4] dark:text-[#9a7b19]",
+            "relative z-10 mx-1 h-10 w-6 rounded-none border-[#f2e7b3] bg-[#fffdf4] p-0 text-[#9a7b19] shadow-[0_0_12px_rgba(244,220,120,0.2)] [background-image:linear-gradient(110deg,transparent_25%,rgba(253,230,138,0.22)_42%,rgba(255,255,255,0.95)_50%,rgba(253,230,138,0.22)_58%,transparent_75%)] [background-size:300%_100%] hover:brightness-[0.985] hover:shadow-[0_0_14px_rgba(244,220,120,0.3)] motion-safe:animate-[social-handle-shimmer_3s_ease-in-out_infinite] sm:h-12 sm:w-7 dark:border-[#f2e7b3] dark:bg-[#fffdf4] dark:text-[#9a7b19]",
+            isOpen
+              ? "invisible pointer-events-none opacity-0 transition-none"
+              : "visible opacity-100 transition-[opacity,visibility,filter,box-shadow] delay-300 duration-150 motion-reduce:transition-none",
             side === "right"
               ? "rounded-l-full border-r-0"
               : "rounded-r-full border-l-0",

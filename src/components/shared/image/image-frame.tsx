@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import { cn } from "@/utils/cn";
+import Wrapper from "../wrapper";
 
 export type ImageFrameAspectRatio = "16/9" | "21/9" | "4/3" | "3/2" | "auto";
 export type ImageHeaderElementSize = "h1" | "h2" | "h3";
@@ -116,43 +117,45 @@ export function ImageFrame({
         {hasTextContent ? (
           <div
             className={cn(
-              "absolute inset-0 z-10 flex flex-col justify-center p-5 text-white sm:p-8 lg:p-14 max-sm:text-center",
+              "absolute inset-0 z-10 flex flex-col justify-center text-white  max-sm:text-center",
               textAlignMap[textAlign],
             )}
           >
-            {eyebrow ? (
-              <p className="type-eyebrow mb-3 text-white/90 drop-shadow-sm">
-                {eyebrow}
-              </p>
-            ) : null}
+            <Wrapper>
+              {eyebrow ? (
+                <p className="type-eyebrow mb-3 text-white/90 drop-shadow-sm">
+                  {eyebrow}
+                </p>
+              ) : null}
 
-            {header ? (
-              <HeaderElement
-                className={cn(
-                  "max-w-4xl text-balance drop-shadow-sm max-sm:w-full max-sm:self-center max-sm:text-center",
-                  headingSizeMap[headerSize],
-                )}
-              >
-                {header}
-              </HeaderElement>
-            ) : null}
+              {header ? (
+                <HeaderElement
+                  className={cn(
+                    "max-w-4xl text-balance drop-shadow-sm max-sm:w-full max-sm:self-center max-sm:text-center",
+                    headingSizeMap[headerSize],
+                  )}
+                >
+                  {header}
+                </HeaderElement>
+              ) : null}
 
-            {title ? (
-              <p className="mt-4 max-w-[38ch] text-balance text-lg font-semibold leading-snug drop-shadow-sm sm:mt-6 sm:text-xl lg:mt-8 lg:text-2xl">
-                {title}
-              </p>
-            ) : null}
+              {title ? (
+                <p className="mt-4 max-w-[38ch] text-balance text-lg font-semibold leading-snug drop-shadow-sm sm:mt-6 sm:text-xl lg:mt-8 lg:text-2xl">
+                  {title}
+                </p>
+              ) : null}
 
-            {description ? (
-              <p
-                className={cn(
-                  "type-prose max-w-2xl text-base text-white/90 drop-shadow-sm lg:text-lg",
-                  header && !title ? "mt-4 sm:mt-6 lg:mt-8" : "mt-3 sm:mt-4",
-                )}
-              >
-                {description}
-              </p>
-            ) : null}
+              {description ? (
+                <p
+                  className={cn(
+                    "type-prose max-w-2xl text-base text-white/90 drop-shadow-sm lg:text-lg",
+                    header && !title ? "mt-4 sm:mt-6 lg:mt-8" : "mt-3 sm:mt-4",
+                  )}
+                >
+                  {description}
+                </p>
+              ) : null}
+            </Wrapper>
           </div>
         ) : null}
       </div>
