@@ -6,7 +6,12 @@ import { ZoomIn } from "lucide-react";
 
 import { ProductGallery } from "@/components/shared/product-gallery";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import type { ProductImageDto } from "@/features/products/types/product-details";
 
 interface ProductImageGalleryProps {
@@ -85,16 +90,28 @@ export default function ProductImageGallery({
       </div>
 
       <Dialog open={isZoomOpen} onOpenChange={setIsZoomOpen}>
-        <DialogContent className="h-[90vh] min-w-4xl overflow-hidden bg-neutral-950 p-0 ring-white/10">
-          <DialogTitle className="sr-only">Ảnh lớn của {productName}</DialogTitle>
+        <DialogContent
+          overlayClassName="bg-black/75 supports-backdrop-filter:backdrop-blur-sm"
+          className="max-h-[calc(100dvh-1.5rem)] w-[calc(100vw-1.5rem)] max-w-5xl gap-0 overflow-hidden rounded-2xl border border-neutral-200 bg-white p-0 text-neutral-950 shadow-[0_24px_80px_rgba(0,0,0,0.3)] ring-1 ring-black/5 sm:w-[calc(100vw-3rem)] sm:rounded-3xl lg:max-w-7xl xl:max-w-[90rem] [&_[data-slot=dialog-close]]:top-3 [&_[data-slot=dialog-close]]:right-3 [&_[data-slot=dialog-close]]:z-20 [&_[data-slot=dialog-close]]:size-9 [&_[data-slot=dialog-close]]:rounded-full [&_[data-slot=dialog-close]]:bg-neutral-100 [&_[data-slot=dialog-close]]:text-neutral-500 [&_[data-slot=dialog-close]]:ring-1 [&_[data-slot=dialog-close]]:ring-neutral-200 [&_[data-slot=dialog-close]]:hover:bg-neutral-200 [&_[data-slot=dialog-close]]:hover:text-neutral-700"
+        >
+          <DialogHeader className="relative border-b border-neutral-200 bg-white px-4 py-4 pr-16 text-left sm:px-6 sm:py-5">
+            <DialogTitle className="line-clamp-1 text-base leading-snug font-semibold text-neutral-950 sm:text-lg">
+              {productName}
+            </DialogTitle>
+          </DialogHeader>
+
           {selectedImage?.publicUrl && (
-            <div className="relative h-full w-full">
-              <Image
-                src={getLargeImageUrl(selectedImage.publicUrl)}
-                alt={selectedImage.altText ?? productName}
-                fill
-                className="object-contain p-4"
-              />
+            <div className="flex min-h-0 items-center justify-center bg-neutral-50 p-3 sm:p-6">
+              <div className="relative h-[min(58dvh,28rem)] w-full sm:h-[min(70dvh,44rem)] lg:h-[min(74dvh,48rem)]">
+                <Image
+                  src={getLargeImageUrl(selectedImage.publicUrl)}
+                  alt={selectedImage.altText ?? productName}
+                  fill
+                  unoptimized
+                  sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 1023px) calc(100vw - 96px), 1024px"
+                  className="object-contain"
+                />
+              </div>
             </div>
           )}
         </DialogContent>

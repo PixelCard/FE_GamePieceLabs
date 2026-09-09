@@ -42,9 +42,28 @@ export type ProductGalleryProps =
 
 export function ProductGallery(props: ProductGalleryProps) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [isMobileDetail, setIsMobileDetail] = useState(false);
   const detailImages = props.type === "detail" ? props.images : null;
   const detailOnImageSelect =
     props.type === "detail" ? props.onImageSelect : undefined;
+
+  useEffect(() => {
+    if (props.type !== "detail") {
+      return;
+    }
+
+    const mobileMediaQuery = window.matchMedia("(max-width: 639px)");
+    const updateDetailOrientation = (): void => {
+      setIsMobileDetail(mobileMediaQuery.matches);
+    };
+
+    updateDetailOrientation();
+    mobileMediaQuery.addEventListener("change", updateDetailOrientation);
+
+    return () => {
+      mobileMediaQuery.removeEventListener("change", updateDetailOrientation);
+    };
+  }, [props.type]);
 
   const syncSelectedImage = useCallback(
     (api: CarouselApi): void => {
@@ -112,22 +131,29 @@ export function ProductGallery(props: ProductGalleryProps) {
 
   return (
     <Carousel
-      orientation="vertical"
+      orientation={isMobileDetail ? "horizontal" : "vertical"}
       opts={{ align: "start", dragFree: true, loop: true }}
       setApi={setCarouselApi}
       aria-label="Ảnh thu nhỏ của sản phẩm"
       className={cn(
-        "flex w-full flex-col items-center gap-1 [&_[data-slot=carousel-content]]:h-76 [&_[data-slot=carousel-content]]:w-full",
+        "flex w-full flex-row items-center gap-2 sm:flex-col sm:gap-1 [&_[data-slot=carousel-content]]:h-auto [&_[data-slot=carousel-content]]:w-full sm:[&_[data-slot=carousel-content]]:h-76",
         props.className,
       )}
     >
-      <CarouselPrevious className="static top-auto left-auto z-20 size-7 shrink-0 translate-x-0 rotate-90 border-0 bg-white text-neutral-950 shadow-lg hover:bg-neutral-100 disabled:hidden" />
+      <CarouselPrevious className="static top-auto left-auto z-20 size-7 shrink-0 translate-x-0 border-0 bg-white text-neutral-950 shadow-lg hover:bg-neutral-100 disabled:hidden sm:rotate-90" />
 
-      <CarouselContent className="h-full w-full -mt-1">
+      <CarouselContent
+        className={cn(
+          "h-full w-full",
+          isMobileDetail ? "-ml-1" : "-mt-1",
+        )}
+      >
         {loopImages.map(({ copy, image, originalIndex }) => (
           <CarouselItem
             key={`${image.id}-copy-${copy}`}
-            className="basis-1/4 pt-1"
+            className={cn(
+              isMobileDetail ? "basis-16 pl-1" : "basis-1/4 pt-1",
+            )}
           >
             <ProductThumbnail
               image={image}
@@ -140,7 +166,7 @@ export function ProductGallery(props: ProductGalleryProps) {
         ))}
       </CarouselContent>
 
-      <CarouselNext className="static right-auto bottom-auto left-auto z-20 size-7 shrink-0 translate-x-0 rotate-90 border-0 bg-white text-neutral-950 shadow-lg hover:bg-neutral-100 disabled:hidden" />
+      <CarouselNext className="static right-auto bottom-auto left-auto z-20 size-7 shrink-0 translate-x-0 border-0 bg-white text-neutral-950 shadow-lg hover:bg-neutral-100 disabled:hidden sm:rotate-90" />
     </Carousel>
   );
 }
