@@ -36,9 +36,7 @@ export type SectionTitleSplitProps = {
   };
 };
 
-export type SectionTitleProps =
-  | SectionTitleMoreProps
-  | SectionTitleSplitProps;
+export type SectionTitleProps = SectionTitleMoreProps | SectionTitleSplitProps;
 
 export type SectionTitleGroupProps = {
   children: ReactNode;
@@ -85,14 +83,7 @@ export function SectionTitle(props: SectionTitleProps) {
     );
   }
 
-  const {
-    title,
-    more,
-    align = "left",
-    children,
-    className,
-    content,
-  } = props;
+  const { title, more, align = "left", children, className, content } = props;
   const titleId = `${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-title`;
 
   if (content !== "text") {
@@ -143,13 +134,10 @@ export function SectionTitle(props: SectionTitleProps) {
   return (
     <section
       aria-labelledby={titleId}
-      className={cn(
-        "mx-auto w-full max-w-[1900px] px-4 sm:px-6 xl:px-[50px]",
-        className,
-      )}
+      className={cn("mx-auto w-full max-w-[1900px]", className)}
     >
-      <div className="mx-auto w-full sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]">
-        <div className="mb-6 flex flex-col gap-3 sm:mb-10 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
+      <div className="w-full sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]">
+        <div className="flex flex-col gap-3 sm:mb-5 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
           <h2
             id={titleId}
             className={cn(

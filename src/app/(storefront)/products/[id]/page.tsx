@@ -32,7 +32,7 @@ export default async function ProductDetailsPage({
 
   return (
     <main className="min-h-screen bg-white px-4 py-5 text-neutral-950">
-      <div className="mx-auto max-w-[1440px]">
+      <div className="mx-auto md:w-[calc(100%-100px)]  max-w-[1580px] grid-cols-[1fr_auto_1fr]">
         <BreadCrumbs />
 
         <section className="grid gap-10 rounded-3xl bg-white p-4 shadow-[0_18px_60px_rgba(0,0,0,0.06)] sm:p-7 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:p-10 xl:gap-16">
@@ -43,14 +43,14 @@ export default async function ProductDetailsPage({
 
           <div className="min-w-0 lg:py-1">
             <ProductDetailsSummary product={product} />
-            <ProductPurchasePanel />
+            {/* <ProductPurchasePanel /> */}
           </div>
         </section>
 
         <SectionTitle
           title="More details"
           align="left"
-          className="-ml-10 mt-5"
+          className="mt-10"
           content="text"
         >
           <p className="w-full">
@@ -87,7 +87,7 @@ export default async function ProductDetailsPage({
         <SectionTitle
           title="Features"
           align="left"
-          className="-ml-10 mt-20"
+          className="mt-10"
           content="text"
         >
           <FeatureList features={product.features} />
@@ -168,10 +168,7 @@ export default async function ProductDetailsPage({
         content="imageList"
       >
         {youMayAlsoLikeProducts.map((recommendedProduct) => (
-          <ProductCard
-            key={recommendedProduct.gui}
-            {...recommendedProduct}
-          />
+          <ProductCard key={recommendedProduct.gui} {...recommendedProduct} />
         ))}
       </SectionTitle>
     </main>

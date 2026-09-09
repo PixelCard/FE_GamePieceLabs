@@ -43,7 +43,7 @@ export function ProductCard({
   return (
     <Card
       className={cn(
-        "group h-full overflow-hidden rounded-xl border-0 bg-white p-0 shadow-none",
+        "group h-full overflow-hidden rounded-xl bg-white p-0 shadow-none border border-gray-200",
         className,
       )}
     >
