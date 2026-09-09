@@ -39,7 +39,7 @@ export function OrderInstruction({
           >
             Từ ý tưởng đến sản phẩm hoàn thiện
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p className="type-prose mx-auto mt-4 max-w-xl text-base text-neutral-600 dark:text-neutral-400">
             Quy trình đặt in 3D rõ ràng trong 5 bước, giúp bạn dễ dàng theo
             dõi từ lúc chọn mẫu đến khi nhận hàng.
           </p>
@@ -63,7 +63,7 @@ export function OrderInstruction({
                     />
                   </span>
 
-                  <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-bold tracking-[0.12em] text-amber-800 uppercase ring-1 ring-amber-200/70 dark:bg-amber-400/10 dark:text-amber-300 dark:ring-amber-400/20">
+                  <span className="type-eyebrow rounded-full bg-amber-50 px-3 py-1 text-amber-800 ring-1 ring-amber-200/70 dark:bg-amber-400/10 dark:text-amber-300 dark:ring-amber-400/20">
                     Bước {String(instruction.id).padStart(2, "0")}
                   </span>
                 </div>
@@ -71,7 +71,7 @@ export function OrderInstruction({
                 <h3 className="text-lg leading-snug font-bold text-neutral-900 dark:text-white">
                   {instruction.title}
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+                <p className="mt-3 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
                   {instruction.description}
                 </p>
 

@@ -100,14 +100,14 @@ export function SectionTitle(props: SectionTitleProps) {
             <h2
               id={titleId}
               className={cn(
-                "m-0 min-w-0 flex-1 text-2xl font-bold tracking-[-0.035em] text-neutral-950 sm:text-[clamp(2rem,2.4vw,3rem)] sm:leading-none",
+                "type-h2 m-0 min-w-0 flex-1 text-neutral-950",
                 titleAlignmentClasses[align],
               )}
             >
               {title}
             </h2>
 
-            <div className="flex inline-flex">
+            <div className="flex">
               <Link
                 href={more?.href || "#"}
                 className="group inline-flex w-fit items-center gap-4 rounded-full text-base font-bold text-neutral-950 outline-none transition-colors hover:text-red-600 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 sm:text-lg"
@@ -141,14 +141,14 @@ export function SectionTitle(props: SectionTitleProps) {
           <h2
             id={titleId}
             className={cn(
-              "m-0 min-w-0 flex-1 text-2xl font-bold tracking-[-0.035em] text-neutral-950 sm:text-[clamp(2rem,2.4vw,3rem)] sm:leading-none",
+              "type-h2 m-0 min-w-0 flex-1 text-neutral-950",
               titleAlignmentClasses[align],
             )}
           >
             {title}
           </h2>
 
-          <div className="flex inline-flex">
+          <div className="flex">
             <Link
               href={more?.href || "#"}
               className="group inline-flex w-fit items-center gap-4 rounded-full text-base font-bold text-neutral-950 outline-none transition-colors hover:text-red-600 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 sm:text-lg"

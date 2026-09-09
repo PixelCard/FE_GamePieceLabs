@@ -60,8 +60,8 @@ export function PlayerReviewsSection({
         >
             <div className="mx-auto max-w-[1900px] px-4 sm:px-6 xl:px-[50px]">
                 {/* Title and Top Navigation */}
-                <div className="mb-8 flex items-center justify-between sm:mb-12">
-                    <h2 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl md:text-5xl">
+                <div className="mb-8 flex items-center justify-between gap-3 sm:mb-12">
+                    <h2 className="type-h2 min-w-0 text-neutral-900">
                         What Our Players Said
                     </h2>
 
@@ -125,7 +125,7 @@ export function PlayerReviewsSection({
                                                     />
                                                 ))}
                                             </div>
-                                            <h3 className="text-base font-bold sm:text-lg">
+                                            <h3 className="type-h6">
                                                 {review.author}
                                             </h3>
                                         </figcaption>
@@ -152,12 +152,12 @@ export function PlayerReviewsSection({
                                         </div>
 
                                         {/* Author */}
-                                        <h3 className="mb-3 text-base font-bold text-neutral-950 sm:text-lg">
+                                        <h3 className="type-h6 mb-3 text-neutral-950">
                                             {review.author}
                                         </h3>
 
                                         {/* Content Paragraphs */}
-                                        <div className="space-y-4 text-sm leading-relaxed text-neutral-800 sm:text-base">
+                                        <div className="type-prose space-y-4 text-base text-neutral-800">
                                             {review.paragraphs.map((paragraph) => (
                                                 <p key={paragraph}>{paragraph}</p>
                                             ))}

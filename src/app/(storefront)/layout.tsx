@@ -7,7 +7,7 @@ import { footerContent } from "@/features/navigation/data/footer-navigation";
 import { socialMediaItems } from "@/features/navigation/data/social-media";
 
 const storefrontFont = Barlow({
-  weight: ["500", "700"],
+  weight: ["400", "500", "600", "700"],
   style: "normal",
   subsets: ["latin", "vietnamese"],
   display: "swap",

@@ -54,7 +54,7 @@ export function CardImageTitleGrid({
   return (
     <div
       className={cn(
-        "grid grid-cols-2 gap-3 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5",
+        "grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-5",
         className,
       )}
     >
@@ -111,7 +111,7 @@ export function CardImageTitle({
             {title ? (
               <span
                 className={cn(
-                  "text-sm font-bold leading-snug text-white drop-shadow-sm sm:text-lg sm:leading-tight xl:text-xl",
+                  "max-w-[18ch] text-balance text-base font-bold leading-snug text-white drop-shadow-sm sm:text-lg xl:text-xl",
                   titleClassName,
                 )}
               >

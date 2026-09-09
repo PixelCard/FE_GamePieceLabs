@@ -90,7 +90,7 @@ function SocialLink({ item, railSide, railOpen }: SocialLinkProps) {
       </TooltipTrigger>
       <TooltipContent
         side={railSide === "right" ? "left" : "right"}
-        className="rounded-md border-border bg-popover px-3 py-1.5 text-xs text-popover-foreground shadow-md"
+        className="rounded-md border-border bg-popover px-3 py-2 text-sm leading-snug text-popover-foreground shadow-md"
       >
         {item.label}
       </TooltipContent>

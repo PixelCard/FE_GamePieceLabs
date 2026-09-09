@@ -98,9 +98,9 @@ export function Pagination({
         aria-label="Product pagination"
         className={cn("flex-col gap-4", paginationAlignClassNames[align])}
       >
-        <p className="text-sm text-neutral-600">{summary}</p>
+        <p className="text-base leading-relaxed text-neutral-600 sm:text-sm">{summary}</p>
 
-        <PaginationContent className="gap-4">
+        <PaginationContent className="no-scrollbar max-w-full justify-start gap-2 overflow-x-auto pb-1 sm:justify-center sm:gap-4">
           <PaginationItem>
             <PaginationPrevious
               href={`?page=${previousPage}`}
@@ -116,7 +116,7 @@ export function Pagination({
 
           <PaginationItem>
             <span
-              className="flex h-9 min-w-24 items-center justify-center px-3 text-sm font-medium text-neutral-700"
+              className="flex h-9 min-w-24 items-center justify-center px-3 text-base font-medium leading-snug text-neutral-700 sm:text-sm"
               aria-current="page"
             >
               Page {currentPage} of {totalPages}
@@ -148,9 +148,9 @@ export function Pagination({
       aria-label="Product pagination"
       className={cn("flex-col gap-4", paginationAlignClassNames[align])}
     >
-      <p className="text-sm text-neutral-600">{summary}</p>
+      <p className="text-base leading-relaxed text-neutral-600 sm:text-sm">{summary}</p>
 
-      <PaginationContent className="gap-1">
+      <PaginationContent className="no-scrollbar max-w-full justify-start gap-1 overflow-x-auto pb-1 sm:justify-center">
         <PaginationItem>
           <PaginationPrevious
             href={`?page=${previousPage}`}

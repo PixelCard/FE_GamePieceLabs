@@ -29,7 +29,7 @@ export function ByGameName({ data }: ByGameNameProps) {
   return (
     <>
       <Wrapper>
-        <h1 className="pb-8 text-3xl font-bold tracking-tight text-neutral-950 sm:text-5xl text-center">
+        <h1 className="type-h1 pb-8 text-center text-neutral-950">
           {title}
         </h1>
 

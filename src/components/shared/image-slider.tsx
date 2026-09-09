@@ -108,18 +108,18 @@ export function ImageSlider({
                                 className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/35 to-transparent"
                             />
                             <div className="absolute inset-0 flex max-w-2xl flex-col items-start justify-center p-5 text-white sm:p-8 lg:p-12">
-                                <span className="mb-2 sm:mb-3 inline-flex rounded-full bg-blue-600/80 px-3.5 py-0.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.28em] text-blue-50 backdrop-blur-sm shadow-sm">
+                                <span className="type-eyebrow mb-2 inline-flex rounded-full bg-blue-600/80 px-3.5 py-1 text-blue-50 shadow-sm backdrop-blur-sm sm:mb-3">
                                     {slide.badge}
                                 </span>
-                                <h2 className="text-xl md:text-4xl lg:text-5xl max-w-2xl text-balance">
+                                <h2 className="type-h2 max-w-[20ch] text-balance">
                                     {slide.title}
                                 </h2>
-                                <p className="mt-2 sm:mt-3 max-w-xl text-sm sm:text-base lg:text-lg leading-relaxed text-white/85 line-clamp-2 sm:line-clamp-none">
+                                <p className="type-prose mt-2 max-w-xl text-base text-white/90 line-clamp-2 sm:mt-3 sm:line-clamp-none lg:text-lg">
                                     {slide.subtitle}
                                 </p>
                                 <Link
                                     href={slide.ctaHref}
-                                    className="mt-3 sm:mt-5 inline-flex items-center rounded-full bg-white px-4 py-2 sm:px-5 sm:py-2.5 text-sm sm:text-base font-bold text-neutral-950 shadow-md transition-all hover:bg-neutral-100 hover:shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
+                                    className="mt-3 inline-flex items-center rounded-full bg-white px-4 py-2 text-base font-bold leading-snug text-neutral-950 shadow-md transition-all hover:bg-neutral-100 hover:shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50 sm:mt-5 sm:px-5 sm:py-2.5"
                                 >
                                     {slide.ctaLabel}
                                 </Link>

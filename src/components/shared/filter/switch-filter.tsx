@@ -91,7 +91,7 @@ export default function SwitchFilter({
           <Label
             htmlFor={switchId}
             className={cn(
-              "cursor-pointer text-sm font-bold text-foreground sm:text-base",
+              "cursor-pointer text-base font-bold leading-snug text-foreground",
               disabled && "cursor-not-allowed opacity-50",
               labelClassName,
             )}
@@ -101,7 +101,7 @@ export default function SwitchFilter({
           {description ? (
             <span
               className={cn(
-                "text-xs text-muted-foreground",
+                "max-w-[32ch] text-sm leading-relaxed text-muted-foreground",
                 descriptionClassName,
               )}
             >
@@ -124,7 +124,7 @@ export default function SwitchFilter({
         <Badge
           {...badgeProps}
           className={cn(
-            "gap-2 rounded-4xl border-0 bg-gray-200 px-5 py-6 text-sm font-medium text-black",
+            "gap-2 rounded-4xl border-0 bg-gray-200 px-5 py-3 text-base font-medium leading-snug text-black sm:py-4 sm:text-sm",
             badgeProps?.className,
           )}
         >

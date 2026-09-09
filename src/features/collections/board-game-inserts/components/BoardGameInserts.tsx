@@ -127,10 +127,10 @@ export function BoardGameInserts({ data }: BoardGameInsertsProps) {
             className="rounded-none border-0 bg-transparent shadow-none sm:rounded-none"
           />
 
-          <h2 className="mt-7 text-3xl font-bold tracking-tight text-neutral-950 sm:text-4xl">
+          <h2 className="type-h2 mt-7 text-neutral-950">
             {editorial.heading}
           </h2>
-          <p className="mt-6 text-sm leading-6 text-neutral-700 sm:text-base sm:leading-7">
+          <p className="type-prose mt-6 text-base text-neutral-700">
             {editorial.description}
           </p>
         </div>

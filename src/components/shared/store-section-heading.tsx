@@ -23,7 +23,7 @@ export default function StoreSectionHeading({
   const headingContent = (
     <div className={clsx("space-y-2", centered && "text-center")}>
       {eyebrow ? (
-        <span className="m-0 block text-base font-bold text-neutral-500">
+        <span className="type-eyebrow m-0 block text-neutral-500">
           {eyebrow}
         </span>
       ) : null}
@@ -40,7 +40,7 @@ export default function StoreSectionHeading({
       {description ? (
         <p
           className={clsx(
-            "m-0 text-base leading-[1.6] text-neutral-500",
+            "type-prose m-0 text-base text-neutral-600",
             centered && "mx-auto max-w-2xl text-center"
           )}
         >
@@ -52,10 +52,10 @@ export default function StoreSectionHeading({
 
   if (divider) {
     return (
-      <div className={clsx("flex items-center gap-4", className)}>
-        <div className="h-px flex-1 bg-neutral-200" />
-        <div className="min-w-0">{headingContent}</div>
-        <div className="h-px flex-1 bg-neutral-200" />
+      <div className={clsx("flex items-center gap-3 sm:gap-4", className)}>
+        <div className="hidden h-px min-w-8 flex-1 bg-neutral-200 sm:block" />
+        <div className="min-w-0 flex-1 sm:flex-initial">{headingContent}</div>
+        <div className="hidden h-px min-w-8 flex-1 bg-neutral-200 sm:block" />
       </div>
     );
   }

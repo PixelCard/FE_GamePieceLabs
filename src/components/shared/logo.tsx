@@ -24,11 +24,13 @@ export function Logo({ className, imageClassName }: LogoProps) {
         width={512}
         height={512}
         loading="eager"
-        className={cn("size-14 object-contain", imageClassName)}
+        className={cn("size-12 object-contain sm:size-14", imageClassName)}
       />
-      <span className="whitespace-nowrap text-sm font-bold tracking-[0.08em] text-foreground sm:text-lg xl:text-xl">
+      <span className="whitespace-nowrap text-base font-bold leading-none tracking-[0.06em] text-foreground sm:text-lg xl:text-xl">
         GAME PIECE LABS
-        <div className="text-[12px] italic text-center">Phụ kiện & Boardgame</div>
+        <span className="mt-1 block text-center text-[0.6875rem] font-medium leading-tight tracking-[0.08em] text-muted-foreground sm:text-xs">
+          Phụ kiện &amp; Boardgame
+        </span>
       </span>
     </Link>
   );
