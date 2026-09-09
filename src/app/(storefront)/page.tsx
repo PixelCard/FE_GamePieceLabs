@@ -74,7 +74,7 @@ export default function StorefrontHomePage() {
           <ImageSlider
             slides={imageSliderSlides}
             autoplay
-            autoplayInterval={3000}
+            autoplayInterval={5000}
             ariaLabel="Bộ sưu tập nổi bật"
           />
         </div>
