@@ -33,12 +33,6 @@ export function OXProductFamily({ data }: OXProductFamilyProps) {
 
       <Wrapper>
         <div className="grid w-full grid-cols-2 items-start gap-x-2 gap-y-1 py-3 sm:flex sm:gap-0">
-          <FilterMobileGroup>
-            <Filter presentation="mobile" variant="switch" label="In stock only" activeLabel="In Stock" defaultChecked={false} labelPosition="left" showActiveBadge />
-            <Filter presentation="mobile" items={[{ id: "accessories", label: "Accessories", count: 4 }]} title="Product" variant="type" />
-            <Filter presentation="mobile" variant="price" min={0} max={274} step={1} currency="USD" />
-            <Filter presentation="mobile" variant="sort" items={["featured", "most relevant", "best selling", "alphabetically, a-z", "alphabetically, z-a", "price, low to high", "price, high to low", "date, old to new", "date, new to old"]} />
-          </FilterMobileGroup>
           <div className="min-w-0 text-left max-sm:hidden sm:flex-1">
             <Filter
               variant="switch"
@@ -88,6 +82,47 @@ export function OXProductFamily({ data }: OXProductFamilyProps) {
         </div>
 
         <section className="pt-8" aria-labelledby="collection-products-heading">
+          <FilterMobileGroup>
+            <Filter
+              presentation="mobile"
+              variant="switch"
+              label="In stock only"
+              activeLabel="In Stock"
+              defaultChecked={false}
+              labelPosition="left"
+              showActiveBadge
+            />
+            <Filter
+              presentation="mobile"
+              items={[{ id: "accessories", label: "Accessories", count: 4 }]}
+              title="Product"
+              variant="type"
+            />
+            <Filter
+              presentation="mobile"
+              variant="price"
+              min={0}
+              max={274}
+              step={1}
+              currency="USD"
+            />
+            <Filter
+              presentation="mobile"
+              variant="sort"
+              items={[
+                "featured",
+                "most relevant",
+                "best selling",
+                "alphabetically, a-z",
+                "alphabetically, z-a",
+                "price, low to high",
+                "price, high to low",
+                "date, old to new",
+                "date, new to old",
+              ]}
+            />
+          </FilterMobileGroup>
+
           <div className="mb-7 flex items-center justify-between gap-4">
             <h2 id="collection-products-heading" className="sr-only">
               Board game inserts
@@ -130,9 +165,7 @@ export function OXProductFamily({ data }: OXProductFamilyProps) {
             className="rounded-none border-0 bg-transparent shadow-none sm:rounded-none"
           />
 
-          <h2 className="type-h2 mt-7 text-neutral-950">
-            {editorial.heading}
-          </h2>
+          <h2 className="type-h2 mt-7 text-neutral-950">{editorial.heading}</h2>
           <p className="type-prose mt-6 text-base text-neutral-700">
             {editorial.description}
           </p>

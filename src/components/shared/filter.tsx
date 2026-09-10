@@ -83,12 +83,7 @@ export function FilterMobileGroup({
   className,
 }: FilterMobileGroupProps) {
   return (
-    <FilterWrapperMobile
-      className={cn(
-        "fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] left-1/2 z-40 -translate-x-1/2",
-        className,
-      )}
-    >
+    <FilterWrapperMobile className={cn("sticky top-30 z-40 w-full", className)}>
       <MobileFilterSheet title="Filters">
         <Accordion type="multiple">
           {Children.toArray(children).map((child) => {
@@ -126,31 +121,19 @@ export default function Filter(props: FilterProps) {
     switch (props.variant) {
       case "price":
         return (
-          <PriceFilter
-            {...withoutWrapperProps(props)}
-            presentation="mobile"
-          />
+          <PriceFilter {...withoutWrapperProps(props)} presentation="mobile" />
         );
       case "sort":
         return (
-          <SortFilter
-            {...withoutWrapperProps(props)}
-            presentation="mobile"
-          />
+          <SortFilter {...withoutWrapperProps(props)} presentation="mobile" />
         );
       case "switch":
         return (
-          <SwitchFilter
-            {...withoutWrapperProps(props)}
-            presentation="mobile"
-          />
+          <SwitchFilter {...withoutWrapperProps(props)} presentation="mobile" />
         );
       case "type":
         return (
-          <TypeFilter
-            {...withoutWrapperProps(props)}
-            presentation="mobile"
-          />
+          <TypeFilter {...withoutWrapperProps(props)} presentation="mobile" />
         );
     }
   }

@@ -34,12 +34,6 @@ export function ByGameName({ data }: ByGameNameProps) {
         </h1>
 
         <div className="grid w-full grid-cols-2 items-center gap-x-2 gap-y-4 border-y border-neutral-200 py-4 sm:flex sm:justify-between sm:gap-x-5">
-          <FilterMobileGroup>
-            <Filter presentation="mobile" variant="switch" label="In stock only" activeLabel="In Stock" defaultChecked={false} labelPosition="left" showActiveBadge />
-            <Filter presentation="mobile" items={[{ id: "insert", label: "Insert", count: 1 }]} title="Product" variant="type" />
-            <Filter presentation="mobile" variant="price" min={0} max={283500} step={5000} currency="VND" />
-            <Filter presentation="mobile" variant="sort" items={sortOptions} />
-          </FilterMobileGroup>
           <Filter
             variant="switch"
             label="In stock only"
@@ -83,6 +77,13 @@ export function ByGameName({ data }: ByGameNameProps) {
               {products.pagination.totalItems} product
             </p>
           </div>
+
+          <FilterMobileGroup>
+            <Filter presentation="mobile" variant="switch" label="In stock only" activeLabel="In Stock" defaultChecked={false} labelPosition="left" showActiveBadge />
+            <Filter presentation="mobile" items={[{ id: "insert", label: "Insert", count: 1 }]} title="Product" variant="type" />
+            <Filter presentation="mobile" variant="price" min={0} max={283500} step={5000} currency="VND" />
+            <Filter presentation="mobile" variant="sort" items={sortOptions} />
+          </FilterMobileGroup>
 
           <ProductList
             products={products.data}
