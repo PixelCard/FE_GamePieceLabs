@@ -18,7 +18,6 @@ export interface CountedFilterItem {
 export interface TypeFilterProps {
   title?: string;
   items: readonly CountedFilterItem[];
-  presentation?: "desktop" | "mobile";
 }
 
 interface DesktopTypeFilterProps {
@@ -111,7 +110,6 @@ function MobileTypeFilter({
 export default function TypeFilter({
   items,
   title = "Product",
-  presentation = "desktop",
 }: TypeFilterProps) {
   const triggerId = useId();
   const [isOpen, setIsOpen] = useState(false);
@@ -140,8 +138,9 @@ export default function TypeFilter({
     },
   ];
 
-  if (presentation === "desktop") {
-    return (
+  return (
+    <>
+      <div className="max-sm:hidden">
       <DesktopTypeFilter
         dropdownItems={dropdownItems}
         isOpen={isOpen}
@@ -149,21 +148,21 @@ export default function TypeFilter({
         title={title}
         triggerId={triggerId}
       />
-    );
-  }
-
-  return (
-    <MobileTypeFilter
-      items={items}
-      selectedIds={selectedIds}
-      triggerId={triggerId}
-      onSelectedIdsChange={(itemId, checked) => {
-        setSelectedIds((currentIds) =>
-          checked
-            ? [...currentIds, itemId]
-            : currentIds.filter((id) => id !== itemId),
-        );
-      }}
-    />
+      </div>
+      <div className="sm:hidden">
+        <MobileTypeFilter
+          items={items}
+          selectedIds={selectedIds}
+          triggerId={triggerId}
+          onSelectedIdsChange={(itemId, checked) => {
+            setSelectedIds((currentIds) =>
+              checked
+                ? [...currentIds, itemId]
+                : currentIds.filter((id) => id !== itemId),
+            );
+          }}
+        />
+      </div>
+    </>
   );
 }

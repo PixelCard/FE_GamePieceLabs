@@ -24,7 +24,6 @@ export interface PriceFilterProps {
   step?: number;
   title?: string;
   value?: PriceRange;
-  presentation?: "desktop" | "mobile";
 }
 
 interface DesktopPriceFilterProps {
@@ -36,7 +35,14 @@ interface DesktopPriceFilterProps {
   triggerId: string;
 }
 
-function DesktopPriceFilter({ disabled, dropdownItems, isOpen, onOpenChange, title, triggerId }: DesktopPriceFilterProps) {
+function DesktopPriceFilter({
+  disabled,
+  dropdownItems,
+  isOpen,
+  onOpenChange,
+  title,
+  triggerId,
+}: DesktopPriceFilterProps) {
   return (
     <DropdownMenu
       items={dropdownItems}
@@ -46,13 +52,29 @@ function DesktopPriceFilter({ disabled, dropdownItems, isOpen, onOpenChange, tit
         align: "center",
         sideOffset: 12,
         onCloseAutoFocus: (event) => event.preventDefault(),
-        className: "w-4xl max-w-[calc(100vw-2rem)] rounded-xl border-border p-3 shadow-lg sm:p-4",
+        className:
+          "w-4xl max-w-[calc(100vw-2rem)] rounded-xl border-border p-3 shadow-lg sm:p-4",
       }}
       trigger={
-        <Button id={triggerId} type="button" variant="ghost" disabled={disabled} aria-label={`Filter by ${title.toLowerCase()}`} className="group h-auto gap-3 rounded-full bg-transparent p-0 text-base shadow-none hover:bg-transparent active:translate-y-0">
-          <span className="shrink-0 text-base font-bold leading-snug text-foreground">{title}</span>
+        <Button
+          id={triggerId}
+          type="button"
+          variant="ghost"
+          disabled={disabled}
+          aria-label={`Filter by ${title.toLowerCase()}`}
+          className="group h-auto gap-3 rounded-full bg-transparent p-0 text-base shadow-none hover:bg-transparent active:translate-y-0"
+        >
+          <span className="shrink-0 text-base font-bold leading-snug text-foreground">
+            {title}
+          </span>
           <span className="inline-flex size-8 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors duration-300 group-hover:bg-foreground group-hover:text-background">
-            <ChevronDown aria-hidden="true" className={cn("size-4 transition-transform duration-300", isOpen && "rotate-180")} />
+            <ChevronDown
+              aria-hidden="true"
+              className={cn(
+                "size-4 transition-transform duration-300",
+                isOpen && "rotate-180",
+              )}
+            />
           </span>
         </Button>
       }
@@ -114,7 +136,6 @@ export default function PriceFilter({
   step = 1,
   title = "Price",
   value,
-  presentation = "desktop",
 }: PriceFilterProps) {
   const triggerId = useId();
   const [isOpen, setIsOpen] = useState(false);
@@ -187,15 +208,47 @@ export default function PriceFilter({
     },
   ];
 
-  if (presentation === "desktop") {
-    return <DesktopPriceFilter disabled={disabled} dropdownItems={dropdownItems} isOpen={isOpen} onOpenChange={setIsOpen} title={title} triggerId={triggerId} />;
-  }
-
   return (
-    <MobilePriceFilter
-      slider={<Slider aria-label="Price range" disabled={disabled} min={safeMin} max={safeMax} step={safeStep} value={[...currentValue]} onValueChange={handleValueChange} className="px-2 [&_[data-slot=slider-range]]:bg-foreground [&_[data-slot=slider-thumb]]:size-4 [&_[data-slot=slider-thumb]]:border-foreground [&_[data-slot=slider-thumb]]:bg-foreground [&_[data-slot=slider-track]]:bg-muted-foreground/30" />}
-      outputs={<><PriceOutput currencyLabel={resolvedCurrencyLabel} value={numberFormatter.format(currentValue[0])} /><PriceOutput currencyLabel={resolvedCurrencyLabel} value={numberFormatter.format(currentValue[1])} /></>}
-    />
+    <>
+      <div className="max-sm:hidden">
+        <DesktopPriceFilter
+          disabled={disabled}
+          dropdownItems={dropdownItems}
+          isOpen={isOpen}
+          onOpenChange={setIsOpen}
+          title={title}
+          triggerId={triggerId}
+        />
+      </div>
+      <div className="sm:hidden">
+        <MobilePriceFilter
+          slider={
+            <Slider
+              aria-label="Price range"
+              disabled={disabled}
+              min={safeMin}
+              max={safeMax}
+              step={safeStep}
+              value={[...currentValue]}
+              onValueChange={handleValueChange}
+              className="px-2 [&_[data-slot=slider-range]]:bg-foreground [&_[data-slot=slider-thumb]]:size-4 [&_[data-slot=slider-thumb]]:border-foreground [&_[data-slot=slider-thumb]]:bg-foreground [&_[data-slot=slider-track]]:bg-muted-foreground/30"
+            />
+          }
+          outputs={
+            <>
+              <PriceOutput
+                currencyLabel={resolvedCurrencyLabel}
+                value={numberFormatter.format(currentValue[0])}
+              />
+              <PriceOutput
+                currencyLabel={resolvedCurrencyLabel}
+                value={numberFormatter.format(currentValue[1])}
+              />
+            </>
+          }
+        />
+      </div>
+    </>
   );
 }
 

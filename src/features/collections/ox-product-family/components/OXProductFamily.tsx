@@ -13,6 +13,12 @@ interface OXProductFamilyProps {
 
 export function OXProductFamily({ data }: OXProductFamilyProps) {
   const { hero, editorial, products, otherCategories } = data;
+  const filters = {
+    availability: <Filter variant="switch" label="In stock only" activeLabel="In Stock" defaultChecked={false} labelPosition="left" showActiveBadge />,
+    type: <Filter items={[{ id: "accessories", label: "Accessories", count: 4 }]} title="Product" variant="type" />,
+    price: <Filter variant="price" min={0} max={274} step={1} currency="USD" />,
+    sort: <Filter variant="sort" items={["featured", "most relevant", "best selling", "alphabetically, a-z", "alphabetically, z-a", "price, low to high", "price, high to low", "date, old to new", "date, new to old"]} />,
+  };
 
   return (
     <>
@@ -32,95 +38,27 @@ export function OXProductFamily({ data }: OXProductFamilyProps) {
       />
 
       <Wrapper>
-        <div className="grid w-full grid-cols-2 items-start gap-x-2 gap-y-1 py-3 sm:flex sm:gap-0">
-          <div className="min-w-0 text-left max-sm:hidden sm:flex-1">
-            <Filter
-              variant="switch"
-              label="In stock only"
-              activeLabel="In Stock"
-              defaultChecked={false}
-              labelPosition="left"
-              showActiveBadge
-              wrapperClassName="m-0 w-full justify-start p-0 sm:w-auto sm:px-2 sm:py-2"
-            />
+        <div className="grid w-full grid-cols-2 items-start gap-x-2 gap-y-1 py-3 max-sm:hidden sm:flex sm:gap-0">
+          <div className="min-w-0 text-left sm:flex-1">
+            {filters.availability}
           </div>
 
           <div className="contents sm:flex sm:flex-1 sm:items-start sm:justify-center sm:gap-2 sm:text-center">
-            <Filter
-              items={[{ id: "accessories", label: "Accessories", count: 4 }]}
-              title="Product"
-              variant="type"
-              wrapperClassName="m-0 w-full justify-end p-0 sm:w-auto sm:px-2 sm:py-2"
-            />
-            <Filter
-              variant="price"
-              min={0}
-              max={274}
-              step={1}
-              currency="USD"
-              wrapperClassName="m-0 w-full justify-start p-0 sm:w-auto sm:px-2 sm:py-2"
-            />
+            {filters.type}
+            {filters.price}
           </div>
 
-          <div className="min-w-0 text-right max-sm:hidden sm:flex-1">
-            <Filter
-              variant="sort"
-              items={[
-                "featured",
-                "most relevant",
-                "best selling",
-                "alphabetically, a-z",
-                "alphabetically, z-a",
-                "price, low to high",
-                "price, high to low",
-                "date, old to new",
-                "date, new to old",
-              ]}
-              wrapperClassName="m-0 w-full justify-end p-0 sm:w-auto sm:px-2 sm:py-2"
-            />
+          <div className="min-w-0 text-right sm:flex-1">
+            {filters.sort}
           </div>
         </div>
 
         <section className="pt-8" aria-labelledby="collection-products-heading">
           <FilterMobileGroup>
-            <Filter
-              presentation="mobile"
-              variant="switch"
-              label="In stock only"
-              activeLabel="In Stock"
-              defaultChecked={false}
-              labelPosition="left"
-              showActiveBadge
-            />
-            <Filter
-              presentation="mobile"
-              items={[{ id: "accessories", label: "Accessories", count: 4 }]}
-              title="Product"
-              variant="type"
-            />
-            <Filter
-              presentation="mobile"
-              variant="price"
-              min={0}
-              max={274}
-              step={1}
-              currency="USD"
-            />
-            <Filter
-              presentation="mobile"
-              variant="sort"
-              items={[
-                "featured",
-                "most relevant",
-                "best selling",
-                "alphabetically, a-z",
-                "alphabetically, z-a",
-                "price, low to high",
-                "price, high to low",
-                "date, old to new",
-                "date, new to old",
-              ]}
-            />
+            {filters.availability}
+            {filters.type}
+            {filters.price}
+            {filters.sort}
           </FilterMobileGroup>
 
           <div className="mb-7 flex items-center justify-between gap-4">

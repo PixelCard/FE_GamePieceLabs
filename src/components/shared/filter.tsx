@@ -28,42 +28,15 @@ type FilterVariantProps =
   | ({ variant: "switch" } & SwitchFilterProps)
   | ({ variant: "type" } & TypeFilterProps);
 
-export type FilterProps = FilterVariantProps & {
-  presentation?: "desktop" | "mobile";
-  wrapperClassName?: string;
-};
+export type FilterProps = FilterVariantProps;
 
-function withoutWrapperProps<
-  T extends {
-    presentation?: "desktop" | "mobile";
-    variant: string;
-    wrapperClassName?: string;
-  },
->(props: T): Omit<T, "presentation" | "variant" | "wrapperClassName"> {
-  const { presentation, variant, wrapperClassName, ...componentProps } = props;
-  void presentation;
+function withoutVariant<T extends { variant: string }>(
+  props: T,
+): Omit<T, "variant"> {
+  const { variant, ...componentProps } = props;
   void variant;
-  void wrapperClassName;
 
   return componentProps;
-}
-
-interface FilterWrapperProps {
-  children: ReactNode;
-  className?: string;
-}
-
-function FilterWrapperDesktop({ children, className }: FilterWrapperProps) {
-  return (
-    <div
-      className={cn(
-        "inline-flex min-w-0 py-1 max-sm:hidden sm:mx-2 sm:px-2 sm:py-2",
-        className,
-      )}
-    >
-      {children}
-    </div>
-  );
 }
 
 interface FilterMobileGroupProps {
@@ -83,7 +56,12 @@ export function FilterMobileGroup({
   className,
 }: FilterMobileGroupProps) {
   return (
-    <FilterWrapperMobile className={cn("sticky top-30 z-40 w-full", className)}>
+    <div
+      className={cn(
+        "sticky top-20 z-40 flex w-full justify-center py-1 sm:hidden",
+        className,
+      )}
+    >
       <MobileFilterSheet title="Filters">
         <Accordion type="multiple">
           {Children.toArray(children).map((child) => {
@@ -104,85 +82,20 @@ export function FilterMobileGroup({
           })}
         </Accordion>
       </MobileFilterSheet>
-    </FilterWrapperMobile>
-  );
-}
-
-function FilterWrapperMobile({ children, className }: FilterWrapperProps) {
-  return (
-    <div className={cn("inline-flex min-w-0 py-1 sm:hidden", className)}>
-      {children}
     </div>
   );
 }
 
 export default function Filter(props: FilterProps) {
-  if (props.presentation === "mobile") {
-    switch (props.variant) {
-      case "price":
-        return (
-          <PriceFilter {...withoutWrapperProps(props)} presentation="mobile" />
-        );
-      case "sort":
-        return (
-          <SortFilter {...withoutWrapperProps(props)} presentation="mobile" />
-        );
-      case "switch":
-        return (
-          <SwitchFilter {...withoutWrapperProps(props)} presentation="mobile" />
-        );
-      case "type":
-        return (
-          <TypeFilter {...withoutWrapperProps(props)} presentation="mobile" />
-        );
-    }
-  }
-
   switch (props.variant) {
     case "price":
-      return (
-        <>
-          <FilterWrapperDesktop className={props.wrapperClassName}>
-            <PriceFilter
-              {...withoutWrapperProps(props)}
-              presentation="desktop"
-            />
-          </FilterWrapperDesktop>
-        </>
-      );
+      return <PriceFilter {...withoutVariant(props)} />;
     case "sort":
-      return (
-        <>
-          <FilterWrapperDesktop className={props.wrapperClassName}>
-            <SortFilter
-              {...withoutWrapperProps(props)}
-              presentation="desktop"
-            />
-          </FilterWrapperDesktop>
-        </>
-      );
+      return <SortFilter {...withoutVariant(props)} />;
     case "switch":
-      return (
-        <>
-          <FilterWrapperDesktop className={props.wrapperClassName}>
-            <SwitchFilter
-              {...withoutWrapperProps(props)}
-              presentation="desktop"
-            />
-          </FilterWrapperDesktop>
-        </>
-      );
+      return <SwitchFilter {...withoutVariant(props)} />;
     case "type":
-      return (
-        <>
-          <FilterWrapperDesktop className={props.wrapperClassName}>
-            <TypeFilter
-              {...withoutWrapperProps(props)}
-              presentation="desktop"
-            />
-          </FilterWrapperDesktop>
-        </>
-      );
+      return <TypeFilter {...withoutVariant(props)} />;
   }
 }
 

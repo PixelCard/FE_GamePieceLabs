@@ -41,7 +41,7 @@ export function MobileFilterSheet({
                 size="default"
                 disabled={disabled}
                 aria-label={`Open ${title.toLowerCase()} filter`}
-                className="rounded-full p-8 mx-auto -mt-10"
+                className="rounded-full p-8 mx-auto"
               >
                 <SlidersHorizontal />
                 Filter and sort

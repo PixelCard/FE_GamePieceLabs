@@ -12,7 +12,6 @@ import { useId, useState } from "react";
 
 export interface SortFilterProps {
   items: readonly string[];
-  presentation?: "desktop" | "mobile";
 }
 
 interface DesktopSortFilterProps {
@@ -111,7 +110,6 @@ function MobileSortFilter({
 
 export default function SortFilter({
   items,
-  presentation = "desktop",
 }: SortFilterProps) {
   const triggerId = useId();
   const defaultValue = items.includes("best selling")
@@ -143,8 +141,9 @@ export default function SortFilter({
     },
   ];
 
-  if (presentation === "desktop") {
-    return (
+  return (
+    <>
+      <div className="max-sm:hidden">
       <DesktopSortFilter
         currentValue={currentValue}
         dropdownItems={dropdownItems}
@@ -152,15 +151,15 @@ export default function SortFilter({
         onOpenChange={setIsOpen}
         triggerId={triggerId}
       />
-    );
-  }
-
-  return (
-    <MobileSortFilter
-      currentValue={currentValue}
-      items={items}
-      onValueChange={setSelectedValue}
-      triggerId={triggerId}
-    />
+      </div>
+      <div className="sm:hidden">
+        <MobileSortFilter
+          currentValue={currentValue}
+          items={items}
+          onValueChange={setSelectedValue}
+          triggerId={triggerId}
+        />
+      </div>
+    </>
   );
 }

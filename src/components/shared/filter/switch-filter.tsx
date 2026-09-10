@@ -37,7 +37,6 @@ export interface SwitchFilterProps
   rootClassName?: string;
   showActiveBadge?: boolean;
   switchType?: SwitchProps["type"];
-  presentation?: "desktop" | "mobile";
 }
 
 interface DesktopSwitchFilterProps {
@@ -81,7 +80,6 @@ export default function SwitchFilter({
   rootClassName,
   showActiveBadge = false,
   switchType = "button",
-  presentation = "desktop",
   ...switchProps
 }: SwitchFilterProps) {
   const generatedId = useId();
@@ -175,9 +173,14 @@ export default function SwitchFilter({
     </Badge>
   ) : null;
 
-  if (presentation === "desktop") {
-    return <DesktopSwitchFilter filterControl={filterControl} activeBadge={activeBadge} />;
-  }
-
-  return <MobileSwitchFilter filterControl={filterControl} />;
+  return (
+    <>
+      <div className="max-sm:hidden">
+        <DesktopSwitchFilter filterControl={filterControl} activeBadge={activeBadge} />
+      </div>
+      <div className="sm:hidden">
+        <MobileSwitchFilter filterControl={filterControl} />
+      </div>
+    </>
+  );
 }
