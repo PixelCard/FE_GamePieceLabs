@@ -182,10 +182,6 @@ export default function PriceFilter({
 
       {presentation === "mobile-content" ? (
           <div className="flex flex-col gap-6">
-            <PriceOutput
-              currencyLabel={resolvedCurrencyLabel}
-              value={numberFormatter.format(currentValue[0])}
-            />
             <Slider
               aria-label="Price range"
               disabled={disabled}
@@ -196,10 +192,16 @@ export default function PriceFilter({
               onValueChange={handleValueChange}
               className="px-2 [&_[data-slot=slider-range]]:bg-foreground [&_[data-slot=slider-thumb]]:size-4 [&_[data-slot=slider-thumb]]:border-foreground [&_[data-slot=slider-thumb]]:bg-foreground [&_[data-slot=slider-track]]:bg-muted-foreground/30"
             />
-            <PriceOutput
-              currencyLabel={resolvedCurrencyLabel}
-              value={numberFormatter.format(currentValue[1])}
-            />
+            <div className="grid grid-cols-2 gap-3">
+              <PriceOutput
+                currencyLabel={resolvedCurrencyLabel}
+                value={numberFormatter.format(currentValue[0])}
+              />
+              <PriceOutput
+                currencyLabel={resolvedCurrencyLabel}
+                value={numberFormatter.format(currentValue[1])}
+              />
+            </div>
           </div>
       ) : null}
     </>

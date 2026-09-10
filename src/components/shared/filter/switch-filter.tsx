@@ -122,7 +122,7 @@ export default function SwitchFilter({
         />
       </div>
 
-      {showActiveBadge && isChecked ? (
+      {presentation === "desktop" && showActiveBadge && isChecked ? (
         <Badge
           {...badgeProps}
           className={cn(

@@ -4,6 +4,7 @@ import DropdownMenu, {
   type DropdownMenuEntry,
 } from "@/components/shared/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/utils/cn";
 import { ChevronDown } from "lucide-react";
 import { useId, useState } from "react";
@@ -27,7 +28,7 @@ export default function TypeFilter({
 }: TypeFilterProps) {
   const triggerId = useId();
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedIds, setSelectedIds] = useState<readonly string[]>([]);
 
   const dropdownItems: DropdownMenuEntry[] = [
     {
@@ -41,10 +42,10 @@ export default function TypeFilter({
         type: "item",
         label: `${item.label} (${item.count})`,
         props: {
-          onSelect: () => setSelectedId(item.id),
+          onSelect: () => setSelectedIds([item.id]),
           className: cn(
             "justify-center rounded-lg px-4 py-4 text-center text-base text-muted-foreground transition-colors sm:py-5",
-            selectedId === item.id &&
+            selectedIds.includes(item.id) &&
               "bg-accent font-semibold text-accent-foreground",
           ),
         },
@@ -56,55 +57,65 @@ export default function TypeFilter({
     <>
       {presentation === "desktop" ? (
         <DropdownMenu
-      items={dropdownItems}
-      rootProps={{ open: isOpen, onOpenChange: setIsOpen }}
-      triggerProps={{ asChild: true }}
-      contentProps={{
-        align: "center",
-        sideOffset: 12,
-        className:
-          "w-xl max-w-[calc(100vw-2rem)] rounded-xl border-border p-3 shadow-lg sm:p-4",
-      }}
-      trigger={
-        <Button
-          id={triggerId}
-          type="button"
-          variant="ghost"
-          aria-label={`Filter by ${title.toLowerCase()} type`}
-          className="group h-auto gap-3 rounded-full bg-transparent p-0 text-base shadow-none hover:bg-transparent active:translate-y-0"
-        >
-          <span className="shrink-0 text-base font-bold leading-snug text-foreground">
-            {title} type
-          </span>
-          <span className="inline-flex size-8 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors duration-300 group-hover:bg-foreground group-hover:text-background">
-            <ChevronDown
-              aria-hidden="true"
-              className={cn(
-                "size-4 transition-transform duration-300",
-                isOpen && "rotate-180",
-              )}
-            />
-          </span>
-        </Button>
-      }
+          items={dropdownItems}
+          rootProps={{ open: isOpen, onOpenChange: setIsOpen }}
+          triggerProps={{ asChild: true }}
+          contentProps={{
+            align: "center",
+            sideOffset: 12,
+            className:
+              "w-xl max-w-[calc(100vw-2rem)] rounded-xl border-border p-3 shadow-lg sm:p-4",
+          }}
+          trigger={
+            <Button
+              id={triggerId}
+              type="button"
+              variant="ghost"
+              aria-label={`Filter by ${title.toLowerCase()} type`}
+              className="group h-auto gap-3 rounded-full bg-transparent p-0 text-base shadow-none hover:bg-transparent active:translate-y-0"
+            >
+              <span className="shrink-0 text-base font-bold leading-snug text-foreground">
+                {title} type
+              </span>
+              <span className="inline-flex size-8 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors duration-300 group-hover:bg-foreground group-hover:text-background">
+                <ChevronDown
+                  aria-hidden="true"
+                  className={cn(
+                    "size-4 transition-transform duration-300",
+                    isOpen && "rotate-180",
+                  )}
+                />
+              </span>
+            </Button>
+          }
         />
       ) : null}
 
       {presentation === "mobile-content" ? (
-          <div className="grid gap-2">
-            {items.map((item) => (
-              <Button
-                key={item.id}
-                type="button"
-                variant={selectedId === item.id ? "secondary" : "outline"}
-                onClick={() => setSelectedId(item.id)}
-                className="h-auto justify-between px-4 py-3 text-left"
-              >
-                <span>{item.label}</span>
-                <span className="text-muted-foreground">{item.count}</span>
-              </Button>
-            ))}
-          </div>
+        <div className="grid">
+          {items.map((item) => (
+            <label
+              key={item.id}
+              htmlFor={`${triggerId}-${item.id}`}
+              className="flex cursor-pointer items-center gap-3 rounded-lg py-1 text-base leading-snug"
+            >
+              <Checkbox
+                id={`${triggerId}-${item.id}`}
+                checked={selectedIds.includes(item.id)}
+                onCheckedChange={(checked) => {
+                  setSelectedIds((currentIds) =>
+                    checked
+                      ? [...currentIds, item.id]
+                      : currentIds.filter((id) => id !== item.id),
+                  );
+                }}
+              />
+              <span className="flex-1 font-bold">
+                {item.label} ({item.count})
+              </span>
+            </label>
+          ))}
+        </div>
       ) : null}
     </>
   );

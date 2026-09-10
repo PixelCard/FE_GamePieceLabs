@@ -1,4 +1,11 @@
-import type { ReactNode } from "react";
+import { Children, isValidElement, type ReactNode } from "react";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 import PriceFilter, {
   type PriceFilterProps,
@@ -64,6 +71,13 @@ interface FilterMobileGroupProps {
   className?: string;
 }
 
+const mobileFilterTitles = {
+  price: "Price",
+  sort: "Sort by",
+  switch: "Availability",
+  type: "Product type",
+} satisfies Record<FilterVariantProps["variant"], string>;
+
 export function FilterMobileGroup({
   children,
   className,
@@ -76,7 +90,24 @@ export function FilterMobileGroup({
       )}
     >
       <MobileFilterSheet title="Filters">
-        <div className="flex flex-col gap-8">{children}</div>
+        <Accordion type="multiple">
+          {Children.toArray(children).map((child) => {
+            if (!isValidElement<FilterProps>(child)) {
+              return child;
+            }
+
+            const variant = child.props.variant;
+
+            return (
+              <AccordionItem key={variant} value={variant}>
+                <AccordionTrigger className="font-bold">
+                  {mobileFilterTitles[variant]}
+                </AccordionTrigger>
+                <AccordionContent className="pt-2">{child}</AccordionContent>
+              </AccordionItem>
+            );
+          })}
+        </Accordion>
       </MobileFilterSheet>
     </FilterWrapperMobile>
   );
@@ -94,13 +125,33 @@ export default function Filter(props: FilterProps) {
   if (props.presentation === "mobile-content") {
     switch (props.variant) {
       case "price":
-        return <PriceFilter {...withoutWrapperProps(props)} presentation="mobile-content" />;
+        return (
+          <PriceFilter
+            {...withoutWrapperProps(props)}
+            presentation="mobile-content"
+          />
+        );
       case "sort":
-        return <SortFilter {...withoutWrapperProps(props)} presentation="mobile-content" />;
+        return (
+          <SortFilter
+            {...withoutWrapperProps(props)}
+            presentation="mobile-content"
+          />
+        );
       case "switch":
-        return <SwitchFilter {...withoutWrapperProps(props)} presentation="mobile-content" />;
+        return (
+          <SwitchFilter
+            {...withoutWrapperProps(props)}
+            presentation="mobile-content"
+          />
+        );
       case "type":
-        return <TypeFilter {...withoutWrapperProps(props)} presentation="mobile-content" />;
+        return (
+          <TypeFilter
+            {...withoutWrapperProps(props)}
+            presentation="mobile-content"
+          />
+        );
     }
   }
 
@@ -109,7 +160,10 @@ export default function Filter(props: FilterProps) {
       return (
         <>
           <FilterWrapperDesktop className={props.wrapperClassName}>
-            <PriceFilter {...withoutWrapperProps(props)} presentation="desktop" />
+            <PriceFilter
+              {...withoutWrapperProps(props)}
+              presentation="desktop"
+            />
           </FilterWrapperDesktop>
         </>
       );
@@ -117,7 +171,10 @@ export default function Filter(props: FilterProps) {
       return (
         <>
           <FilterWrapperDesktop className={props.wrapperClassName}>
-            <SortFilter {...withoutWrapperProps(props)} presentation="desktop" />
+            <SortFilter
+              {...withoutWrapperProps(props)}
+              presentation="desktop"
+            />
           </FilterWrapperDesktop>
         </>
       );
@@ -125,7 +182,10 @@ export default function Filter(props: FilterProps) {
       return (
         <>
           <FilterWrapperDesktop className={props.wrapperClassName}>
-            <SwitchFilter {...withoutWrapperProps(props)} presentation="desktop" />
+            <SwitchFilter
+              {...withoutWrapperProps(props)}
+              presentation="desktop"
+            />
           </FilterWrapperDesktop>
         </>
       );
@@ -133,7 +193,10 @@ export default function Filter(props: FilterProps) {
       return (
         <>
           <FilterWrapperDesktop className={props.wrapperClassName}>
-            <TypeFilter {...withoutWrapperProps(props)} presentation="desktop" />
+            <TypeFilter
+              {...withoutWrapperProps(props)}
+              presentation="desktop"
+            />
           </FilterWrapperDesktop>
         </>
       );
