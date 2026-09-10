@@ -43,7 +43,7 @@ export function ProductCard({
   return (
     <Card
       className={cn(
-        "group h-full overflow-hidden rounded-xl bg-white p-0 shadow-none border border-gray-200",
+        "group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white p-0 shadow-none",
         className,
       )}
     >
@@ -67,14 +67,16 @@ export function ProductCard({
         </Button> */}
       </div>
 
-      <CardContent className="flex min-h-[148px] flex-col gap-2 p-4 sm:p-6">
-        <div className="flex items-start justify-between gap-4">
-          <h3 className="type-h6 m-0 line-clamp-2 text-neutral-950">
+      <CardContent className="flex h-[196px] shrink-0 flex-col p-4 sm:h-[212px] sm:p-6">
+        <div className="flex h-14 shrink-0 items-start justify-between gap-3">
+          <h3 className="min-w-0 flex-1 text-lg leading-7 text-neutral-950">
             <Link
               href={productHref}
-              className="transition-colors hover:text-blue-700"
+              className="block transition-colors hover:text-blue-700"
             >
-              {name}
+              <span className="line-clamp-2 text-wrap max-sm:text-xl">
+                {name}
+              </span>
             </Link>
           </h3>
 
@@ -84,19 +86,21 @@ export function ProductCard({
           >
             {rating.toFixed(1)}
             <Star
-              className="size-4 fill-amber-400 text-amber-400"
+              className="size-4 max-sm:size-5 fill-amber-400 text-amber-400"
               aria-hidden="true"
             />
           </span>
         </div>
 
-        <p className="m-0 text-base font-semibold leading-snug tabular-nums text-neutral-700">{formattedPrice}</p>
+        <p className="m-0 mt-2 text-md font-semibold leading-snug tabular-nums text-neutral-700">
+          {formattedPrice}
+        </p>
 
-        <div className="text-center">
+        <div className="mt-auto text-center">
           <Button
             asChild
             aria-label={`${quickAddLabel}: ${name}`}
-            className="translate-y-0 rounded-full bg-neutral-950 px-6 text-base font-bold leading-snug text-white hover:bg-black"
+            className="h-12 translate-y-0 rounded-full bg-neutral-950 px-6 text-md font-bold leading-snug text-white hover:bg-black"
           >
             <Link
               href={

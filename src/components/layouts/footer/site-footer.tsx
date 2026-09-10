@@ -11,7 +11,7 @@ export function SiteFooter({ content }: SiteFooterProps) {
   return (
     <footer className="border-t border-border bg-background text-foreground">
       <div className="mx-auto w-[calc(100%-2rem)] py-12 sm:w-[calc(100%-3rem)] sm:max-w-[620px] lg:max-w-[940px] lg:py-14 xl:w-[calc(100%-100px)] xl:max-w-[1580px]">
-        <div className="grid grid-cols-2 items-start gap-x-6 gap-y-12 sm:gap-8 lg:grid-cols-4 lg:gap-10 xl:gap-16">
+        <div className="grid grid-cols-2 items-start gap-x-6 gap-y-12 text-center sm:gap-8 sm:text-left lg:grid-cols-4 lg:gap-10 xl:gap-16">
           {content.navigationGroups.map((group) => {
             const headingId = `footer-${group.title
               .toLowerCase()
@@ -52,7 +52,7 @@ export function SiteFooter({ content }: SiteFooterProps) {
             >
               {content.certifications.title}
             </h2>
-            <div className="flex flex-col items-start gap-4">
+            <div className="flex flex-col items-center gap-4 sm:items-start">
               {content.certifications.badges.map((badge) => (
                 <a
                   key={badge.label}
@@ -87,7 +87,7 @@ export function SiteFooter({ content }: SiteFooterProps) {
               width="340"
               height="150"
               loading="lazy"
-              className="block aspect-[34/15] h-auto w-full max-w-[340px] border-0"
+              className="mx-auto block aspect-[34/15] h-auto w-full max-w-[340px] border-0 sm:mx-0"
               scrolling="no"
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
               allowFullScreen
