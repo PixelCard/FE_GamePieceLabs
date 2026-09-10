@@ -58,9 +58,9 @@ const imageSliderSlides = [
 
 export default function StorefrontHomePage() {
   return (
-    <main className="bg-white">
+    <main className="bg-neutral-50/60">
       {/* Image slider */}
-      <div className="pt-6 sm:pt-8">
+      <div className="pt-6 pb-40 sm:pt-8">
         <div className="mx-auto w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] sm:max-w-[620px] lg:max-w-[940px] xl:w-[calc(100%-100px)] xl:max-w-[1580px]">
           <ImageSlider
             slides={imageSliderSlides}
@@ -90,85 +90,93 @@ export default function StorefrontHomePage() {
         </SectionTitle>
       </SectionTitleGroupProps>
 
-      <MarqueeText
-        title="Mastery is a never-ending exploration"
-        speed={30}
-        fontSize="text-8xl"
-      />
-
-      <SectionTitle
-        title="Maximize Your Game Time"
-        orientation="vertical"
-        align="center"
-        content="split"
-      >
-        <div className="mb-8 space-y-3 text-center sm:mb-10 sm:space-y-4">
-          <p className="text-sm font-bold tracking-[0.12em] text-red-600 uppercase sm:text-base">
-            Clear Space, Clear Strategy
-          </p>
-
-          <p className="mx-auto max-w-3xl text-pretty text-base leading-relaxed font-semibold text-neutral-700 sm:text-lg">
-            We all know the frustration of wasting hours of precious game time
-            on game setup and teardown. With Laserox, you can set up in a snap
-            and stay organized, no matter how complex the campaign gets.
-          </p>
-        </div>
-
-        <ImageComparison
-          imageOne="https://laserox.net/cdn/shop/files/Picture_201509_MH40S5_marbletableplant_2_jpg.png?v=1714735329&width=1000"
-          imageTwo="https://laserox.net/cdn/shop/files/2024-05-03T132444.466.png?v=1714735542&width=1000"
+      <SectionTitleGroupProps>
+        <MarqueeText
+          title="Mastery is a never-ending exploration"
+          speed={30}
+          fontSize="text-8xl"
         />
-      </SectionTitle>
+      </SectionTitleGroupProps>
 
-      <div className="py-16 sm:py-20">
+      <SectionTitleGroupProps>
         <SectionTitle
-          title="Featured Products"
-          more={{ label: "View all", href: "/products" }}
+          title="Maximize Your Game Time"
+          orientation="vertical"
+          align="center"
+          content="split"
         >
-          <div className="col-span-full">
-            <ProductGallery type="featured" images={featuredProducts} />
-          </div>
-        </SectionTitle>
-      </div>
-
-      <SectionTitle
-        orientation="vertical"
-        align="center"
-        content="split"
-        ariaLabel="The Game Piece Labs philosophy"
-        className="overflow-hidden bg-neutral-50/60"
-      >
-        <div className="flex flex-col items-center text-center">
-          <h2 className="bg-gradient-to-b from-neutral-300 to-white bg-clip-text text-[clamp(2.25rem,9.5vw,9rem)] leading-[0.82] font-black tracking-[-0.065em] whitespace-nowrap text-transparent">
-            GAME PIECE LABS
-          </h2>
-
-          <div className="mt-14 flex max-w-5xl flex-col items-center sm:mt-20">
-            <h3 className="text-2xl leading-tight font-bold text-balance text-neutral-950 sm:text-3xl lg:text-4xl">
-              From Our Table to Yours:
-              <br />
-              The Game Piece Labs Philosophy
-            </h3>
-
-            <p className="mt-7 max-w-4xl text-base leading-relaxed font-medium text-pretty text-neutral-700 sm:mt-9 sm:text-lg lg:text-xl">
-              We believe that the best gaming experiences are born from
-              hassle-free setups and crystal-clear organization. We craft our
-              organizers and accessories with precision and passion, using
-              eco-friendly, hand-selected, premium materials. Prepare to
-              transform how you play!
+          <div className="mb-8 space-y-3 text-center sm:mb-10 sm:space-y-4">
+            <p className="text-sm font-bold tracking-[0.12em] text-red-600 uppercase sm:text-base">
+              Clear Space, Clear Strategy
             </p>
 
-            <Button
-              asChild
-              className="mt-8 h-14 rounded-full bg-neutral-950 px-10 text-base font-bold text-white hover:bg-neutral-800 focus-visible:ring-neutral-950 sm:mt-10 sm:h-16 sm:px-12 sm:text-lg"
-            >
-              <Link href="/about">Discover more</Link>
-            </Button>
+            <p className="mx-auto max-w-3xl text-pretty text-base leading-relaxed font-semibold text-neutral-700 sm:text-lg">
+              We all know the frustration of wasting hours of precious game time
+              on game setup and teardown. With Laserox, you can set up in a snap
+              and stay organized, no matter how complex the campaign gets.
+            </p>
           </div>
-        </div>
 
-        <ProductDemo className="px-0 pt-12 pb-0 sm:px-0 sm:pt-16 sm:pb-0" />
-      </SectionTitle>
+          <ImageComparison
+            imageOne="https://laserox.net/cdn/shop/files/Picture_201509_MH40S5_marbletableplant_2_jpg.png?v=1714735329&width=1000"
+            imageTwo="https://laserox.net/cdn/shop/files/2024-05-03T132444.466.png?v=1714735542&width=1000"
+          />
+        </SectionTitle>
+      </SectionTitleGroupProps>
+
+      <SectionTitleGroupProps>
+        <div className="mt-10">
+          <SectionTitle
+            title="Featured Products"
+            more={{ label: "View all", href: "/products" }}
+          >
+            <div className="col-span-full">
+              <ProductGallery type="featured" images={featuredProducts} />
+            </div>
+          </SectionTitle>
+        </div>
+      </SectionTitleGroupProps>
+
+      <SectionTitleGroupProps>
+        <SectionTitle
+          orientation="vertical"
+          align="center"
+          content="split"
+          ariaLabel="The Game Piece Labs philosophy"
+          className="overflow-hidden"
+        >
+          <div className="flex flex-col items-center text-center">
+            <h2 className="bg-gradient-to-b from-neutral-300 to-white bg-clip-text text-[clamp(2.25rem,9.5vw,15rem)] leading-[1.2] font-black tracking-[-0.065em] whitespace-nowrap text-transparent">
+              GAME PIECE LABS
+            </h2>
+
+            <div className="mt-14 flex max-w-5xl flex-col items-center sm:mt-20">
+              <h3 className="text-2xl leading-tight font-bold text-balance text-neutral-950 sm:text-3xl lg:text-4xl">
+                From Our Table to Yours:
+                <br />
+                The Game Piece Labs Philosophy
+              </h3>
+
+              <p className="mt-7 max-w-4xl text-base leading-relaxed font-medium text-pretty text-neutral-700 sm:mt-9 sm:text-lg lg:text-xl">
+                We believe that the best gaming experiences are born from
+                hassle-free setups and crystal-clear organization. We craft our
+                organizers and accessories with precision and passion, using
+                eco-friendly, hand-selected, premium materials. Prepare to
+                transform how you play!
+              </p>
+
+              <Button
+                asChild
+                className="mt-8 h-14 rounded-full bg-neutral-950 px-10 text-base font-bold text-white hover:bg-neutral-800 focus-visible:ring-neutral-950 sm:mt-10 sm:h-16 sm:px-12 sm:text-lg"
+              >
+                <Link href="/about">Discover more</Link>
+              </Button>
+            </div>
+          </div>
+        </SectionTitle>
+
+        <ProductDemo className="mx-auto max-w-[800px] px-4 py-0 sm:px-0 sm:py-0" />
+      </SectionTitleGroupProps>
       {/* 
       <VideoFrame
         type="youtube"

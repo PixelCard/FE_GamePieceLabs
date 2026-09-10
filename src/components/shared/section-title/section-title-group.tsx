@@ -8,5 +8,5 @@ export interface SectionTitleGroupProps {
 export function SectionTitleGroupProps({
   children,
 }: SectionTitleGroupProps): ReactElement {
-  return <div className="mt-10 space-y-16 sm:space-y-20">{children}</div>;
+  return <div className="space-y-16 pb-20 sm:space-y-20">{children}</div>;
 }

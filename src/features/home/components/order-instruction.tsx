@@ -23,12 +23,10 @@ const instructionIcons: Record<OrderInstructionIcon, LucideIcon> = {
 
 export type OrderInstructionVariant = "default" | "interactive";
 
-export function OrderInstruction({
-}): ReactElement {
- 
+export function OrderInstruction({}): ReactElement {
   return (
     <section
-      className="relative isolate overflow-hidden bg-white py-16 sm:py-20 lg:py-28"
+      className="relative isolate overflow-hidden bg-neutral-50/60 py-16 sm:py-20 lg:py-28"
       aria-labelledby="order-instruction-title"
     >
       <div className="mx-auto w-full max-w-[1680px] px-4 sm:px-6 xl:px-[50px]">
@@ -40,8 +38,8 @@ export function OrderInstruction({
             Từ ý tưởng đến sản phẩm hoàn thiện
           </h2>
           <p className="type-prose mx-auto mt-4 max-w-xl text-base text-neutral-600 dark:text-neutral-400">
-            Quy trình đặt in 3D rõ ràng trong 5 bước, giúp bạn dễ dàng theo
-            dõi từ lúc chọn mẫu đến khi nhận hàng.
+            Quy trình đặt in 3D rõ ràng trong 5 bước, giúp bạn dễ dàng theo dõi
+            từ lúc chọn mẫu đến khi nhận hàng.
           </p>
         </div>
 

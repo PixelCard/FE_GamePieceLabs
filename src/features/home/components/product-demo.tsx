@@ -23,6 +23,7 @@ import {
   productHotspots,
 } from "@/features/home/data/product-demo";
 import { cn } from "@/utils/cn";
+import styles from "./product-demo.module.css";
 
 export interface ProductDemoProps {
   className?: string;
@@ -36,6 +37,7 @@ function HotspotButton({
     <button
       type="button"
       className={cn(
+        styles.hotspot,
         "group/hotspot relative size-11 cursor-pointer items-center justify-center rounded-full bg-white text-neutral-950 shadow-[0_8px_24px_rgba(15,23,42,0.24)] outline-none transition-transform duration-200 before:absolute before:-inset-2.5 before:-z-10 before:rounded-full before:bg-white/35 hover:scale-105 focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-4 motion-reduce:transition-none sm:size-14 [&[data-state=delayed-open]_.hotspot-close]:block [&[data-state=delayed-open]_.hotspot-plus]:hidden [&[data-state=instant-open]_.hotspot-close]:block [&[data-state=instant-open]_.hotspot-plus]:hidden [&[data-state=open]_.hotspot-close]:block [&[data-state=open]_.hotspot-plus]:hidden",
         className,
       )}
