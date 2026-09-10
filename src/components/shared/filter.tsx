@@ -29,13 +29,13 @@ type FilterVariantProps =
   | ({ variant: "type" } & TypeFilterProps);
 
 export type FilterProps = FilterVariantProps & {
-  presentation?: "desktop" | "mobile-content";
+  presentation?: "desktop" | "mobile";
   wrapperClassName?: string;
 };
 
 function withoutWrapperProps<
   T extends {
-    presentation?: "desktop" | "mobile-content";
+    presentation?: "desktop" | "mobile";
     variant: string;
     wrapperClassName?: string;
   },
@@ -122,34 +122,34 @@ function FilterWrapperMobile({ children, className }: FilterWrapperProps) {
 }
 
 export default function Filter(props: FilterProps) {
-  if (props.presentation === "mobile-content") {
+  if (props.presentation === "mobile") {
     switch (props.variant) {
       case "price":
         return (
           <PriceFilter
             {...withoutWrapperProps(props)}
-            presentation="mobile-content"
+            presentation="mobile"
           />
         );
       case "sort":
         return (
           <SortFilter
             {...withoutWrapperProps(props)}
-            presentation="mobile-content"
+            presentation="mobile"
           />
         );
       case "switch":
         return (
           <SwitchFilter
             {...withoutWrapperProps(props)}
-            presentation="mobile-content"
+            presentation="mobile"
           />
         );
       case "type":
         return (
           <TypeFilter
             {...withoutWrapperProps(props)}
-            presentation="mobile-content"
+            presentation="mobile"
           />
         );
     }
