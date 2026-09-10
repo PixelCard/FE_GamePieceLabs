@@ -17,11 +17,13 @@ export interface CountedFilterItem {
 export interface TypeFilterProps {
   title?: string;
   items: readonly CountedFilterItem[];
+  presentation?: "desktop" | "mobile-content";
 }
 
 export default function TypeFilter({
   items,
   title = "Product",
+  presentation = "desktop",
 }: TypeFilterProps) {
   const triggerId = useId();
   const [isOpen, setIsOpen] = useState(false);
@@ -51,7 +53,9 @@ export default function TypeFilter({
   ];
 
   return (
-    <DropdownMenu
+    <>
+      {presentation === "desktop" ? (
+        <DropdownMenu
       items={dropdownItems}
       rootProps={{ open: isOpen, onOpenChange: setIsOpen }}
       triggerProps={{ asChild: true }}
@@ -83,6 +87,25 @@ export default function TypeFilter({
           </span>
         </Button>
       }
-    />
+        />
+      ) : null}
+
+      {presentation === "mobile-content" ? (
+          <div className="grid gap-2">
+            {items.map((item) => (
+              <Button
+                key={item.id}
+                type="button"
+                variant={selectedId === item.id ? "secondary" : "outline"}
+                onClick={() => setSelectedId(item.id)}
+                className="h-auto justify-between px-4 py-3 text-left"
+              >
+                <span>{item.label}</span>
+                <span className="text-muted-foreground">{item.count}</span>
+              </Button>
+            ))}
+          </div>
+      ) : null}
+    </>
   );
 }

@@ -12,6 +12,7 @@ import SwitchFilter, {
 import TypeFilter, {
   type TypeFilterProps,
 } from "@/components/shared/filter/type-filter";
+import { MobileFilterSheet } from "@/components/shared/filter/mobile-filter-sheet";
 import { cn } from "@/utils/cn";
 
 type FilterVariantProps =
@@ -21,13 +22,19 @@ type FilterVariantProps =
   | ({ variant: "type" } & TypeFilterProps);
 
 export type FilterProps = FilterVariantProps & {
+  presentation?: "desktop" | "mobile-content";
   wrapperClassName?: string;
 };
 
 function withoutWrapperProps<
-  T extends { variant: string; wrapperClassName?: string },
->(props: T): Omit<T, "variant" | "wrapperClassName"> {
-  const { variant, wrapperClassName, ...componentProps } = props;
+  T extends {
+    presentation?: "desktop" | "mobile-content";
+    variant: string;
+    wrapperClassName?: string;
+  },
+>(props: T): Omit<T, "presentation" | "variant" | "wrapperClassName"> {
+  const { presentation, variant, wrapperClassName, ...componentProps } = props;
+  void presentation;
   void variant;
   void wrapperClassName;
 
@@ -39,39 +46,96 @@ interface FilterWrapperProps {
   className?: string;
 }
 
-function FilterWrapper({ children, className }: FilterWrapperProps) {
+function FilterWrapperDesktop({ children, className }: FilterWrapperProps) {
   return (
-    <div className={cn("inline-flex min-w-0 py-1 sm:mx-2 sm:px-2 sm:py-2", className)}>
+    <div
+      className={cn(
+        "inline-flex min-w-0 py-1 max-sm:hidden sm:mx-2 sm:px-2 sm:py-2",
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
+interface FilterMobileGroupProps {
+  children: ReactNode;
+  className?: string;
+}
+
+export function FilterMobileGroup({
+  children,
+  className,
+}: FilterMobileGroupProps) {
+  return (
+    <FilterWrapperMobile
+      className={cn(
+        "fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] left-1/2 z-40 -translate-x-1/2",
+        className,
+      )}
+    >
+      <MobileFilterSheet title="Filters">
+        <div className="flex flex-col gap-8">{children}</div>
+      </MobileFilterSheet>
+    </FilterWrapperMobile>
+  );
+}
+
+function FilterWrapperMobile({ children, className }: FilterWrapperProps) {
+  return (
+    <div className={cn("inline-flex min-w-0 py-1 sm:hidden", className)}>
       {children}
     </div>
   );
 }
 
 export default function Filter(props: FilterProps) {
+  if (props.presentation === "mobile-content") {
+    switch (props.variant) {
+      case "price":
+        return <PriceFilter {...withoutWrapperProps(props)} presentation="mobile-content" />;
+      case "sort":
+        return <SortFilter {...withoutWrapperProps(props)} presentation="mobile-content" />;
+      case "switch":
+        return <SwitchFilter {...withoutWrapperProps(props)} presentation="mobile-content" />;
+      case "type":
+        return <TypeFilter {...withoutWrapperProps(props)} presentation="mobile-content" />;
+    }
+  }
+
   switch (props.variant) {
     case "price":
       return (
-        <FilterWrapper className={props.wrapperClassName}>
-          <PriceFilter {...withoutWrapperProps(props)} />
-        </FilterWrapper>
+        <>
+          <FilterWrapperDesktop className={props.wrapperClassName}>
+            <PriceFilter {...withoutWrapperProps(props)} presentation="desktop" />
+          </FilterWrapperDesktop>
+        </>
       );
     case "sort":
       return (
-        <FilterWrapper className={props.wrapperClassName}>
-          <SortFilter {...withoutWrapperProps(props)} />
-        </FilterWrapper>
+        <>
+          <FilterWrapperDesktop className={props.wrapperClassName}>
+            <SortFilter {...withoutWrapperProps(props)} presentation="desktop" />
+          </FilterWrapperDesktop>
+        </>
       );
     case "switch":
       return (
-        <FilterWrapper className={props.wrapperClassName}>
-          <SwitchFilter {...withoutWrapperProps(props)} />
-        </FilterWrapper>
+        <>
+          <FilterWrapperDesktop className={props.wrapperClassName}>
+            <SwitchFilter {...withoutWrapperProps(props)} presentation="desktop" />
+          </FilterWrapperDesktop>
+        </>
       );
     case "type":
       return (
-        <FilterWrapper className={props.wrapperClassName}>
-          <TypeFilter {...withoutWrapperProps(props)} />
-        </FilterWrapper>
+        <>
+          <FilterWrapperDesktop className={props.wrapperClassName}>
+            <TypeFilter {...withoutWrapperProps(props)} presentation="desktop" />
+          </FilterWrapperDesktop>
+        </>
       );
   }
 }

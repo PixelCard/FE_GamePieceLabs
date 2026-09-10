@@ -24,6 +24,7 @@ export interface PriceFilterProps {
   step?: number;
   title?: string;
   value?: PriceRange;
+  presentation?: "desktop" | "mobile-content";
 }
 
 function clampPrice(value: number, min: number, max: number): number {
@@ -66,6 +67,7 @@ export default function PriceFilter({
   step = 1,
   title = "Price",
   value,
+  presentation = "desktop",
 }: PriceFilterProps) {
   const triggerId = useId();
   const [isOpen, setIsOpen] = useState(false);
@@ -139,7 +141,9 @@ export default function PriceFilter({
   ];
 
   return (
-    <DropdownMenu
+    <>
+      {presentation === "desktop" ? (
+        <DropdownMenu
       items={dropdownItems}
       rootProps={{ open: isOpen, onOpenChange: setIsOpen }}
       triggerProps={{ asChild: true }}
@@ -173,7 +177,32 @@ export default function PriceFilter({
           </span>
         </Button>
       }
-    />
+        />
+      ) : null}
+
+      {presentation === "mobile-content" ? (
+          <div className="flex flex-col gap-6">
+            <PriceOutput
+              currencyLabel={resolvedCurrencyLabel}
+              value={numberFormatter.format(currentValue[0])}
+            />
+            <Slider
+              aria-label="Price range"
+              disabled={disabled}
+              min={safeMin}
+              max={safeMax}
+              step={safeStep}
+              value={[...currentValue]}
+              onValueChange={handleValueChange}
+              className="px-2 [&_[data-slot=slider-range]]:bg-foreground [&_[data-slot=slider-thumb]]:size-4 [&_[data-slot=slider-thumb]]:border-foreground [&_[data-slot=slider-thumb]]:bg-foreground [&_[data-slot=slider-track]]:bg-muted-foreground/30"
+            />
+            <PriceOutput
+              currencyLabel={resolvedCurrencyLabel}
+              value={numberFormatter.format(currentValue[1])}
+            />
+          </div>
+      ) : null}
+    </>
   );
 }
 

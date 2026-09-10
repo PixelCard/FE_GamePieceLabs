@@ -11,9 +11,13 @@ import { useId, useState } from "react";
 
 export interface SortFilterProps {
   items: readonly string[];
+  presentation?: "desktop" | "mobile-content";
 }
 
-export default function SortFilter({ items }: SortFilterProps) {
+export default function SortFilter({
+  items,
+  presentation = "desktop",
+}: SortFilterProps) {
   const triggerId = useId();
   const defaultValue = items.includes("best selling")
     ? "best selling"
@@ -45,7 +49,9 @@ export default function SortFilter({ items }: SortFilterProps) {
   ];
 
   return (
-    <div className="inline-flex items-center gap-2">
+    <>
+      {presentation === "desktop" ? (
+        <div className="inline-flex items-center gap-2">
       <Label
         htmlFor={triggerId}
         className="shrink-0 text-base font-bold leading-snug text-foreground"
@@ -85,6 +91,24 @@ export default function SortFilter({ items }: SortFilterProps) {
           </Button>
         }
       />
-    </div>
+        </div>
+      ) : null}
+
+      {presentation === "mobile-content" ? (
+          <div className="grid gap-2">
+            {items.map((item) => (
+              <Button
+                key={item}
+                type="button"
+                variant={currentValue === item ? "secondary" : "outline"}
+                onClick={() => setSelectedValue(item)}
+                className="h-auto justify-start px-4 py-3 text-left capitalize"
+              >
+                {item}
+              </Button>
+            ))}
+          </div>
+      ) : null}
+    </>
   );
 }

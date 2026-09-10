@@ -37,6 +37,7 @@ export interface SwitchFilterProps
   rootClassName?: string;
   showActiveBadge?: boolean;
   switchType?: SwitchProps["type"];
+  presentation?: "desktop" | "mobile-content";
 }
 
 export default function SwitchFilter({
@@ -58,6 +59,7 @@ export default function SwitchFilter({
   rootClassName,
   showActiveBadge = false,
   switchType = "button",
+  presentation = "desktop",
   ...switchProps
 }: SwitchFilterProps) {
   const generatedId = useId();
@@ -79,7 +81,7 @@ export default function SwitchFilter({
     onClear?.();
   }
 
-  return (
+  const filterControl = (
     <div className={cn("inline-flex flex-col items-start gap-2", rootClassName)}>
       <div
         className={cn(
@@ -148,5 +150,12 @@ export default function SwitchFilter({
         </Badge>
       ) : null}
     </div>
+  );
+
+  return (
+    <>
+      {presentation === "desktop" ? filterControl : null}
+      {presentation === "mobile-content" ? filterControl : null}
+    </>
   );
 }

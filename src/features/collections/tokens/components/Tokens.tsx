@@ -1,5 +1,5 @@
 import { CardImageTitle } from "@/components/shared/card-image-title";
-import Filter from "@/components/shared/filter";
+import Filter, { FilterMobileGroup } from "@/components/shared/filter";
 import { SectionTitle } from "@/components/shared/section-title";
 import Wrapper from "@/components/shared/wrapper";
 import { CollectionsPageData } from "../types/tokens";
@@ -33,7 +33,13 @@ export function Tokens({ data }: TokensProps) {
 
       <Wrapper>
         <div className="grid w-full grid-cols-2 items-start gap-x-2 gap-y-1 py-3 sm:flex sm:gap-0">
-          <div className="min-w-0 text-left sm:flex-1">
+          <FilterMobileGroup>
+            <Filter presentation="mobile-content" variant="switch" label="In stock only" activeLabel="In Stock" defaultChecked={false} labelPosition="left" showActiveBadge />
+            <Filter presentation="mobile-content" items={[{ id: "accessories", label: "Accessories", count: 4 }]} title="Product" variant="type" />
+            <Filter presentation="mobile-content" variant="price" min={0} max={274} step={1} currency="USD" />
+            <Filter presentation="mobile-content" variant="sort" items={["featured", "most relevant", "best selling", "alphabetically, a-z", "alphabetically, z-a", "price, low to high", "price, high to low", "date, old to new", "date, new to old"]} />
+          </FilterMobileGroup>
+          <div className="min-w-0 text-left max-sm:hidden sm:flex-1">
             <Filter
               variant="switch"
               label="In stock only"
@@ -62,7 +68,7 @@ export function Tokens({ data }: TokensProps) {
             />
           </div>
 
-          <div className="min-w-0 text-right sm:flex-1">
+          <div className="min-w-0 text-right max-sm:hidden sm:flex-1">
             <Filter
               variant="sort"
               items={[

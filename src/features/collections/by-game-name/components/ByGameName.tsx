@@ -1,5 +1,5 @@
 import { CardImageTitle } from "@/components/shared/card-image-title";
-import Filter from "@/components/shared/filter";
+import Filter, { FilterMobileGroup } from "@/components/shared/filter";
 import { ImageFrame } from "@/components/shared/image/image-frame";
 import { MarqueeText } from "@/components/shared/marquee-text";
 import { ProductList } from "@/components/shared/product/product-list";
@@ -34,6 +34,12 @@ export function ByGameName({ data }: ByGameNameProps) {
         </h1>
 
         <div className="grid w-full grid-cols-2 items-center gap-x-2 gap-y-4 border-y border-neutral-200 py-4 sm:flex sm:justify-between sm:gap-x-5">
+          <FilterMobileGroup>
+            <Filter presentation="mobile-content" variant="switch" label="In stock only" activeLabel="In Stock" defaultChecked={false} labelPosition="left" showActiveBadge />
+            <Filter presentation="mobile-content" items={[{ id: "insert", label: "Insert", count: 1 }]} title="Product" variant="type" />
+            <Filter presentation="mobile-content" variant="price" min={0} max={283500} step={5000} currency="VND" />
+            <Filter presentation="mobile-content" variant="sort" items={sortOptions} />
+          </FilterMobileGroup>
           <Filter
             variant="switch"
             label="In stock only"
