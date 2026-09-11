@@ -17,26 +17,65 @@ export interface SwitchFilterProps
     SwitchProps,
     "checked" | "defaultChecked" | "id" | "onCheckedChange" | "type"
   > {
+  /** Nhãn chính liên kết accessibility với switch. */
   label: ReactNode;
+  /** Nội dung badge khi filter đang bật; mặc định dùng `label`. */
   activeLabel?: ReactNode;
+  /** Props style/semantic bổ sung cho badge trạng thái active. */
   badgeProps?: Omit<ComponentProps<typeof Badge>, "children">;
+  /** Trạng thái controlled; dùng cùng `onCheckedChange`. */
   checked?: boolean;
+  /** Có hiện nút xóa trong badge active không. Mặc định `true`. */
   clearable?: boolean;
+  /** Props cho nút xóa badge, trừ event click do component quản lý. */
   clearButtonProps?: Omit<
     ComponentProps<typeof Button>,
     "children" | "onClick"
   >;
+  /** Trạng thái ban đầu ở uncontrolled mode. Mặc định `false`. */
   defaultChecked?: boolean;
+  /** Mô tả phụ phía dưới label. */
   description?: ReactNode;
+  /** Class riêng cho mô tả. */
   descriptionClassName?: string;
+  /** ID ghi đè generated ID để liên kết label/switch. */
   id?: string;
+  /** Class riêng cho label. */
   labelClassName?: string;
+  /** Vị trí label so với control. Mặc định `left`. */
   labelPosition?: "left" | "right";
+  /** Nhận trạng thái tiếp theo khi người dùng thay đổi switch. */
   onCheckedChange?: (checked: boolean) => void;
+  /** Được gọi sau khi người dùng nhấn xóa badge active. */
   onClear?: () => void;
+  /** Class cho wrapper label và switch. */
   rootClassName?: string;
+  /** Hiện badge active ở desktop khi switch bật. Mặc định `false`. */
   showActiveBadge?: boolean;
+  /** Kiểu native button của switch; mặc định `button`. */
   switchType?: SwitchProps["type"];
+}
+
+interface DesktopSwitchFilterProps {
+  activeBadge: ReactNode;
+  filterControl: ReactNode;
+}
+
+function DesktopSwitchFilter({ activeBadge, filterControl }: DesktopSwitchFilterProps) {
+  return (
+    <>
+      {filterControl}
+      {activeBadge}
+    </>
+  );
+}
+
+interface MobileSwitchFilterProps {
+  filterControl: ReactNode;
+}
+
+function MobileSwitchFilter({ filterControl }: MobileSwitchFilterProps) {
+  return <>{filterControl}</>;
 }
 
 export default function SwitchFilter({
@@ -79,7 +118,7 @@ export default function SwitchFilter({
     onClear?.();
   }
 
-  return (
+  const filterControl = (
     <div className={cn("inline-flex flex-col items-start gap-2", rootClassName)}>
       <div
         className={cn(
@@ -120,33 +159,45 @@ export default function SwitchFilter({
         />
       </div>
 
-      {showActiveBadge && isChecked ? (
-        <Badge
-          {...badgeProps}
-          className={cn(
-            "gap-2 rounded-4xl border-0 bg-gray-200 px-5 py-3 text-base font-medium leading-snug text-black sm:py-4 sm:text-sm",
-            badgeProps?.className,
-          )}
-        >
-          {activeLabel ?? label}
-          {clearable ? (
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon-sm"
-              aria-label="Clear switch filter"
-              {...clearButtonProps}
-              className={cn(
-                "size-5 rounded-full p-0 hover:bg-foreground/10",
-                clearButtonProps?.className,
-              )}
-              onClick={clearFilter}
-            >
-              <X aria-hidden="true" className="size-3.5" />
-            </Button>
-          ) : null}
-        </Badge>
-      ) : null}
     </div>
+  );
+
+  const activeBadge = showActiveBadge && isChecked ? (
+    <Badge
+      {...badgeProps}
+      className={cn(
+        "gap-2 rounded-4xl border-0 bg-gray-200 px-5 py-3 text-base font-medium leading-snug text-black sm:py-4 sm:text-sm",
+        badgeProps?.className,
+      )}
+    >
+      {activeLabel ?? label}
+      {clearable ? (
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-sm"
+          aria-label="Clear switch filter"
+          {...clearButtonProps}
+          className={cn(
+            "size-5 rounded-full p-0 hover:bg-foreground/10",
+            clearButtonProps?.className,
+          )}
+          onClick={clearFilter}
+        >
+          <X aria-hidden="true" className="size-3.5" />
+        </Button>
+      ) : null}
+    </Badge>
+  ) : null;
+
+  return (
+    <>
+      <div className="max-sm:hidden">
+        <DesktopSwitchFilter filterControl={filterControl} activeBadge={activeBadge} />
+      </div>
+      <div className="sm:hidden">
+        <MobileSwitchFilter filterControl={filterControl} />
+      </div>
+    </>
   );
 }

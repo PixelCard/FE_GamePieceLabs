@@ -22,18 +22,29 @@ import {
 import { cn } from "@/utils/cn";
 
 export interface SocialMediaItem {
+  /** Tên platform; `facebook`, `instagram`, `tiktok` sẽ dùng icon/màu dựng sẵn. */
   platform: string;
+  /** Nhãn accessibility và nội dung tooltip. */
   label: string;
+  /** URL external đến social profile. */
   href: string;
+  /** Icon ghi đè icon mặc định của platform. */
   icon?: ReactNode;
 }
 
+/** Thanh social cố định ở cạnh màn hình, có thể dùng controlled hoặc uncontrolled state. */
 export interface SocialMediaRailProps {
+  /** Danh sách social link cần hiển thị. */
   items: SocialMediaItem[];
+  /** Cạnh gắn rail. Mặc định `right`. */
   side?: "left" | "right";
+  /** Trạng thái mở lúc khởi tạo cho uncontrolled mode. */
   defaultOpen?: boolean;
+  /** Trạng thái mở controlled; truyền cùng `onOpenChange`. */
   open?: boolean;
+  /** Nhận trạng thái tiếp theo sau khi người dùng mở/đóng rail. */
   onOpenChange?: (open: boolean) => void;
+  /** Class cho thẻ `aside` cố định. */
   className?: string;
 }
 
@@ -77,7 +88,7 @@ function SocialLink({ item, railSide, railOpen }: SocialLinkProps) {
             "flex size-12 items-center justify-center rounded-md shadow-md ring-1 ring-black/5",
             "transition-[transform,filter,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-lg",
             "focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-            "sm:size-12 sm:rounded-lg",
+            "md:size-15 lg:size-12 sm:rounded-lg",
             socialLinkStyles[platform] ??
               "bg-foreground text-background hover:brightness-110",
           )}
@@ -85,7 +96,7 @@ function SocialLink({ item, railSide, railOpen }: SocialLinkProps) {
           <span
             aria-hidden="true"
             className={cn(
-              "flex size-6 items-center justify-center text-2xl sm:size-6 sm:text-2xl",
+              "flex size-6 items-center justify-center text-2xl sm:size-6 sm:text-2xl md:size-8 md:text-3xl lg:size-6 lg:text-2xl",
               socialIconStyles[platform],
             )}
           >

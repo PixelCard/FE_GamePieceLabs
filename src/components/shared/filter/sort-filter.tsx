@@ -4,75 +4,44 @@ import DropdownMenu, {
   type DropdownMenuEntry,
 } from "@/components/shared/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/utils/cn";
 import { ChevronDown } from "lucide-react";
 import { useId, useState } from "react";
 
+/** Sort selector nội bộ; phù hợp khi trang không cần đồng bộ sort với URL/API. */
 export interface SortFilterProps {
+  /** Các nhãn sort; ưu tiên dùng string human-readable như `best selling`. */
   items: readonly string[];
-  label?: string;
-  value?: string;
-  onValueChange?: (value: string) => void;
 }
 
-export default function SortFilter({
-  items,
-  label = "Sort by:",
-  value,
-  onValueChange,
-}: SortFilterProps) {
-  const triggerId = useId();
-  const defaultValue = items.includes("best selling")
-    ? "best selling"
-    : (items[0] ?? "");
-  const [selectedValue, setSelectedValue] = useState(defaultValue);
-  const [isOpen, setIsOpen] = useState(false);
+interface DesktopSortFilterProps {
+  currentValue: string;
+  dropdownItems: DropdownMenuEntry[];
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
+  triggerId: string;
+}
 
-  const resolvedValue = value ?? selectedValue;
-  const currentValue = items.includes(resolvedValue)
-    ? resolvedValue
-    : (items[0] ?? "");
-
-  function handleValueChange(nextValue: string): void {
-    if (value === undefined) {
-      setSelectedValue(nextValue);
-    }
-
-    onValueChange?.(nextValue);
-  }
-
-  const dropdownItems: DropdownMenuEntry[] = [
-    {
-      id: "sort-options",
-      type: "radio-group",
-      props: {
-        value: currentValue,
-        onValueChange: handleValueChange,
-      },
-      items: items.map((item) => ({
-        id: item,
-        label: item,
-        props: {
-          value: item,
-          className: "cursor-pointer rounded-lg px-3 py-2.5 capitalize",
-        },
-      })),
-    },
-  ];
-
+function DesktopSortFilter({
+  currentValue,
+  dropdownItems,
+  isOpen,
+  onOpenChange,
+  triggerId,
+}: DesktopSortFilterProps) {
   return (
     <div className="inline-flex items-center gap-2">
       <Label
         htmlFor={triggerId}
         className="shrink-0 text-base font-bold leading-snug text-foreground"
       >
-        {label}
+        Sort by:
       </Label>
-
       <DropdownMenu
         items={dropdownItems}
-        rootProps={{ open: isOpen, onOpenChange: setIsOpen }}
+        rootProps={{ open: isOpen, onOpenChange }}
         triggerProps={{ asChild: true }}
         contentProps={{
           align: "end",
@@ -103,5 +72,96 @@ export default function SortFilter({
         }
       />
     </div>
+  );
+}
+
+interface MobileSortFilterProps {
+  currentValue: string;
+  items: readonly string[];
+  onValueChange: (value: string) => void;
+  triggerId: string;
+}
+
+function MobileSortFilter({
+  currentValue,
+  items,
+  onValueChange,
+  triggerId,
+}: MobileSortFilterProps) {
+  return (
+    <div className="grid">
+      {items.map((item) => (
+        <label
+          key={item}
+          htmlFor={`${triggerId}-${item}`}
+          className="flex cursor-pointer items-center gap-3 rounded-lg py-1 text-base leading-snug capitalize"
+        >
+          <Checkbox
+            id={`${triggerId}-${item}`}
+            checked={currentValue === item}
+            onCheckedChange={(checked) => {
+              if (checked) onValueChange(item);
+            }}
+          />
+          <span className="font-bold">{item}</span>
+        </label>
+      ))}
+    </div>
+  );
+}
+
+export default function SortFilter({
+  items,
+}: SortFilterProps) {
+  const triggerId = useId();
+  const defaultValue = items.includes("best selling")
+    ? "best selling"
+    : (items[0] ?? "");
+  const [selectedValue, setSelectedValue] = useState(defaultValue);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const currentValue = items.includes(selectedValue)
+    ? selectedValue
+    : (items[0] ?? "");
+
+  const dropdownItems: DropdownMenuEntry[] = [
+    {
+      id: "sort-options",
+      type: "radio-group",
+      props: {
+        value: currentValue,
+        onValueChange: setSelectedValue,
+      },
+      items: items.map((item) => ({
+        id: item,
+        label: item,
+        props: {
+          value: item,
+          className: "cursor-pointer rounded-lg px-3 py-2.5 capitalize",
+        },
+      })),
+    },
+  ];
+
+  return (
+    <>
+      <div className="max-sm:hidden">
+      <DesktopSortFilter
+        currentValue={currentValue}
+        dropdownItems={dropdownItems}
+        isOpen={isOpen}
+        onOpenChange={setIsOpen}
+        triggerId={triggerId}
+      />
+      </div>
+      <div className="sm:hidden">
+        <MobileSortFilter
+          currentValue={currentValue}
+          items={items}
+          onValueChange={setSelectedValue}
+          triggerId={triggerId}
+        />
+      </div>
+    </>
   );
 }
