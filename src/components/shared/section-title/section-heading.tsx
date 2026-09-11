@@ -68,12 +68,16 @@ export function SectionHeading({
       {more ? (
         <Link
           href={more.href || "#"}
-          className="group inline-flex w-fit items-center gap-4 rounded-full text-base font-bold text-neutral-950 outline-none transition-colors hover:text-red-600 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 sm:text-lg"
+          className="group inline-flex w-fit items-center gap-2 rounded-full text-xs font-medium text-neutral-950 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 sm:text-sm"
         >
-          {more.label}
+          {/* Thẻ span bọc chữ để chạy hiệu ứng line */}
+          <span className="relative after:absolute after:bottom-0 after:left-0 after:h-[0.8px] after:w-full after:origin-left after:scale-x-0 after:bg-black after:transition-transform after:duration-500 group-hover:after:scale-x-100">
+            {more.label}
+          </span>
 
-          <span className="flex size-8 items-center justify-center rounded-full bg-neutral-200 text-neutral-700 transition-colors group-hover:bg-red-600 group-hover:text-white">
-            <ChevronRight className="size-4" aria-hidden="true" />
+          {/* Icon ChevronRight giữ nguyên bên ngoài */}
+          <span className="flex size-5 items-center justify-center rounded-full bg-neutral-200 text-neutral-700 transition-colors">
+            <ChevronRight className="size-3" aria-hidden="true" />
           </span>
         </Link>
       ) : null}

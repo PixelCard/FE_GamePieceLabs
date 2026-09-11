@@ -58,26 +58,24 @@ const imageSliderSlides = [
 
 export default function StorefrontHomePage() {
   return (
-    <main className="bg-white">
+    <main className="bg-neutral-50/60">
       {/* Image slider */}
-      <div className="pt-6 sm:pt-8">
-        <div className="mx-auto w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] sm:max-w-[620px] lg:max-w-[940px] xl:w-[calc(100%-100px)] xl:max-w-[1580px]">
-          <ImageSlider
-            slides={imageSliderSlides}
-            autoplay
-            autoplayInterval={5000}
-            ariaLabel="Bộ sưu tập nổi bật"
-          />
-        </div>
+      <div className="px-12 pt-5 pb-18">
+        <ImageSlider
+          slides={imageSliderSlides}
+          autoplay
+          autoplayInterval={5000}
+          ariaLabel="Bộ sưu tập nổi bật"
+        />
       </div>
 
-      <SectionTitleGroupProps>
         <SectionTitle
           title="Choose Your Gear"
           more={{
             label: "Browse all categories",
             href: "/products",
           }}
+          className="px-12 py-20"
         >
           {gearCategories.map((category) => (
             <CardImageTitle
@@ -88,7 +86,6 @@ export default function StorefrontHomePage() {
             />
           ))}
         </SectionTitle>
-      </SectionTitleGroupProps>
 
       <MarqueeText
         title="Mastery is a never-ending exploration"

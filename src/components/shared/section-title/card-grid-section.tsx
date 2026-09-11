@@ -20,7 +20,7 @@ export function CardGridSection({
     <section
       aria-labelledby={titleId}
       className={cn(
-        "mx-auto w-full max-w-[1900px] px-4 sm:px-6 xl:px-[50px]",
+        "mx-auto w-full",
         className,
       )}
     >
