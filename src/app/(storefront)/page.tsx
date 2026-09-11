@@ -60,12 +60,14 @@ export default function StorefrontHomePage() {
   return (
     <main className="bg-neutral-50/60">
       {/* Image slider */}
-      <ImageSlider
-        slides={imageSliderSlides}
-        autoplay
-        autoplayInterval={5000}
-        ariaLabel="Bộ sưu tập nổi bật"
-      />
+      <SectionTitle content="imageSlider" ariaLabel="Bộ sưu tập nổi bật">
+        <ImageSlider
+          slides={imageSliderSlides}
+          autoplay
+          autoplayInterval={5000}
+          ariaLabel="Bộ sưu tập nổi bật"
+        />
+      </SectionTitle>
 
       <SectionTitle
         title="Choose Your Gear"
@@ -73,7 +75,6 @@ export default function StorefrontHomePage() {
           label: "Browse all categories",
           href: "/products",
         }}
-        className="px-12 py-20"
       >
         {gearCategories.map((category) => (
           <CardImageTitle
@@ -171,19 +172,19 @@ export default function StorefrontHomePage() {
         src="https://www.youtube.com/embed/HjsGUuQsQOY?si=ZcxnS0Ln7VPw4BqD"
       /> */}
 
-        <SectionTitle
-          title="Browse By Game"
-          more={{
-            label: "View all games",
-            href: "/products",
-          }}
-          align="left"
-          className="px-12 py-20"
-        >
-          {gameCategories.map((game) => (
-            <CardImageTitle key={game.title} {...game} prefix="/collections" />
-          ))}
-        </SectionTitle>
+      <SectionTitle
+        title="Browse By Game"
+        more={{
+          label: "View all games",
+          href: "/products",
+        }}
+        align="left"
+        className="px-12 py-20"
+      >
+        {gameCategories.map((game) => (
+          <CardImageTitle key={game.title} {...game} prefix="/collections" />
+        ))}
+      </SectionTitle>
 
       <PlayerReviewsSection
         variant="image"

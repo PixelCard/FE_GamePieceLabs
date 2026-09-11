@@ -92,7 +92,7 @@ function VerticalSplitContentSection({
   );
 }
 
-export function SplitContentSection(
+export function   SplitContentSection(
   props: SectionTitleSplitProps,
 ): ReactElement {
   switch (props.orientation) {

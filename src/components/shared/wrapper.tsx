@@ -5,9 +5,5 @@ export type WrapperProps = {
 };
 
 export default function Wrapper({ children }: WrapperProps) {
-  return (
-    <div className="mx-auto w-[calc(100%-2rem)] max-w-[1580px] pt-6 sm:w-[calc(100%-3rem)] sm:pt-8 xl:w-[calc(100%-100px)] xl:pt-10">
-      {children}
-    </div>
-  );
+  return <div className="2xl:p-[calc([4vw-2vw])]">{children}</div>;
 }

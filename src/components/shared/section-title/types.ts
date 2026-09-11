@@ -1,4 +1,6 @@
-import type { ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
+
+import type { ImageSliderProps } from "@/components/shared/image/image-slider";
 
 /** Canh heading/CTA trong section. */
 export type SectionTitleAlign = "left" | "center" | "right";
@@ -87,6 +89,18 @@ export interface SectionTitleVerticalSplitProps {
   image?: never;
 }
 
+/** Slider campaign không có section heading; chỉ nhận spacing ngang từ `SectionTitle`. */
+export interface SectionTitleImageSliderProps {
+  /** Chọn layout slider, không thêm padding-top 80px. */
+  content: "imageSlider";
+  /** Nhãn trợ năng cho section chứa slider. */
+  ariaLabel: string;
+  /** Chỉ nhận component `ImageSlider`. */
+  children: ReactElement<ImageSliderProps>;
+  /** Class tùy biến cho section wrapper. */
+  className?: string;
+}
+
 /** Union props cho hai biến thể split. */
 export type SectionTitleSplitProps =
   | SectionTitleHorizonSplitProps
@@ -95,4 +109,5 @@ export type SectionTitleSplitProps =
 /** API public của `SectionTitle`; `content` và `orientation` quyết định biến thể render. */
 export type SectionTitleProps =
   | SectionTitleMoreProps
-  | SectionTitleSplitProps;
+  | SectionTitleSplitProps
+  | SectionTitleImageSliderProps;
