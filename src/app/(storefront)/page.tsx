@@ -179,6 +179,7 @@ export default function StorefrontHomePage() {
             href: "/products",
           }}
           align="left"
+          className="px-12 py-20"
         >
           {gameCategories.map((game) => (
             <CardImageTitle key={game.title} {...game} prefix="/collections" />
