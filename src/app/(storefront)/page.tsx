@@ -136,10 +136,10 @@ export default function StorefrontHomePage() {
         align="center"
         content="split"
         ariaLabel="The Game Piece Labs philosophy"
-        className="overflow-hidden bg-neutral-50/60"
+        className="overflow-hidden"
       >
         <div className="flex flex-col items-center text-center">
-          <h2 className="bg-gradient-to-b from-neutral-300 to-white bg-clip-text text-[clamp(2.25rem,9.5vw,9rem)] leading-[0.82] font-black tracking-[-0.065em] whitespace-nowrap text-transparent">
+          <h2 className="bg-gradient-to-b from-neutral-300 to-white bg-clip-text text-[clamp(2.25rem,9.5vw,15rem)] leading-[1.2] font-black tracking-[-0.065em] whitespace-nowrap text-transparent">
             GAME PIECE LABS
           </h2>
 
@@ -166,9 +166,8 @@ export default function StorefrontHomePage() {
             </Button>
           </div>
         </div>
-
-        <ProductDemo className="px-0 pt-12 pb-0 sm:px-0 sm:pt-16 sm:pb-0" />
       </SectionTitle>
+
       {/* 
       <VideoFrame
         type="youtube"
