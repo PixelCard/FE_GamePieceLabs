@@ -171,7 +171,6 @@ export default function StorefrontHomePage() {
         src="https://www.youtube.com/embed/HjsGUuQsQOY?si=ZcxnS0Ln7VPw4BqD"
       /> */}
 
-      <SectionTitleGroupProps>
         <SectionTitle
           title="Browse By Game"
           more={{
@@ -185,7 +184,6 @@ export default function StorefrontHomePage() {
             <CardImageTitle key={game.title} {...game} prefix="/collections" />
           ))}
         </SectionTitle>
-      </SectionTitleGroupProps>
 
       <PlayerReviewsSection
         variant="image"

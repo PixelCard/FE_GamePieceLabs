@@ -26,7 +26,6 @@ export function SectionTitle(props: SectionTitleProps): ReactElement {
       return <SplitContentSection {...props} />;
     case "text":
       return <TextContentSection {...props} />;
-    case "imageList":
     default:
       return <CardGridSection {...props} />;
   }
