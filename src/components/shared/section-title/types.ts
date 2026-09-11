@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 /** Canh heading/CTA trong section. */
 export type SectionTitleAlign = "left" | "center" | "right";
+export type SectionTitleHeadingLevel = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 /** Hướng xếp heading và content. */
 export type SectionTitleOrientation = "vertical" | "horizon";
 /** Vị trí text content so với ảnh trong horizontal split. */
@@ -18,6 +19,7 @@ export interface SectionTitleMore {
 export interface SectionTitleMoreProps {
   /** Heading chính của section. */
   title: string;
+  headingLevel?: SectionTitleHeadingLevel;
   /** CTA "xem thêm" tùy chọn. */
   more?: SectionTitleMore;
   /** Canh heading và CTA. */
@@ -64,6 +66,7 @@ export interface SectionTitleHorizonSplitProps {
 export interface SectionTitleVerticalSplitProps {
   /** Heading tùy chọn; cần `ariaLabel` nếu bỏ qua title. */
   title?: string;
+  headingLevel?: SectionTitleHeadingLevel;
   /** Tên accessibility cho section không có title. */
   ariaLabel?: string;
   /** CTA cạnh heading. */

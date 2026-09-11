@@ -8,6 +8,7 @@ import type { SectionTitleMoreProps } from "./types";
 
 export function CardGridSection({
   title,
+  headingLevel,
   more,
   align,
   orientation,
@@ -28,6 +29,7 @@ export function CardGridSection({
         <SectionHeading
           title={title}
           titleId={titleId}
+          headingLevel={headingLevel}
           more={more}
           align={align}
           orientation={orientation}

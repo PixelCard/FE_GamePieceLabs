@@ -55,6 +55,7 @@ function HorizonSplitContentSection({
 
 function VerticalSplitContentSection({
   title,
+  headingLevel,
   ariaLabel,
   more,
   align,
@@ -77,6 +78,7 @@ function VerticalSplitContentSection({
           <SectionHeading
             title={title}
             titleId={titleId}
+            headingLevel={headingLevel}
             more={more}
             align={align}
             orientation="vertical"

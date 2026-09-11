@@ -9,6 +9,7 @@ import type { SectionTitleProps } from "./section-title/types";
 export { SectionTitleGroupProps } from "./section-title/section-title-group";
 export type {
   SectionTitleAlign,
+  SectionTitleHeadingLevel,
   SectionTitleHorizonSplitProps,
   SectionTitleMore,
   SectionTitleMoreProps,

@@ -6,6 +6,7 @@ import { cn } from "@/utils/cn";
 
 import type {
   SectionTitleAlign,
+  SectionTitleHeadingLevel,
   SectionTitleMore,
   SectionTitleOrientation,
 } from "./types";
@@ -13,6 +14,7 @@ import type {
 interface SectionHeadingProps {
   title: string;
   titleId: string;
+  headingLevel?: SectionTitleHeadingLevel;
   more?: SectionTitleMore;
   align?: SectionTitleAlign;
   orientation?: SectionTitleOrientation;
@@ -31,6 +33,15 @@ const verticalAlignmentClasses: Record<SectionTitleAlign, string> = {
   right: "items-end",
 };
 
+const headingSizeClasses: Record<SectionTitleHeadingLevel, string> = {
+  h1: "text-5xl",
+  h2: "text-4xl",
+  h3: "text-3xl",
+  h4: "text-2xl",
+  h5: "text-xl",
+  h6: "text-lg",
+};
+
 export function createSectionTitleId(title: string): string {
   const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
@@ -40,11 +51,14 @@ export function createSectionTitleId(title: string): string {
 export function SectionHeading({
   title,
   titleId,
+  headingLevel = "h2",
   more,
   align = "left",
   orientation = "horizon",
   className,
 }: SectionHeadingProps): ReactElement {
+  const HeadingTag = headingLevel;
+
   return (
     <div
       className={cn(
@@ -55,15 +69,16 @@ export function SectionHeading({
         className,
       )}
     >
-      <h2
+      <HeadingTag
         id={titleId}
         className={cn(
-          "type-h2 m-0 min-w-0 flex-1 text-neutral-950",
+          "m-0 min-w-0 flex-1 font-bold text-neutral-950",
+          headingSizeClasses[headingLevel],
           titleAlignmentClasses[align],
         )}
       >
         {title}
-      </h2>
+      </HeadingTag>
 
       {more ? (
         <Link

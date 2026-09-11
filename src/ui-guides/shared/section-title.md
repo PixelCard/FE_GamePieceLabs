@@ -35,6 +35,7 @@ import {
   type SectionTitleHorizonSplitProps,
   type SectionTitleVerticalSplitProps,
   type SectionTitleAlign,
+  type SectionTitleHeadingLevel,
   type SectionTitleOrientation,
   type SectionTitleMore,
 } from "@/components/shared/section-title";
@@ -144,6 +145,27 @@ export function StorySection() {
     </SectionTitle>
   );
 }
+```
+
+## Heading level
+
+`headingLevel` accepts `"h1"` through `"h6"` and defaults to `"h2"`. It controls both the semantic tag and the Tailwind size utility:
+
+| Level | Tailwind class |
+| --- | --- |
+| `h1` | `text-5xl` |
+| `h2` | `text-4xl` |
+| `h3` | `text-3xl` |
+| `h4` | `text-2xl` |
+| `h5` | `text-xl` |
+| `h6` | `text-lg` |
+
+Use `"h1"` only for the page's single primary title and use lower levels in document order for subsequent sections.
+
+```tsx
+<SectionTitle title="Board game inserts" headingLevel="h1">
+  {children}
+</SectionTitle>
 ```
 
 ## Dependencies
