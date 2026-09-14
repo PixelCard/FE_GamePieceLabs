@@ -17,10 +17,10 @@ Tên class của CSS Module dùng camelCase để có thể truy cập bằng do
 Wrapper của `SectionTitle` theo hướng mobile-first: mặc định `px-5` (`20px`) dưới breakpoint `sm` (`640px`); từ `sm` trở lên dùng Tailwind arbitrary value:
 
 ```tsx
-px-5 sm:px-[clamp(48px,calc(37.333333vw-556.8px),160px)]
+px-5 sm:px-[var(--section-padding-x)]
 ```
 
-Công thức nội suy tuyến tính là `padding = ((160 - 48) / (1920 - 1620)) × (100vw - 1620) + 48`, tương đương `37.333333vw - 556.8px`. Vì vậy padding ngang là `48px` tại viewport `1620px`, tăng tuyến tính đến `160px` tại `1920px`, và được `clamp()` giới hạn trong khoảng `48px–160px` trên `sm` trở lên.
+`--section-padding-x` là CSS variable runtime dùng để điều chỉnh padding ngang toàn bộ section. Các layout dạng lưới (`content` mặc định hoặc `imageList`) đặt `mb-6 sm:mb-10` trên `SectionHeading` để tạo khoảng cách giữa tiêu đề và grid children.
 
 ## Use Cases
 
@@ -35,7 +35,6 @@ Công thức nội suy tuyến tính là `padding = ((160 - 48) / (1920 - 1620))
   - `content="imageList"` (hoặc không truyền): Tiêu đề phía trên, bên dưới là lưới thẻ ảnh (`CardImageTitleGrid`).
   - `content="text"`: Tiêu đề phía trên, bên dưới là nội dung bài viết/khối chữ.
   - `content="split"`: Bố cục chia đôi hai cột (một bên ảnh `ImageFrame`, một bên là text/children).
-  - `content="imageSlider"`: Bọc một `ImageSlider`, nhận responsive padding ngang nhưng không thêm `pt-[80px]`.
 
 ## When NOT to Use
 
@@ -60,7 +59,7 @@ import {
 
 ## Props
 
-`SectionTitleProps` là một Discriminated Union giữa `SectionTitleMoreProps`, `SectionTitleSplitProps` và `SectionTitleImageSliderProps`:
+`SectionTitleProps` là một Discriminated Union giữa `SectionTitleMoreProps` và `SectionTitleSplitProps`:
 
 ### 1. Khi `content?: "imageList" | "text"` (`SectionTitleMoreProps`)
 
@@ -73,6 +72,7 @@ import {
 | `align` | `SectionTitleAlign` (`"left"` \| `"center"` \| `"right"`) | No | `"left"` | Căn chỉnh vị trí tiêu đề |
 | `orientation` | `SectionTitleOrientation` (`"horizon"` \| `"vertical"`) | No | `"horizon"` | Bố trí tiêu đề và nút 'more': nằm ngang cùng hàng (`horizon`) hoặc xếp dọc (`vertical`) |
 | `className` | `string` | No | — | Lớp CSS tùy biến cho thẻ `<section>` |
+| `wrapperClassName` | `string` | No | — | Lớp CSS tùy biến cho wrapper ngoài cùng của `SectionTitle` |
 
 ### 2. Khi `content="split"` (`SectionTitleSplitProps`)
 
@@ -88,6 +88,7 @@ Chia làm 2 biến thể theo `orientation`:
 | `contentPosition` | `"left"` \| `"right"` | No | `"right"` | Vị trí của khối chữ `children` so với ảnh |
 | `orientation` | `"horizon"` | No | `"horizon"` | Định hướng bố cục ngang |
 | `className` | `string` | No | — | Lớp CSS tùy biến cho thẻ section |
+| `wrapperClassName` | `string` | No | — | Lớp CSS tùy biến cho wrapper ngoài cùng của `SectionTitle` |
 
 #### Biến thể dọc (`orientation="vertical"` - `SectionTitleVerticalSplitProps`)
 
@@ -101,15 +102,7 @@ Chia làm 2 biến thể theo `orientation`:
 | `more` | `SectionTitleMore` | No | — | Nút liên kết xem thêm |
 | `align` | `SectionTitleAlign` | No | `"left"` | Căn lề tiêu đề |
 | `className` | `string` | No | — | Lớp CSS tùy biến |
-
-### 3. Khi `content="imageSlider"` (`SectionTitleImageSliderProps`)
-
-| Prop | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-| `content` | `"imageSlider"` | Yes | Chọn biến thể slider không có top padding 80px |
-| `ariaLabel` | `string` | Yes | Nhãn trợ năng cho section slider không có heading |
-| `children` | `ReactElement<ImageSliderProps>` | Yes | Component `ImageSlider` cần hiển thị |
-| `className` | `string` | No | Lớp CSS tùy biến cho section wrapper |
+| `wrapperClassName` | `string` | No | — | Lớp CSS tùy biến cho wrapper ngoài cùng của `SectionTitle` |
 
 ## Basic Usage
 

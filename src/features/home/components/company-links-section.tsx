@@ -1,23 +1,22 @@
 import { CardImageTitle } from "@/components/shared/card-image-title";
 import { companyLinks } from "@/features/home/data/company-links";
+import { cn } from "@/utils/cn";
 
 const fullWidthSizes =
   "(max-width: 1023px) calc(100vw - 2rem), (max-width: 1279px) 50vw, 790px";
 const halfWidthSizes =
   "(max-width: 1024px) calc(50vw - 1.5rem), (max-width: 1279px) 25vw, 385px";
 
-export function CompanyLinksSection() {
-  return (
-    <section
-      aria-labelledby="company-links-title"
-      className="bg-white py-12 sm:py-8 xl:py-10"
-    >
-      <h2 id="company-links-title" className="sr-only">
-        Explore GamePieceLabs
-      </h2>
+type CompanyLinksSectionProps = {
+  className?: string;
+};
 
-      <div className="mx-auto w-full max-w-[1900px] px-4 sm:px-6 xl:px-[50px]">
-        <div className="mx-auto grid w-full gap-3 sm:max-w-[620px] sm:gap-5 lg:max-w-[940px] lg:grid-cols-2 xl:max-w-[1580px]">
+export function CompanyLinksSection({
+  className,
+}: CompanyLinksSectionProps) {
+  return (
+    <div className={cn("w-full bg-white", className)}>
+      <div className="mx-auto grid w-full gap-3 sm:gap-5 lg:grid-cols-2">
           <CardImageTitle
             {...companyLinks.about}
             isArrow={false}
@@ -52,8 +51,7 @@ export function CompanyLinksSection() {
               isClicked={true}
             />
           </div>
-        </div>
       </div>
-    </section>
+    </div>
   );
 }

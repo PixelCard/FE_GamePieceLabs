@@ -69,30 +69,28 @@ function VerticalSplitContentSection({
       aria-labelledby={titleId}
       aria-label={title ? undefined : ariaLabel}
       className={cn(
-        "mx-auto w-full max-w-[1900px] px-4 sm:px-6 xl:px-[50px]",
+        "mx-auto w-full sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]",
         className,
       )}
     >
-      <div className="mx-auto w-full sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]">
-        {title && titleId ? (
-          <SectionHeading
-            title={title}
-            titleId={titleId}
-            headingLevel={headingLevel}
-            more={more}
-            align={align}
-            orientation="vertical"
-            className="mb-6 sm:mb-10"
-          />
-        ) : null}
+      {title && titleId ? (
+        <SectionHeading
+          title={title}
+          titleId={titleId}
+          headingLevel={headingLevel}
+          more={more}
+          align={align}
+          orientation="vertical"
+          className="mb-6 sm:mb-10"
+        />
+      ) : null}
 
-        {children}
-      </div>
+      {children}
     </section>
   );
 }
 
-export function   SplitContentSection(
+export function SplitContentSection(
   props: SectionTitleSplitProps,
 ): ReactElement {
   switch (props.orientation) {

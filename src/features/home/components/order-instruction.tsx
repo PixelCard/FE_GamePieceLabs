@@ -23,25 +23,20 @@ const instructionIcons: Record<OrderInstructionIcon, LucideIcon> = {
 
 export type OrderInstructionVariant = "default" | "interactive";
 
-export function OrderInstruction({
-}): ReactElement {
- 
+type OrderInstructionProps = {};
+
+export function OrderInstruction({}: OrderInstructionProps): ReactElement {
   return (
-    <section
-      className="relative isolate overflow-hidden bg-white py-16 sm:py-20 lg:py-28"
-      aria-labelledby="order-instruction-title"
-    >
-      <div className="mx-auto w-full max-w-[1680px] px-4 sm:px-6 xl:px-[50px]">
-        <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14 lg:mb-16">
-          <h2
-            id="order-instruction-title"
-            className="type-h2 text-balance text-neutral-900 dark:text-white"
-          >
+    <div className="relative isolate w-full overflow-hidden bg-white">
+      <div className="w-full">
+        <div className="mx-auto mb-10 max-w-4xl text-center sm:mb-14 lg:mb-16">
+          <h2 className="type-h2 text-balance text-neutral-900 dark:text-white">
             Từ ý tưởng đến sản phẩm hoàn thiện
           </h2>
-          <p className="type-prose mx-auto mt-4 max-w-xl text-base text-neutral-600 dark:text-neutral-400">
-            Quy trình đặt in 3D rõ ràng trong 5 bước, giúp bạn dễ dàng theo
-            dõi từ lúc chọn mẫu đến khi nhận hàng.
+
+          <p className="type-prose mx-auto mt-4 max-3-xl text-base text-neutral-600 dark:text-neutral-400">
+            Quy trình đặt in 3D rõ ràng trong 5 bước, giúp bạn dễ dàng theo dõi
+            từ lúc chọn mẫu đến khi nhận hàng.
           </p>
         </div>
 
@@ -52,7 +47,9 @@ export function OrderInstruction({
             return (
               <li
                 key={instruction.id}
-                className="group relative flex min-h-64 flex-col rounded-3xl border border-neutral-200 bg-white p-5 shadow-[0_12px_36px_-24px_rgba(23,23,23,0.28)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-[0_18px_44px_-24px_rgba(23,23,23,0.32)] md:p-6 xl:min-h-80"
+                className="group relative flex min-h-64 flex-col rounded-3xl border border-neutral-200 bg-white p-5 shadow-[0_12px_36px_-24px_rgba(23,23,23,0.28)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-[0_18px_44px_-24px_rgba(23,23,23,0.32)] 
+                md:p-6 
+                xl:min-h-128"
               >
                 <div className="relative z-10 mb-6 flex items-center justify-between xl:mb-8">
                   <span className="flex size-14 items-center justify-center rounded-2xl bg-yellow-400 text-neutral-950 ring-1 ring-yellow-500/20 transition-colors duration-300 group-hover:bg-yellow-300">
@@ -83,6 +80,6 @@ export function OrderInstruction({
           })}
         </ol>
       </div>
-    </section>
+    </div>
   );
 }

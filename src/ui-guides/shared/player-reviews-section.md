@@ -25,6 +25,7 @@ Xây dựng bằng chứng xã hội (social proof) và gia tăng độ tin cậ
 ## Import
 
 ```tsx
+import { SectionTitle } from "@/components/shared/section-title";
 import { PlayerReviewsSection } from "@/components/shared/player-reviews-section";
 import type {
   PlayerReviewContent,
@@ -40,7 +41,8 @@ import type {
 | `variant` | `PlayerReviewsVariant` (`"image"` \| `"content"`) | Yes | — | Chế độ hiển thị: dạng thẻ ảnh phủ chữ (`"image"`) hoặc thẻ văn bản (`"content"`) |
 | `imageList` | `readonly PlayerReviewImage[]` | Yes | — | Danh sách dữ liệu đánh giá dạng hình ảnh (dùng khi `variant="image"`) |
 | `contentList` | `readonly PlayerReviewContent[]` | Yes | — | Danh sách dữ liệu đánh giá dạng bài viết (dùng khi `variant="content"`) |
-| `className` | `string` | No | — | Lớp CSS tùy biến cho thẻ `<section>` bao ngoài |
+| `className` | `string` | No | — | Lớp CSS tùy biến cho wrapper `<div>` bao ngoài |
+| `hideTitle` | `boolean` | No | `false` | Ẩn heading nội bộ khi title đã được render bởi `SectionTitle` cha |
 
 ### Type Definitions
 
@@ -87,7 +89,8 @@ export interface PlayerReviewContent {
   - Mobile (`< 640px`): `basis-[88%]` (hiển thị gần 1 slide, chừa mép để gợi ý người dùng vuốt ngang).
   - Tablet (`sm: 640px - 1023px`): `basis-[48%]` (hiển thị 2 slide).
   - Desktop (`lg: >= 1024px`): `basis-[32%]` (hiển thị 3 slide).
-- Container có chiều rộng tối đa `max-w-[1900px]` với padding thích ứng `px-4 sm:px-6 xl:px-[50px]`.
+- Component tự render content width `w-full`; padding ngang và max-width nên để `SectionTitle` hoặc layout cha kiểm soát.
+- Khi cần typography và spacing section đồng bộ với storefront, bọc component trong `SectionTitle` và truyền `hideTitle` để title dùng `SectionHeading` chung.
 
 ## Basic Usage
 
@@ -106,11 +109,19 @@ const reviewImages = [
 
 export function ReviewsImageDemo() {
   return (
-    <PlayerReviewsSection
-      variant="image"
-      imageList={reviewImages}
-      contentList={[]}
-    />
+    <SectionTitle
+      title="What Our Players Said"
+      orientation="vertical"
+      align="center"
+      content="split"
+    >
+      <PlayerReviewsSection
+        hideTitle
+        variant="image"
+        imageList={reviewImages}
+        contentList={[]}
+      />
+    </SectionTitle>
   );
 }
 ```

@@ -1,6 +1,4 @@
-import type { ReactElement, ReactNode } from "react";
-
-import type { ImageSliderProps } from "@/components/shared/image/image-slider";
+import type { ReactNode } from "react";
 
 /** Canh heading/CTA trong section. */
 export type SectionTitleAlign = "left" | "center" | "right";
@@ -32,6 +30,8 @@ export interface SectionTitleMoreProps {
   children: ReactNode;
   /** Class cho section wrapper. */
   className?: string;
+  /** Class cho wrapper ngoài cùng của `SectionTitle`. */
+  wrapperClassName?: string;
   /** Chọn layout content text hoặc image grid. */
   content?: "text" | "imageList";
 }
@@ -49,6 +49,8 @@ export interface SectionTitleHorizonSplitProps {
   children: ReactNode;
   /** Class cho section wrapper. */
   className?: string;
+  /** Class cho wrapper ngoài cùng của `SectionTitle`. */
+  wrapperClassName?: string;
   /** Chọn layout split có ảnh. */
   content: "split";
   /** Đặt content ở trái/phải trên desktop. Mặc định `right`. */
@@ -81,24 +83,14 @@ export interface SectionTitleVerticalSplitProps {
   children: ReactNode;
   /** Class cho section wrapper. */
   className?: string;
+  /** Class cho wrapper ngoài cùng của `SectionTitle`. */
+  wrapperClassName?: string;
   /** Chọn layout split. */
   content: "split";
   /** Không áp dụng cho vertical split. */
   contentPosition?: never;
   /** Không áp dụng cho vertical split. */
   image?: never;
-}
-
-/** Slider campaign không có section heading; chỉ nhận spacing ngang từ `SectionTitle`. */
-export interface SectionTitleImageSliderProps {
-  /** Chọn layout slider, không thêm padding-top 80px. */
-  content: "imageSlider";
-  /** Nhãn trợ năng cho section chứa slider. */
-  ariaLabel: string;
-  /** Chỉ nhận component `ImageSlider`. */
-  children: ReactElement<ImageSliderProps>;
-  /** Class tùy biến cho section wrapper. */
-  className?: string;
 }
 
 /** Union props cho hai biến thể split. */
@@ -109,5 +101,4 @@ export type SectionTitleSplitProps =
 /** API public của `SectionTitle`; `content` và `orientation` quyết định biến thể render. */
 export type SectionTitleProps =
   | SectionTitleMoreProps
-  | SectionTitleSplitProps
-  | SectionTitleImageSliderProps;
+  | SectionTitleSplitProps;

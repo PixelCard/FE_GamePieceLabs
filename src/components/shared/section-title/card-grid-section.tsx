@@ -20,24 +20,19 @@ export function CardGridSection({
   return (
     <section
       aria-labelledby={titleId}
-      className={cn(
-        "mx-auto w-full",
-        className,
-      )}
+      className="mx-auto w-full sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]"
     >
-      <div className="mx-auto w-full sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]">
-        <SectionHeading
-          title={title}
-          titleId={titleId}
-          headingLevel={headingLevel}
-          more={more}
-          align={align}
-          orientation={orientation}
-          className="mb-6 sm:mb-10"
-        />
+      <SectionHeading
+        title={title}
+        titleId={titleId}
+        headingLevel={headingLevel}
+        more={more}
+        align={align}
+        orientation={orientation}
+        className="mb-6 sm:mb-10"
+      />
 
-        <CardImageTitleGrid>{children}</CardImageTitleGrid>
-      </div>
+      <CardImageTitleGrid>{children}</CardImageTitleGrid>
     </section>
   );
 }

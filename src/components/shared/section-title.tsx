@@ -14,7 +14,6 @@ export type {
   SectionTitleAlign,
   SectionTitleHeadingLevel,
   SectionTitleHorizonSplitProps,
-  SectionTitleImageSliderProps,
   SectionTitleMore,
   SectionTitleMoreProps,
   SectionTitleOrientation,
@@ -31,12 +30,6 @@ export function SectionTitle(props: SectionTitleProps): ReactElement {
         return <SplitContentSection {...props} />;
       case "text":
         return <TextContentSection {...props} />;
-      case "imageSlider":
-        return (
-          <section aria-label={props.ariaLabel} className={props.className}>
-            {props.children}
-          </section>
-        );
       default:
         return <CardGridSection {...props} />;
     }
@@ -44,8 +37,10 @@ export function SectionTitle(props: SectionTitleProps): ReactElement {
   return (
     <div
       className={cn(
-        "px-5 sm:px-section-padding",
-        props.content !== "imageSlider" && "pt-[80px]",
+        "px-5 py-10 sm:px-[var(--section-padding-x)] sm:py-[80px]",
+        "ariaLabel" in props &&
+          props.ariaLabel === "ImageSlider" &&
+          "sm:pb-[80px] sm:pt-[10px]",
       )}
     >
       {getComponents(props)}

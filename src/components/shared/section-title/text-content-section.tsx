@@ -19,21 +19,22 @@ export function TextContentSection({
   return (
     <section
       aria-labelledby={titleId}
-      className={cn("mx-auto w-full max-w-[1900px]", className)}
+      className={cn(
+        "mx-auto sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]",
+        className,
+      )}
     >
-      <div className="w-full sm:max-w-[620px] lg:max-w-[940px] xl:max-w-[1580px]">
-        <SectionHeading
-          title={title}
-          titleId={titleId}
-          headingLevel={headingLevel}
-          more={more}
-          align={align}
-          orientation={orientation}
-          className="sm:mb-5"
-        />
+      <SectionHeading
+        title={title}
+        titleId={titleId}
+        headingLevel={headingLevel}
+        more={more}
+        align={align}
+        orientation={orientation}
+        className="sm:mb-5"
+      />
 
-        {children}
-      </div>
+      {children}
     </section>
   );
 }

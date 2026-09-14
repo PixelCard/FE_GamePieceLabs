@@ -59,12 +59,15 @@ const imageSliderSlides = [
 export default function StorefrontHomePage() {
   return (
     <main className="bg-neutral-50/60">
-      {/* Image slider */}
-      <SectionTitle content="imageSlider" ariaLabel="Bộ sưu tập nổi bật">
+      <SectionTitle
+        content="split"
+        orientation="vertical"
+        ariaLabel="ImageSlider"
+      >
         <ImageSlider
           slides={imageSliderSlides}
           autoplay
-          autoplayInterval={5000}
+          autoplayInterval={10000}
           ariaLabel="Bộ sưu tập nổi bật"
         />
       </SectionTitle>
@@ -90,7 +93,6 @@ export default function StorefrontHomePage() {
         title="Mastery is a never-ending exploration"
         speed={30}
         fontSize="text-8xl"
-        className="pb-20"
       />
 
       <SectionTitle
@@ -99,7 +101,6 @@ export default function StorefrontHomePage() {
         align="center"
         content="split"
         headingLevel="h6"
-        className="pt-0 px-12 pb-20"
       >
         <div className="mb-8 space-y-3 text-center sm:mb-10 sm:space-y-4 -mt-5">
           <p className="text-[24px] sm:text-[48px] font-bold capitalize">
@@ -136,7 +137,7 @@ export default function StorefrontHomePage() {
         ariaLabel="The Game Piece Labs philosophy"
         className="overflow-hidden"
       >
-        <div className="flex flex-col items-center text-center border border-red-500">
+        <div className="flex flex-col items-center text-center">
           <h2 className="bg-gradient-to-b from-neutral-300 to-white bg-clip-text text-[clamp(36px,10vw,192px)] leading-[1.2] font-black tracking-[-0.065em] whitespace-nowrap text-transparent">
             GAME PIECE LABS
           </h2>
@@ -186,17 +187,35 @@ export default function StorefrontHomePage() {
         ))}
       </SectionTitle>
 
-      <PlayerReviewsSection
-        variant="image"
-        imageList={playerReviewImageList}
-        contentList={playerReviewContentList}
-      />
+      <SectionTitle orientation="vertical" align="left" content="split">
+        <PlayerReviewsSection
+          variant="image"
+          imageList={playerReviewImageList}
+          contentList={playerReviewContentList}
+        />
+      </SectionTitle>
 
-      <OrderInstruction />
+      <SectionTitle orientation="vertical" align="center" content="split">
+        <OrderInstruction />
+      </SectionTitle>
 
-      <CompanyLinksSection />
+      <SectionTitle
+        orientation="vertical"
+        align="center"
+        content="split"
+        ariaLabel="Explore GamePieceLabs"
+      >
+        <CompanyLinksSection />
+      </SectionTitle>
 
-      <UpcomingProductsSection />
+      <SectionTitle
+        title="Upcoming Products"
+        orientation="vertical"
+        align="center"
+        content="split"
+      >
+        <UpcomingProductsSection hideTitle />
+      </SectionTitle>
     </main>
   );
 }
